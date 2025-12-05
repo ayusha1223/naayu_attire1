@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/screens/onboarding_main.dart';
+
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,13 +14,13 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-         
+            // LOGO
             Container(
               height: 120,
               width: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.pink.shade50, // light background for logo
+                color: Colors.pink.shade50,
               ),
               child: Icon(
                 Icons.shopping_bag,
@@ -25,10 +29,10 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
-            
-            Text(
+            // TITLE
+            const Text(
               "Naayu Attire",
               style: TextStyle(
                 fontSize: 36,
@@ -37,34 +41,40 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Text(
+            // SUBTITLE
+            const Text(
               "Find Your Perfect Kurtha Style Delivered to Your Doorstep",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: const Color.fromARGB(255, 13, 13, 13),
+                color: Color.fromARGB(255, 13, 13, 13),
               ),
             ),
 
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
 
-          
+            // BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const OnboardingMain(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pink.shade400,
-                  padding: EdgeInsets.symmetric(vertical: 14),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Get Started",
                   style: TextStyle(
                     fontSize: 18,
@@ -72,7 +82,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
