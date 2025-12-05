@@ -12,35 +12,34 @@ class Onboarding3 extends StatelessWidget {
           const SizedBox(height: 100),
 
           const Text(
-            "Discover something new",
+            "Explore your true style",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           const Text(
-            "Special new arrivals just for you",
+            "Feel confident with every outfit",
             style: TextStyle(fontSize: 14, color: Colors.black54),
           ),
 
           const SizedBox(height: 40),
 
-          // Logo instead of product image
+          // ⭐ UPDATED LOGO (ONLY THIS PART CHANGED)
           Container(
-            height: 180,
-            width: 180,
-            padding: const EdgeInsets.all(20),
+            height: 120,
+            width: 120,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
+              shape: BoxShape.circle,
+              color: Colors.pink.shade50,
             ),
-            child: Image.asset(
-              "assets/images/kurtha_logo.png",
-              fit: BoxFit.contain,
+            child: Icon(
+              Icons.shopping_bag,
+              color: Colors.pink.shade400,
+              size: 60,
             ),
           ),
 
           const SizedBox(height: 40),
 
-          // ⭐ SHOP NOW (CENTERED AREA)
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
@@ -54,7 +53,6 @@ class Onboarding3 extends StatelessWidget {
             child: const Text("Shop now"),
           ),
 
-          // This pushes content upward but leaves space for NEXT button
           const Spacer(),
         ],
       ),
