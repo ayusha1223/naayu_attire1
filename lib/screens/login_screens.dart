@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/screens/register_screen.dart';
+import 'package:naayu_attire1/screens/home_screen.dart';  
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -79,11 +80,16 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // LOGIN BUTTON
+                // ⭐ UPDATED LOGIN BUTTON — NAVIGATE TO HOME SCREEN
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => HomeScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink.shade400,
                       padding: const EdgeInsets.symmetric(vertical: 14),
@@ -101,17 +107,17 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // SIGN UP LINK
-               Row(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    const Text("Don't have an account? "),
-    GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const RegisterScreen()),
-        );
-      },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                        );
+                      },
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
