@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/screens/home_screen.dart';
 import 'package:naayu_attire1/screens/login_screens.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -121,7 +122,12 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (_) => HomeScreen()),
+  );
+},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink.shade400,
                       padding: const EdgeInsets.symmetric(vertical: 14),
