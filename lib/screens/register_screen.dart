@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/screens/register_screen.dart';
+import 'package:naayu_attire1/screens/login_screens.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfffde7ef), // light pink theme background
+      backgroundColor: const Color(0xfffde7ef), // light pink background
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -25,12 +25,11 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
 
-            // Inside the white card
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  "Login",
+                  "Sign Up",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -39,6 +38,25 @@ class LoginScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 30),
+
+                // NAME FIELD
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    labelStyle: const TextStyle(color: Colors.pink),
+                    filled: true,
+                    fillColor: Colors.pink.shade50,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.pink.shade400),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 16),
 
                 // EMAIL FIELD
                 TextField(
@@ -77,9 +95,29 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
 
+                const SizedBox(height: 16),
+
+                // CONFIRM PASSWORD FIELD
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: "Confirm Password",
+                    labelStyle: const TextStyle(color: Colors.pink),
+                    filled: true,
+                    fillColor: Colors.pink.shade50,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.pink.shade400),
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 30),
 
-                // LOGIN BUTTON
+                // SIGNUP BUTTON
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -92,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      "Login",
+                      "Sign Up",
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
@@ -100,20 +138,20 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // SIGN UP LINK
-               Row(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    const Text("Don't have an account? "),
-    GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const RegisterScreen()),
-        );
-      },
+                // LOGIN LINK
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Already have an account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const LoginScreen()),
+                        );
+                      },
                       child: Text(
-                        "Sign Up",
+                        "Login",
                         style: TextStyle(
                           color: Colors.pink.shade400,
                           fontWeight: FontWeight.bold,
