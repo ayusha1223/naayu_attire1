@@ -45,7 +45,7 @@ class SplashScreen extends StatelessWidget {
 
             // SUBTITLE
             const Text(
-              "Find Your Perfect Kurtha Style Delivered to Your Doorstep",
+              "Find Your Perfect Kurtha Style Delivered to Your Doorstep!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
