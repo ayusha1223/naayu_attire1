@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/screens/login_screens.dart';
 import 'package:naayu_attire1/screens/onboarding1.dart';
 import 'package:naayu_attire1/screens/onboarding2.dart';
 import 'package:naayu_attire1/screens/onboarding3.dart';
-
 
 class OnboardingMain extends StatefulWidget {
   const OnboardingMain({super.key});
@@ -52,7 +52,7 @@ class _OnboardingMainState extends State<OnboardingMain> {
             ),
           ),
 
-          // DOT INDICATOR + NEXT BUTTON
+          // DOTS + NEXT/GET STARTED
           Positioned(
             bottom: 40,
             left: 0,
@@ -80,20 +80,28 @@ class _OnboardingMainState extends State<OnboardingMain> {
 
                 const SizedBox(height: 20),
 
-                // NEXT OR GET STARTED BUTTON
+                // NEXT / GET STARTED BUTTON
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black87,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 14),
+                      horizontal: 40,
+                      vertical: 14,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   onPressed: () {
                     if (_currentPage == 2) {
-                      // TODO → Navigate to Login or Home screen
+                    
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => LoginScreen(),
+                        ),
+                      );
                     } else {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 400),
