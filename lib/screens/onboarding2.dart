@@ -31,11 +31,12 @@ class Onboarding2 extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.pink.shade50,
             ),
-            child: Icon(
-              Icons.shopping_bag,
-              color: Colors.pink.shade400,
-              size: 60,
+           child: ClipOval(
+              child: Image.asset(
+                "assets/images/SAASHI.jpeg",  // <-- your actual image
+                fit: BoxFit.cover,
             ),
+          ),
           ),
 
           const SizedBox(height: 40),

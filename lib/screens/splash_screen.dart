@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/screens/onboarding_main.dart';
 
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -14,7 +13,7 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // LOGO
+            // LOGO (UPDATED)
             Container(
               height: 120,
               width: 120,
@@ -22,10 +21,12 @@ class SplashScreen extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.pink.shade50,
               ),
-              child: Icon(
-                Icons.shopping_bag,
-                color: Colors.pink.shade400,
-                size: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Image.asset(
+                  'assets/images/brown.png',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
 

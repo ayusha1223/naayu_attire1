@@ -23,7 +23,7 @@ class Onboarding1 extends StatelessWidget {
 
           const SizedBox(height: 40),
 
-          // ⭐ UPDATED LOGO (ONLY THIS PART CHANGED)
+          // ⭐ YOUR IMAGE HERE
           Container(
             height: 120,
             width: 120,
@@ -31,16 +31,16 @@ class Onboarding1 extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.pink.shade50,
             ),
-            child: Icon(
-              Icons.shopping_bag,
-              color: Colors.pink.shade400,
-              size: 60,
+            child: ClipOval(
+              child: Image.asset(
+                "assets/images/SAASHI.jpeg",  // <-- your actual image
+                fit: BoxFit.cover,
+              ),
             ),
           ),
 
           const SizedBox(height: 40),
 
-          // ⭐ SHOP NOW (CENTERED AREA)
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
