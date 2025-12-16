@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/widgets/category_item.dart';
-import 'package:naayu_attire1/widgets/product_card.dart';
+import 'package:naayu_attire1/widgets/product_cart.dart';
 import 'package:naayu_attire1/widgets/section_title.dart';
 
 class HomeScreen extends StatelessWidget {
