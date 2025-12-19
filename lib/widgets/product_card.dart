@@ -1,45 +1,55 @@
 import 'package:flutter/material.dart';
 
 Widget productList() {
+  final products = [
+    "assets/images/image6.jpeg",
+    "assets/images/image7.jpeg",
+    "assets/images/image8.jpeg",
+    "assets/images/image9.jpeg",
+  ];
+
   return SizedBox(
-    height: 200,
+    height: 210,
     child: ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
       scrollDirection: Axis.horizontal,
-      itemCount: 4,
+      itemCount: products.length,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       itemBuilder: (context, index) {
         return Container(
           width: 140,
           margin: const EdgeInsets.only(right: 12),
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
+            color: Colors.white,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 120,
+                height: 140,
                 decoration: BoxDecoration(
-                  color: Colors.brown.shade100,
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
-                ),
-                child: const Center(
-                  child: Icon(Icons.image, size: 40),
+                  image: DecorationImage(
+                    image: AssetImage(products[index]),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
-                "Product Name",
-                style: TextStyle(fontWeight: FontWeight.w600),
+              const Padding(
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  "Rs. 2,999",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              const SizedBox(height: 4),
-              const Text("₹ 2,999", style: TextStyle(color: Colors.grey)),
             ],
           ),
         );
       },
-),
-);
+    ),
+  );
 }

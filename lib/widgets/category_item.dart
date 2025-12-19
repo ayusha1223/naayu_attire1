@@ -1,27 +1,46 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
+  final String image;
 
-  const CategoryItem({super.key, required this.title});
+  const CategoryItem({
+    super.key,
+    required this.title,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: 70,
-          width: 70,
+          height: 100, // ⬅ bigger height
+          width: 100,  // ⬅ bigger width
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 6,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
-          child: const Icon(Icons.checkroom, size: 30),
         ),
-        const SizedBox(height: 6),
-        Text(title, style: const TextStyle(fontSize: 12)),
-     ],
-);
-}
+        const SizedBox(height: 8),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
+  }
 }

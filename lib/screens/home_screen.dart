@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              // 🔍 Top Search + Icons
+              // 🔍 Search bar
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
 
-              // 🎉 TOP BANNER — IMAGE 1
+              // 🎉 Top banner
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
@@ -70,31 +70,15 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.black.withOpacity(0.35),
                     ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            "Get 50% off\non your first order",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Chip(
-                            backgroundColor: Color(0xff918C8C),
-                            label: Text(
-                              "Wishlist now",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
+                    child: const Center(
+                      child: Text(
+                        "Get 50% off\non your first order",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -103,37 +87,40 @@ class HomeScreen extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // 🧥 Category Cards
+              // 🧥 Categories
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
-                    CategoryItem(title: "Best Selling", image: 'image2',),
-                    CategoryItem(title: "Party Wear", image: 'image3',),
-                    CategoryItem(title: "Casual Wear", image: 'image4',),
+                    CategoryItem(
+                      title: "Best Selling",
+                      image: "assets/images/image2.jpeg",
+                    ),
+                    CategoryItem(
+                      title: "Party Wear",
+                      image: "assets/images/image3.jpeg",
+                    ),
+                    CategoryItem(
+                      title: "Casual Wear",
+                      image: "assets/images/image4.jpeg",
+                    ),
                   ],
                 ),
               ),
 
               const SizedBox(height: 30),
 
-              // 🆕 New Collection Banner (placeholder stays same)
+              // 🆕 New collection banner
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
                   height: 190,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "New Collection",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    image: const DecorationImage(
+                      image: AssetImage("assets/images/image5.jpeg"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -141,21 +128,18 @@ class HomeScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // 🆕 New Collection Products
               sectionTitle("New Collection"),
               productList(),
 
-              // 🔥 Best Red Selling
               sectionTitle("Best Red Selling"),
               productList(),
 
-              // ❄ Winter Collection
               sectionTitle("Winter Collection"),
               productList(),
 
               const SizedBox(height: 20),
 
-              // 🖼 FINAL BANNER — IMAGE 12
+              // 🔻 Final banner
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
@@ -165,23 +149,6 @@ class HomeScreen extends StatelessWidget {
                     image: const DecorationImage(
                       image: AssetImage("assets/images/image12.jpeg"),
                       fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.black.withOpacity(0.35),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Featured Brand / Promotion",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
                   ),
                 ),
