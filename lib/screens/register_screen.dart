@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/screens/home_screen.dart';
-import 'package:naayu_attire1/screens/login_screens.dart';
+import 'package:naayu_attire1/features/auth/presentation/login_screens.dart';
+import '../../../core/hive/hive_service.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final hiveService = HiveService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfffde7ef), // light pink background
+      backgroundColor: const Color(0xfffde7ef),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -17,154 +26,42 @@ class RegisterScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
             ),
-
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pink,
-                  ),
+                const Text("Sign Up",
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+
+                const SizedBox(height: 20),
+
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(labelText: "Email"),
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 12),
 
-                // NAME FIELD
                 TextField(
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    labelStyle: const TextStyle(color: Colors.pink),
-                    filled: true,
-                    fillColor: Colors.pink.shade50,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.pink.shade400),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                // EMAIL FIELD
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Email",
-                    labelStyle: const TextStyle(color: Colors.pink),
-                    filled: true,
-                    fillColor: Colors.pink.shade50,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.pink.shade400),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                // PASSWORD FIELD
-                TextField(
+                  controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                    labelStyle: const TextStyle(color: Colors.pink),
-                    filled: true,
-                    fillColor: Colors.pink.shade50,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.pink.shade400),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                // CONFIRM PASSWORD FIELD
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Confirm Password",
-                    labelStyle: const TextStyle(color: Colors.pink),
-                    filled: true,
-                    fillColor: Colors.pink.shade50,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.pink.shade400),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                // SIGNUP BUTTON
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (_) => HomeScreen()),
-  );
-},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink.shade400,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  ),
+                  decoration: const InputDecoration(labelText: "Password"),
                 ),
 
                 const SizedBox(height: 20),
 
-                // LOGIN LINK
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Already have an account? "),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const LoginScreen()),
-                        );
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.pink.shade400,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
+                ElevatedButton(
+                  onPressed: () {
+                    hiveService.saveUser(
+                      emailController.text,
+                      passwordController.text,
+                    );
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
+                    );
+                  },
+                  child: const Text("Sign Up"),
                 ),
               ],
             ),

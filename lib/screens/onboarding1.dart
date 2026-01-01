@@ -23,7 +23,7 @@ class Onboarding1 extends StatelessWidget {
 
           const SizedBox(height: 40),
 
-          // ⭐ YOUR IMAGE HERE
+         
           Container(
             height: 120,
             width: 120,

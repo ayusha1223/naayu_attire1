@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/screens/login_screens.dart';
+import 'package:naayu_attire1/features/auth/presentation/login_screens.dart';
 import 'package:naayu_attire1/screens/onboarding1.dart';
 import 'package:naayu_attire1/screens/onboarding2.dart';
 import 'package:naayu_attire1/screens/onboarding3.dart';
