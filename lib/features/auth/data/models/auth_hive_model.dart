@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import '../../domain/entities/auth_entity.dart';
+import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 
 part 'auth_hive_model.g.dart';
 
