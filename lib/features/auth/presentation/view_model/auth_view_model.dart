@@ -17,6 +17,11 @@ class AuthViewModel extends ChangeNotifier {
     _isLoading = value;
     notifyListeners();
   }
+  void clearError() {
+  _errorMessage = null;
+  notifyListeners();
+}
+
 
   void _setError(String? message) {
     _errorMessage = message;

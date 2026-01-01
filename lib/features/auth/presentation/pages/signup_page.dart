@@ -16,6 +16,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+
+    // ✅ Clear any previous login error when opening signup screen
+    Future.microtask(() {
+      context.read<AuthViewModel>().clearError();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authVM = context.watch<AuthViewModel>();
 
@@ -72,6 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 20),
 
+                // ✅ Error message (only when relevant)
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
@@ -92,21 +103,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               password: passwordController.text.trim(),
                             );
 
-                           if (success && mounted) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text('Signup successful. Please login.'),
-    ),
-  );
+                            if (success && mounted) {
+                              // Clear fields
+                              nameController.clear();
+                              emailController.clear();
+                              passwordController.clear();
 
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const LoginScreen(),
-    ),
-  );
-}
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Signup successful. Please login.',
+                                  ),
+                                ),
+                              );
 
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const LoginScreen(),
+                                ),
+                              );
+                            }
                           },
                     child: authVM.isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
@@ -118,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (_) => const LoginScreen(),
