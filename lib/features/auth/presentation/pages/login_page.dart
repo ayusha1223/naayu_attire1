@@ -1,12 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/auth/presentation/pages/signup_page.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:naayu_attire1/features/bottom_screens/presentation/screens/home_screen.dart';
-
 import 'package:provider/provider.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -54,43 +50,39 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 30),
 
+                // 🔹 Email (underline style)
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Email",
-                    filled: true,
-                    fillColor: Colors.pink.shade50,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    border: UnderlineInputBorder(),
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
 
+                // 🔹 Password (underline style)
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Password",
-                    filled: true,
-                    fillColor: Colors.pink.shade50,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    border: UnderlineInputBorder(),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
+                // 🔴 Error message
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
                     style: const TextStyle(color: Colors.red),
                   ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
 
+                // 🔹 Button (same as Sign Up)
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -111,43 +103,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             }
                           },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink.shade400,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
                     child: authVM.isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                            "Login",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        : const Text("Login"),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Don't have an account? "),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const RegisterScreen(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Colors.pink.shade400,
-                          fontWeight: FontWeight.bold,
-                        ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const RegisterScreen(),
                       ),
-                    ),
-                  ],
+                    );
+                  },
+                  child: const Text(
+                    "Don't have an account? Sign Up",
+                    style: TextStyle(color: Colors.pink),
+                  ),
                 ),
               ],
             ),

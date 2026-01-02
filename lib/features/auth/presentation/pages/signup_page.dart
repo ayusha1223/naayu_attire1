@@ -14,15 +14,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  String? localError;
 
   @override
   void initState() {
     super.initState();
 
-    // ✅ Clear any previous login error when opening signup screen
+    // Clear any previous auth error
     Future.microtask(() {
       context.read<AuthViewModel>().clearError();
     });
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -80,9 +92,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   decoration: const InputDecoration(labelText: "Password"),
                 ),
 
+                const SizedBox(height: 16),
+
+                TextField(
+                  controller: confirmPasswordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(labelText: "Confirm Password"),
+                ),
+
                 const SizedBox(height: 20),
 
-                // ✅ Error message (only when relevant)
+                // 🔴 Local validation error (password mismatch)
+                if (localError != null)
+                  Text(
+                    localError!,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+
+                // 🔴 Backend / ViewModel error
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
@@ -97,6 +124,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: authVM.isLoading
                         ? null
                         : () async {
+                            setState(() {
+                              localError = null;
+                            });
+
+                            if (passwordController.text.trim() !=
+                                confirmPasswordController.text.trim()) {
+                              setState(() {
+                                localError = "Passwords do not match";
+                              });
+                              return;
+                            }
+
                             final success = await authVM.register(
                               fullName: nameController.text.trim(),
                               email: emailController.text.trim(),
@@ -104,10 +143,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             );
 
                             if (success && mounted) {
-                              // Clear fields
                               nameController.clear();
                               emailController.clear();
                               passwordController.clear();
+                              confirmPasswordController.clear();
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
