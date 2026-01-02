@@ -44,6 +44,10 @@ dependencies:
   # State management
   provider: ^6.1.2
 
+  
+  # UUID (for user id)
+  uuid: ^4.4.0
+
 
 
 dev_dependencies:

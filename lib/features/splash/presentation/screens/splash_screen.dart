@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/screens/onboarding_main.dart';
+import 'package:naayu_attire1/features/onboarding/presentation/screens/onboarding_main.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

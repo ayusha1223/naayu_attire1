@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final IAuthRepository authRepository;
 
   AuthViewModel(this.authRepository);
+
+  final _uuid = const Uuid();
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -17,11 +20,11 @@ class AuthViewModel extends ChangeNotifier {
     _isLoading = value;
     notifyListeners();
   }
-  void clearError() {
-  _errorMessage = null;
-  notifyListeners();
-}
 
+  void clearError() {
+    _errorMessage = null;
+    notifyListeners();
+  }
 
   void _setError(String? message) {
     _errorMessage = message;
@@ -38,6 +41,7 @@ class AuthViewModel extends ChangeNotifier {
     _setError(null);
 
     final entity = AuthEntity(
+      id: _uuid.v4(), // ✅ GENERATED ID
       fullName: fullName,
       email: email,
       password: password,

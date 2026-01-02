@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/auth/presentation/login_screens.dart';
-import 'package:naayu_attire1/screens/onboarding1.dart';
-import 'package:naayu_attire1/screens/onboarding2.dart';
-import 'package:naayu_attire1/screens/onboarding3.dart';
+import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
+import 'package:naayu_attire1/features/onboarding/presentation/screens/onboarding1.dart';
+import 'package:naayu_attire1/features/onboarding/presentation/screens/onboarding2.dart';
+import 'package:naayu_attire1/features/onboarding/presentation/screens/onboarding3.dart';
 
 class OnboardingMain extends StatefulWidget {
   const OnboardingMain({super.key});

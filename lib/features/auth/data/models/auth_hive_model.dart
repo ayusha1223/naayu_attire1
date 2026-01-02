@@ -5,36 +5,43 @@ part 'auth_hive_model.g.dart';
 
 @HiveType(typeId: 1)
 class AuthHiveModel extends HiveObject {
+
   @HiveField(0)
-  final String fullName;
+  final String? id;
 
   @HiveField(1)
-  final String email;
+  final String? fullName;
 
   @HiveField(2)
-  final String password;
+  final String? email;
+
+  @HiveField(3)
+  final String? password;
 
   AuthHiveModel({
-    required this.fullName,
-    required this.email,
-    required this.password,
+    this.id,
+    this.fullName,
+    this.email,
+    this.password,
   });
 
-  // Convert Hive → Entity
+  // 🔁 Hive → Entity
   AuthEntity toEntity() {
     return AuthEntity(
-      fullName: fullName,
-      email: email,
-      password: password,
+      id: id ?? '',
+      fullName: fullName ?? '',
+      email: email ?? '',
+      password: password ?? '',
     );
   }
 
-  // Convert Entity → Hive
+  // 🔁 Entity → Hive
   factory AuthHiveModel.fromEntity(AuthEntity entity) {
     return AuthHiveModel(
-      fullName: entity.fullName,
-      email: entity.email,
-      password: entity.password,
+      id: entity.id.isEmpty ? null : entity.id,
+      fullName: entity.fullName.isEmpty ? null : entity.fullName,
+      email: entity.email.isEmpty ? null : entity.email,
+      password: entity.password.isEmpty ? null : entity.password,
     );
   }
 }

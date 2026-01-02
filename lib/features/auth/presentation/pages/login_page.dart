@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/auth/presentation/pages/signup_page.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
-import 'package:naayu_attire1/screens/home_screen.dart';
+import 'package:naayu_attire1/features/bottom_screens/presentation/screens/home_screen.dart';
+
 import 'package:provider/provider.dart';
 
 
