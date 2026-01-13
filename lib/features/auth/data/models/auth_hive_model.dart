@@ -29,7 +29,7 @@ class AuthHiveModel extends HiveObject {
   AuthEntity toEntity() {
     return AuthEntity(
       id: id ?? '',
-      fullName: fullName ?? '',
+      name: fullName ?? '',
       email: email ?? '',
       password: password ?? '',
     );
@@ -39,7 +39,7 @@ class AuthHiveModel extends HiveObject {
   factory AuthHiveModel.fromEntity(AuthEntity entity) {
     return AuthHiveModel(
       id: entity.id.isEmpty ? null : entity.id,
-      fullName: entity.fullName.isEmpty ? null : entity.fullName,
+      fullName: entity.name.isEmpty ? null : entity.name,
       email: entity.email.isEmpty ? null : entity.email,
       password: entity.password.isEmpty ? null : entity.password,
     );

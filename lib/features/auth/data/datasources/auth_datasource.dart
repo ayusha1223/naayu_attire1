@@ -1,17 +1,17 @@
-import '../models/auth_hive_model.dart';
+import 'package:naayu_attire1/features/auth/data/models/auth_api_model.dart';
+
 
 abstract interface class IAuthDatasource {
-  Future<bool> register(AuthHiveModel model);
-
-  Future<AuthHiveModel?> login(
+  /// Register user via API
+  Future<bool> register(
+    String name,
     String email,
     String password,
   );
 
-  Future<AuthHiveModel?> getCurrentUser();
-
-  Future<bool> logout();
-
-  // check if email already exists
-  Future<bool> isEmailExists(String email);
+  /// Login user via API
+  Future<AuthRemoteModel> login(
+    String email,
+    String password,
+  );
 }

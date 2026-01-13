@@ -42,7 +42,7 @@ class AuthViewModel extends ChangeNotifier {
 
     final entity = AuthEntity(
       id: _uuid.v4(), // ✅ GENERATED ID
-      fullName: fullName,
+      name: fullName,
       email: email,
       password: password,
     );

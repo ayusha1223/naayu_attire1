@@ -27,9 +27,9 @@ class AuthRemoteModel {
 AuthEntity toEntity() {
   return AuthEntity(
     id: id,
-    fullName: name,
+    name: name,
     email: email,
-    password: '', // or '' if API does not return it
+    password: '',
   );
 }
  }
