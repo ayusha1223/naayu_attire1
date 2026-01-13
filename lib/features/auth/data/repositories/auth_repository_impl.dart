@@ -14,7 +14,7 @@ class AuthRepositoryImpl implements IAuthRepository {
   Future<Either<Failure, bool>> register(AuthEntity entity) async {
     try {
       final result = await datasource.register(
-        entity.name,
+        entity.fullName,
         entity.email,
         entity.password,
       );
