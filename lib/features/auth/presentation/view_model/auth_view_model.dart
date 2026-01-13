@@ -82,7 +82,7 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   /// ---------------- LOGOUT ----------------
-  Future<void> logout() async {
-    await authRepository.logout();
-  }
+  // Future<void> logout() async {
+  //   await authRepository.logout();
+  // }
 }

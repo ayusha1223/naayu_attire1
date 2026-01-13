@@ -1,6 +1,4 @@
-
-
-import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
+import '../../domain/entities/auth_entity.dart';
 
 class AuthRemoteModel {
   final String id;
@@ -24,12 +22,12 @@ class AuthRemoteModel {
     );
   }
 
-AuthEntity toEntity() {
-  return AuthEntity(
-    id: id,
-    name: name,
-    email: email,
-    password: '',
-  );
+  AuthEntity toEntity() {
+    return AuthEntity(
+      id: id,
+      name: name,
+      email: email,
+      password: '',
+    );
+  }
 }
- }

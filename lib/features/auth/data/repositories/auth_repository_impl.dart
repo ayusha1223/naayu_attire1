@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:naayu_attire1/core/error/server_failure.dart';
 import 'package:naayu_attire1/features/auth/data/datasources/auth_datasource.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/auth_entity.dart';
