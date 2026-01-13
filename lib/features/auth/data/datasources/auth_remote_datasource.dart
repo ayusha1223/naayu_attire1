@@ -22,8 +22,13 @@ class AuthRemoteDatasourceImpl implements IAuthDatasource {
         'password': password,
       },
     );
+    print('STATUS: ${response.statusCode}');
+print('DATA: ${response.data}');
 
-    return response.statusCode == 201;
+
+    return response.statusCode == 200 || response.statusCode == 201;
+    
+
   }
 
   @override

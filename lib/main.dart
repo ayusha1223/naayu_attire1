@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:provider/provider.dart';
 
-import 'package:naayu_attire1/core/services/hive/hive_service.dart';
-
-import 'package:naayu_attire1/features/auth/data/datasources/local/auth_local_datasource.dart';
+import 'package:naayu_attire1/core/api/api_client.dart';
 import 'package:naayu_attire1/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Hive
-  final hiveService = HiveService();
-  await hiveService.init();
+  // 🔹 API Client (Sprint 4)
+  final apiClient = ApiClient();
 
-  // Setup datasource & repository
-  final authDatasource = AuthLocalDatasource(hiveService);
+  // 🔹 Remote Datasource (API)
+  final authDatasource = AuthRemoteDatasourceImpl(apiClient);
+
+  // 🔹 Repository
   final authRepository = AuthRepositoryImpl(authDatasource);
 
   runApp(

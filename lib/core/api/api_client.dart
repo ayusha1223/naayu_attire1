@@ -12,11 +12,12 @@ class ApiClient {
         receiveTimeout: const Duration(seconds: 30),
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
       ),
     );
 
-    // Logging (very good for viva)
+    // 🔹 Logging interceptor (important for viva proof)
     dio.interceptors.add(
       LogInterceptor(
         request: true,
