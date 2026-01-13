@@ -1,9 +1,7 @@
 import 'package:naayu_attire1/core/api/api_client.dart';
 import 'package:naayu_attire1/core/api/api_endpoints.dart';
-import 'package:naayu_attire1/features/auth/data/datasources/remote/auth_datasourse.dart';
-import 'package:naayu_attire1/features/auth/data/models/auth_remote_model.dart';
-
-
+import 'auth_datasource.dart';
+import '../../models/auth_remote_model.dart';
 
 class AuthRemoteDatasourceImpl implements IAuthDatasource {
   final ApiClient apiClient;
@@ -26,7 +24,7 @@ class AuthRemoteDatasourceImpl implements IAuthDatasource {
       },
     );
 
-    // Accept both success codes
+    // backend returns 201 or 200 on success
     return response.statusCode == 200 || response.statusCode == 201;
   }
 
@@ -44,6 +42,7 @@ class AuthRemoteDatasourceImpl implements IAuthDatasource {
       },
     );
 
-    return AuthRemoteModel.fromJson(response.data);
+    // assuming backend returns { data: {...user} }
+    return AuthRemoteModel.fromJson(response.data['data']);
   }
 }
