@@ -13,21 +13,42 @@ class AuthRemoteModel {
     required this.token,
   });
 
+  // ================= FROM JSON (Login Response) =================
   factory AuthRemoteModel.fromJson(Map<String, dynamic> json) {
     return AuthRemoteModel(
-      id: json['_id'],
-      name: json['name'],
-      email: json['email'],
-      token: json['token'],
+      id: json['_id'] ?? '',
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      token: json['token'] ?? '',
     );
   }
 
+  // ================= TO ENTITY =================
   AuthEntity toEntity() {
     return AuthEntity(
       id: id,
-      name: name,
+      fullName: name,
       email: email,
-      password: '',
+      password: '', // password never comes from API
     );
+  }
+
+  // ================= FROM ENTITY (Signup Request) =================
+  factory AuthRemoteModel.fromEntity(AuthEntity entity) {
+    return AuthRemoteModel(
+      id: '',
+      name: entity.fullName,
+      email: entity.email,
+      token: '',
+    );
+  }
+
+  // ================= TO JSON (Signup Request Body) =================
+  Map<String, dynamic> toJson(String password) {
+    return {
+      'name': name,
+      'email': email,
+      'password': password,
+    };
   }
 }

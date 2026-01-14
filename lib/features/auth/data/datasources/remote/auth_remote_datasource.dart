@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:naayu_attire1/core/api/api_client.dart';
 import 'package:naayu_attire1/core/api/api_endpoints.dart';
 import 'auth_datasource.dart';
@@ -9,12 +10,13 @@ class AuthRemoteDatasourceImpl implements IAuthDatasource {
   AuthRemoteDatasourceImpl(this.apiClient);
 
   // ================= SIGN UP =================
-  @override
-  Future<bool> register(
-    String name,
-    String email,
-    String password,
-  ) async {
+@override
+Future<bool> register(
+  String name,
+  String email,
+  String password,
+) async {
+  try {
     final response = await apiClient.dio.post(
       ApiEndpoints.studentRegister,
       data: {
@@ -24,9 +26,16 @@ class AuthRemoteDatasourceImpl implements IAuthDatasource {
       },
     );
 
-    // backend returns 201 or 200 on success
+    print('REGISTER STATUS: ${response.statusCode}');
+    print('REGISTER RESPONSE: ${response.data}');
+
     return response.statusCode == 200 || response.statusCode == 201;
+  } on DioException catch (e) {
+    print('REGISTER ERROR: ${e.response?.data}');
+    return false;
   }
+}
+
 
   // ================= LOGIN =================
   @override

@@ -137,10 +137,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
 
                             final success = await authVM.register(
-                              fullName: nameController.text.trim(),
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+  nameController.text.trim(),
+  emailController.text.trim(),
+  passwordController.text.trim(), fullName: '',
+);
+
 
                             if (success && mounted) {
                               nameController.clear();

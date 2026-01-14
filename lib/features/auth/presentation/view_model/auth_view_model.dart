@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
-import 'package:uuid/uuid.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final IAuthRepository authRepository;
 
   AuthViewModel(this.authRepository);
-
-  final _uuid = const Uuid();
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -16,13 +13,10 @@ class AuthViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
+  // ---------------- STATE HELPERS ----------------
+
   void _setLoading(bool value) {
     _isLoading = value;
-    notifyListeners();
-  }
-
-  void clearError() {
-    _errorMessage = null;
     notifyListeners();
   }
 
@@ -31,23 +25,27 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// ---------------- SIGN UP ----------------
-  Future<bool> register({
-    required String fullName,
-    required String email,
-    required String password,
-  }) async {
+  void clearError() {
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+  // ---------------- SIGN UP ----------------
+  Future<bool> register(
+    String name,
+    String email,
+    String password, {required String fullName}
+  ) async {
     _setLoading(true);
-    _setError(null);
+    _setError(null); // 🔥 CLEAR OLD ERROR
 
-    final entity = AuthEntity(
-      id: _uuid.v4(), // ✅ GENERATED ID
-      fullName: fullName,
-      email: email,
-      password: password,
+    final result = await authRepository.register(
+      AuthEntity(
+        fullName: name,
+        email: email,
+        password: password, id: '',
+      ),
     );
-
-    final result = await authRepository.register(entity);
 
     _setLoading(false);
 
@@ -56,11 +54,14 @@ class AuthViewModel extends ChangeNotifier {
         _setError(failure.message);
         return false;
       },
-      (success) => success,
+      (_) {
+        _setError(null); // 🔥 CLEAR ERROR ON SUCCESS
+        return true;
+      },
     );
   }
 
-  /// ---------------- LOGIN ----------------
+  // ---------------- LOGIN ----------------
   Future<bool> login({
     required String email,
     required String password,
@@ -81,7 +82,7 @@ class AuthViewModel extends ChangeNotifier {
     );
   }
 
-  /// ---------------- LOGOUT ----------------
+  // ---------------- LOGOUT (future) ----------------
   // Future<void> logout() async {
   //   await authRepository.logout();
   // }
