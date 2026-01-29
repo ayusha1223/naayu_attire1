@@ -1,11 +1,62 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart';
+
 import 'package:naayu_attire1/widgets/category_item.dart';
 import 'package:naayu_attire1/widgets/product_card.dart';
 import 'package:naayu_attire1/widgets/section_title.dart';
+import 'package:naayu_attire1/core/services/storage/image_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // ---------------- IMAGE UPLOAD STATE ----------------
+  final ImagePicker _picker = ImagePicker();
+  String? uploadedImageUrl;
+  bool isUploading = false;
+
+  // ---------------- IMAGE PICK & UPLOAD ----------------
+  Future<void> pickAndUploadImage(BuildContext context) async {
+    final pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile == null) return;
+
+    setState(() {
+      isUploading = true;
+    });
+
+    final imageFile = File(pickedFile.path);
+    final imageService = ImageService(Dio());
+
+    try {
+      final imageUrl = await imageService.uploadImage(
+        context: context,
+        imageFile: imageFile,
+      );
+
+      setState(() {
+        uploadedImageUrl = imageUrl;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Image upload failed")),
+      );
+    } finally {
+      setState(() {
+        isUploading = false;
+      });
+    }
+  }
+
+  // ---------------- UI ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +135,40 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              const SizedBox(height: 20),
+
+              // 📤 UPLOAD IMAGE BUTTON
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: isUploading
+                        ? null
+                        : () => pickAndUploadImage(context),
+                    child: isUploading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text("Upload Image"),
+                  ),
+                ),
+              ),
+
+              // 🖼️ DISPLAY IMAGE FROM SERVER
+              if (uploadedImageUrl != null)
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      uploadedImageUrl!,
+                      height: 180,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
 
               const SizedBox(height: 30),
 
