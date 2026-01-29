@@ -1,67 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/auth/presentation/pages/signup_page.dart';
+import 'package:provider/provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:naayu_attire1/features/bottom_screens/presentation/screens/home_screen.dart';
-import 'package:provider/provider.dart';
+import 'signup_page.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
+  // 🔹 Controllers (same as old code)
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final authVM = context.watch<AuthViewModel>();
 
     return Scaffold(
-      backgroundColor: const Color(0xfffde7ef),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 10,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
+      backgroundColor: const Color(0xfff8f1ef),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 40),
+
+                /// Title (UNCHANGED)
                 const Text(
-                  "Login",
+                  "Log into\nyour account",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.pink,
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 40),
 
-                // 🔹 Email (underline style)
+                /// Email (NOW CONNECTED)
                 TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
-                    labelText: "Email",
+                    labelText: "Email address",
                     border: UnderlineInputBorder(),
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
 
-                // 🔹 Password (underline style)
+                /// Password (NOW CONNECTED)
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -71,21 +70,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
 
+                const SizedBox(height: 10),
+
+                /// Forgot password (UNCHANGED)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 20),
 
-                // 🔴 Error message
+                /// 🔴 Error message (FROM API)
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
                     style: const TextStyle(color: Colors.red),
                   ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
 
-                // 🔹 Button (same as Sign Up)
+                /// LOGIN BUTTON (API FLOW)
                 SizedBox(
                   width: double.infinity,
+                  height: 50,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff7c5cff),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
                     onPressed: authVM.isLoading
                         ? null
                         : () async {
@@ -98,38 +118,97 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => HomeScreen(),
+                                  builder: (_) => const HomeScreen(),
                                 ),
                               );
                             }
                           },
                     child: authVM.isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text("Login"),
+                        : const Text(
+                            "LOG IN",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const RegisterScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Don't have an account? Sign Up",
-                    style: TextStyle(color: Colors.pink),
+                /// Or login with (UNCHANGED)
+                const Center(
+                  child: Text(
+                    "or log in with",
+                    style: TextStyle(color: Colors.grey),
                   ),
+                ),
+
+                const SizedBox(height: 20),
+
+                /// Social buttons (UNCHANGED)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    _SocialButton(icon: Icons.g_mobiledata),
+                    SizedBox(width: 20),
+                    _SocialButton(icon: Icons.facebook),
+                  ],
+                ),
+
+                const SizedBox(height: 40),
+
+                /// Sign up (UNCHANGED)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don’t have an account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const RegisterScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Social button widget (UNCHANGED)
+class _SocialButton extends StatelessWidget {
+  final IconData icon;
+
+  const _SocialButton({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 48,
+      width: 48,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Icon(icon, size: 28),
     );
   }
 }

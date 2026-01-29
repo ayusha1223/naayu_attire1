@@ -15,7 +15,6 @@ class NetworkInfo implements INetworkInfo {
   Future<bool> get isConnected async {
     final result = await connectivity.checkConnectivity();
 
-    // ignore: unrelated_type_equality_checks
     if (result == ConnectivityResult.none) {
       return false;
     }

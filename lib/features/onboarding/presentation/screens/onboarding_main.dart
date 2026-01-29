@@ -99,7 +99,7 @@ class _OnboardingMainState extends State<OnboardingMain> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => LoginScreen(),
+                          builder: (_) => LoginPage(),
                         ),
                       );
                     } else {
