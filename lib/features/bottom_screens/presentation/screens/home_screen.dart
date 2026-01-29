@@ -1,76 +1,31 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
+import 'package:naayu_attire1/features/bottom_screens/presentation/screens/profile_screen.dart';
+import 'package:naayu_attire1/features/bottom_screens/presentation/screens/tryon_screen.dart';
 
 import 'package:naayu_attire1/widgets/category_item.dart';
 import 'package:naayu_attire1/widgets/product_card.dart';
 import 'package:naayu_attire1/widgets/section_title.dart';
-import 'package:naayu_attire1/core/services/storage/image_service.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  // ---------------- IMAGE UPLOAD STATE ----------------
-  final ImagePicker _picker = ImagePicker();
-  String? uploadedImageUrl;
-  bool isUploading = false;
-
-  // ---------------- IMAGE PICK & UPLOAD ----------------
-  Future<void> pickAndUploadImage(BuildContext context) async {
-    final pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile == null) return;
-
-    setState(() {
-      isUploading = true;
-    });
-
-    final imageFile = File(pickedFile.path);
-    final imageService = ImageService(Dio());
-
-    try {
-      final imageUrl = await imageService.uploadImage(
-        context: context,
-        imageFile: imageFile,
-      );
-
-      setState(() {
-        uploadedImageUrl = imageUrl;
-      });
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Image upload failed")),
-      );
-    } finally {
-      setState(() {
-        isUploading = false;
-      });
-    }
-  }
-
-  // ---------------- UI ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // ➕ CENTER PLUS BUTTON
+      // ➕ CENTER FAB → TRY ON SCREEN
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xff7c5cff),
-        onPressed: isUploading
-            ? null
-            : () => pickAndUploadImage(context),
-        child: isUploading
-            ? const CircularProgressIndicator(color: Colors.white)
-            : const Icon(Icons.add, size: 28),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const TryOnScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add, size: 28),
       ),
 
       floatingActionButtonLocation:
@@ -93,14 +48,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.favorite_border),
                 onPressed: () {},
               ),
+
               const SizedBox(width: 40), // space for FAB
+
               IconButton(
                 icon: const Icon(Icons.shopping_cart_outlined),
                 onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(Icons.person_outline),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ProfileScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -182,21 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-
-              // 🖼️ DISPLAY IMAGE FROM SERVER
-              if (uploadedImageUrl != null)
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      uploadedImageUrl!,
-                      height: 180,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
 
               const SizedBox(height: 30),
 
