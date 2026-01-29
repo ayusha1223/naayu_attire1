@@ -61,6 +61,53 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
+      // ➕ CENTER PLUS BUTTON
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xff7c5cff),
+        onPressed: isUploading
+            ? null
+            : () => pickAndUploadImage(context),
+        child: isUploading
+            ? const CircularProgressIndicator(color: Colors.white)
+            : const Icon(Icons.add, size: 28),
+      ),
+
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
+
+      // ⬇️ BOTTOM NAV BAR
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.favorite_border),
+                onPressed: () {},
+              ),
+              const SizedBox(width: 40), // space for FAB
+              IconButton(
+                icon: const Icon(Icons.shopping_cart_outlined),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.person_outline),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+      ),
+
+      // 📄 BODY
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -132,25 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // 📤 UPLOAD IMAGE BUTTON
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: isUploading
-                        ? null
-                        : () => pickAndUploadImage(context),
-                    child: isUploading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text("Upload Image"),
                   ),
                 ),
               ),
