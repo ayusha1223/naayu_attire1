@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
+import 'package:naayu_attire1/core/services/storage/token_service.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final IAuthRepository authRepository;
@@ -34,16 +37,18 @@ class AuthViewModel extends ChangeNotifier {
   Future<bool> register(
     String name,
     String email,
-    String password, {required String fullName}
+    String password,
   ) async {
     _setLoading(true);
-    _setError(null); // 🔥 CLEAR OLD ERROR
+    _setError(null);
 
     final result = await authRepository.register(
       AuthEntity(
+        id: '',
         fullName: name,
         email: email,
-        password: password, id: '',
+        password: password,
+        token: '',
       ),
     );
 
@@ -55,7 +60,7 @@ class AuthViewModel extends ChangeNotifier {
         return false;
       },
       (_) {
-        _setError(null); // 🔥 CLEAR ERROR ON SUCCESS
+        _setError(null);
         return true;
       },
     );
@@ -65,6 +70,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<bool> login({
     required String email,
     required String password,
+    required BuildContext context, // ✅ context REQUIRED
   }) async {
     _setLoading(true);
     _setError(null);
@@ -78,12 +84,24 @@ class AuthViewModel extends ChangeNotifier {
         _setError(failure.message);
         return false;
       },
-      (_) => true,
+      (authEntity) async {
+        // 🔐 SAVE TOKEN AFTER LOGIN
+        final tokenService =
+            Provider.of<TokenService>(context, listen: false);
+
+        await tokenService.saveToken(authEntity.token);
+
+        _setError(null);
+        return true;
+      },
     );
   }
 
   // ---------------- LOGOUT (future) ----------------
-  // Future<void> logout() async {
-  //   await authRepository.logout();
-  // }
+  Future<void> logout(BuildContext context) async {
+    final tokenService =
+        Provider.of<TokenService>(context, listen: false);
+
+    await tokenService.removeToken();
+  }
 }

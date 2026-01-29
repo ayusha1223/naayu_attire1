@@ -110,9 +110,11 @@ class _LoginPageState extends State<LoginPage> {
                         ? null
                         : () async {
                             final success = await authVM.login(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+  email: emailController.text.trim(),
+  password: passwordController.text.trim(),
+  context: context, 
+);
+
 
                             if (success && mounted) {
                               Navigator.pushReplacement(
