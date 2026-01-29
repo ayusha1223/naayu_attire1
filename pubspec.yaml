@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  shared_preferences: ^2.2.2   # ✅ FIXED POSITION
+
   cupertino_icons: ^1.0.8
 
   # Local Database (Sprint 3)
