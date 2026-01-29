@@ -29,7 +29,8 @@ class AuthRemoteModel {
       id: id,
       fullName: name,
       email: email,
-      password: '', // password never comes from API
+      password: '', 
+      token: token
     );
   }
 
