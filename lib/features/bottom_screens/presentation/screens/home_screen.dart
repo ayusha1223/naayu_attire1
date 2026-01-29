@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // ➕ CENTER FAB → TRY ON SCREEN
+      
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xff7c5cff),
         onPressed: () {
