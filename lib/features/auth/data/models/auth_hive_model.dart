@@ -32,6 +32,7 @@ class AuthHiveModel extends HiveObject {
       fullName: fullName ?? '',
       email: email ?? '',
       password: password ?? '',
+      token: '',
     );
   }
 
