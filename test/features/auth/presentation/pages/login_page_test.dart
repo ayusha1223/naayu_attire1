@@ -1,35 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-bool isValidEmail(String email) {
-  return email.contains('@');
-}
-
-bool isValidPassword(String password) {
-  return password.length >= 6;
-}
-
-bool doPasswordsMatch(String p1, String p2) {
-  return p1 == p2;
-}
+import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 
 void main() {
-  test('Login: empty email is invalid', () {
-    expect(isValidEmail(''), false);
+  /// Test 1: Login screen loads
+  testWidgets('Login page loads correctly', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: LoginPage(),
+      ),
+    );
+
+    expect(find.text('Login'), findsOneWidget);
   });
 
-  test('Login: empty password is invalid', () {
-    expect(isValidPassword(''), false);
-  });
+  /// Test 2: Email and Password fields exist
+  testWidgets('Login page has email and password fields',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: LoginPage(),
+      ),
+    );
 
-  test('Signup: valid email format', () {
-    expect(isValidEmail('user@gmail.com'), true);
-  });
-
-  test('Signup: password length must be >= 6', () {
-    expect(isValidPassword('12345'), false);
-  });
-
-  test('Signup: password and confirm password must match', () {
-    expect(doPasswordsMatch('123456', '123456'), true);
+    expect(find.byType(TextFormField), findsWidgets);
   });
 }
