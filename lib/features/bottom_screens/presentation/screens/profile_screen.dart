@@ -3,8 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
+import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 import 'package:naayu_attire1/core/services/storage/image_service.dart';
+import 'package:naayu_attire1/core/services/storage/token_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -19,13 +23,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? profileImageUrl;
   bool isUploading = false;
 
-  // 👇 Controllers for profile fields
-  final TextEditingController nameController =
-      TextEditingController(text: "Your Name");
-  final TextEditingController emailController =
-      TextEditingController(text: "your@email.com");
-  final TextEditingController phoneController =
-      TextEditingController(text: "");
+  // Controllers
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // ---------------- INIT ----------------
+  @override
+  void initState() {
+    super.initState();
+    loadProfileData();
+  }
+
+  // ---------------- LOAD SAVED DATA ----------------
+  Future<void> loadProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      profileImageUrl = prefs.getString('profile_image');
+      nameController.text = prefs.getString('profile_name') ?? '';
+      emailController.text = prefs.getString('profile_email') ?? '';
+      phoneController.text = prefs.getString('profile_phone') ?? '';
+    });
+  }
+
+  // ---------------- SAVE PROFILE DATA ----------------
+  Future<void> saveProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('profile_name', nameController.text);
+    await prefs.setString('profile_phone', phoneController.text);
+  }
 
   // ---------------- IMAGE PICK & UPLOAD ----------------
   Future<void> pickAndUploadProfileImage() async {
@@ -45,6 +74,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         imageFile: imageFile,
       );
 
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('profile_image', imageUrl);
+
       setState(() {
         profileImageUrl = imageUrl;
       });
@@ -57,16 +89,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  // ---------------- LOGOUT ----------------
+ Future<void> logout() async {
+  final tokenService =
+      Provider.of<TokenService>(context, listen: false);
+
+  await tokenService.removeToken();
+
+  if (!mounted) return;
+
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const LoginPage(),
+    ),
+    (route) => false, // 🔥 clears entire stack
+  );
+}
+
+
   // ---------------- UI ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Profile")),
+      appBar: AppBar(
+        title: const Text("Profile"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: logout,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
             // 👤 PROFILE IMAGE
             GestureDetector(
@@ -93,16 +152,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
 
             const SizedBox(height: 10),
-
             if (isUploading) const CircularProgressIndicator(),
-
             const SizedBox(height: 30),
-
-            // ---------------- PROFILE DETAILS ----------------
 
             // NAME
             TextField(
               controller: nameController,
+              onChanged: (_) => saveProfileData(),
               decoration: const InputDecoration(
                 labelText: "Name",
                 prefixIcon: Icon(Icons.person_outline),
@@ -112,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 16),
 
-            // EMAIL (read-only)
+            // EMAIL (READ ONLY)
             TextField(
               controller: emailController,
               readOnly: true,
@@ -125,10 +181,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 16),
 
-            // PHONE NUMBER
+            // PHONE
             TextField(
               controller: phoneController,
               keyboardType: TextInputType.phone,
+              onChanged: (_) => saveProfileData(),
               decoration: const InputDecoration(
                 labelText: "Phone Number",
                 prefixIcon: Icon(Icons.phone_outlined),
@@ -136,30 +193,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
-            // 🔒 CHANGE PASSWORD
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () {
-                  // later navigate to change password screen
-                },
-                child: const Text("Change Password"),
+            // CHANGE PASSWORD (TEXT FIELD)
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "Change Password",
+                prefixIcon: Icon(Icons.lock_outline),
+                border: OutlineInputBorder(),
               ),
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
 
-            // 📜 TERMS & CONDITIONS
+            // TERMS
             TextButton(
-              onPressed: () {
-                // later open terms page
-              },
+              onPressed: () {},
               child: const Text("Terms & Conditions"),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
           ],
         ),
       ),
