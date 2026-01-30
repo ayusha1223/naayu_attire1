@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:naayu_attire1/features/bottom_screens/presentation/screens/home_screen.dart';
 import 'signup_page.dart';
+import 'package:naayu_attire1/core/services/sensors/fingerprint_service.dart';
+import 'package:naayu_attire1/core/services/storage/token_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -48,6 +50,52 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(height: 40),
+                const SizedBox(height: 16),
+
+SizedBox(
+  width: double.infinity,
+  height: 50,
+  child: OutlinedButton.icon(
+    icon: const Icon(Icons.fingerprint),
+    label: const Text("Login with Fingerprint"),
+    onPressed: () async {
+      final fingerprintService = FingerprintService();
+      final isAuthenticated = await fingerprintService.authenticate();
+
+      if (!isAuthenticated) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Fingerprint authentication failed")),
+        );
+        return;
+      }
+
+      final tokenService =
+          Provider.of<TokenService>(context, listen: false);
+
+      final token = tokenService.getToken();
+
+      if (token == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Please login once with email & password"),
+          ),
+        );
+        return;
+      }
+
+      // ✅ Token exists → go to Home
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const HomeScreen(),
+          ),
+        );
+      }
+    },
+  ),
+),
+
 
                 /// Email (NOW CONNECTED)
                 TextField(

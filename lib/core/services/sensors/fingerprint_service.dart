@@ -5,16 +5,16 @@ class FingerprintService {
 
   Future<bool> authenticate() async {
     try {
-      final isAvailable = await _auth.canCheckBiometrics;
-      if (!isAvailable) return false;
+      final canCheck = await _auth.canCheckBiometrics;
+      if (!canCheck) return false;
 
       return await _auth.authenticate(
-        localizedReason: 'Verify fingerprint to continue',
+        localizedReason: 'Authenticate using fingerprint',
         options: const AuthenticationOptions(
           biometricOnly: true,
         ),
       );
-    } catch (e) {
+    } catch (_) {
       return false;
     }
   }
