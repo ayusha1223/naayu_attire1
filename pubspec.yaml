@@ -15,6 +15,7 @@ dependencies:
   shared_preferences: ^2.2.2   
 
   cupertino_icons: ^1.0.8
+  test_cov_console: ^0.2.2
 
   # Local Database (Sprint 3)
   hive: ^2.2.3

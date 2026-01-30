@@ -1,40 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:naayu_attire1/features/auth/presentation/pages/signup_page.dart';
+import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
+import 'package:naayu_attire1/core/services/storage/token_service.dart';
+
+import '../../../../fake/fake_auth_repository.dart';
 
 void main() {
-  /// Test 1: Signup screen loads
-  testWidgets('Signup page loads correctly', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
+  late AuthViewModel authViewModel;
+
+  Widget createSignupTestWidget() {
+    return ChangeNotifierProvider<AuthViewModel>.value(
+      value: authViewModel,
+      child: const MaterialApp(
         home: RegisterScreen(),
       ),
     );
+  }
 
-    expect(find.text('Sign Up'), findsOneWidget);
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    authViewModel = AuthViewModel(
+      FakeAuthRepository(),
+      TokenService(prefs),
+    );
   });
 
-  /// Test 2: Signup page has input fields
-  testWidgets('Signup page has text fields',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: RegisterScreen(),
-      ),
-    );
+  /// ✅ Test 3
+  testWidgets('Signup page loads', (tester) async {
+    await tester.pumpWidget(createSignupTestWidget());
+    await tester.pumpAndSettle();
 
-    expect(find.byType(TextFormField), findsWidgets);
+    expect(find.textContaining('Create'), findsOneWidget);
   });
 
-  /// Test 3: Signup button exists
-  testWidgets('Signup button is visible',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: RegisterScreen(),
-      ),
-    );
+  /// ✅ Test 4
+  testWidgets('Signup page has input fields', (tester) async {
+    await tester.pumpWidget(createSignupTestWidget());
+    await tester.pumpAndSettle();
 
-    expect(find.text('Sign Up'), findsOneWidget);
+    expect(find.byType(TextField), findsWidgets);
+  });
+
+  /// ✅ Test 5
+  testWidgets('Signup button exists', (tester) async {
+    await tester.pumpWidget(createSignupTestWidget());
+    await tester.pumpAndSettle();
+
+    expect(find.text('SIGN UP'), findsOneWidget);
   });
 }
