@@ -21,19 +21,26 @@ class ImageService {
     }
 
     final formData = FormData.fromMap({
-      "image": await MultipartFile.fromFile(imageFile.path),
+      "image": await MultipartFile.fromFile(
+        imageFile.path,
+        filename: imageFile.path.split('/').last,
+      ),
     });
 
     final response = await dio.post(
-      "http://192.168.1.91:3000/api/v1/students/upload-image",
+      "http://192.168.1.74:3000/api/v1/students/upload-image",
       data: formData,
       options: Options(
         headers: {
           "Authorization": "Bearer $token",
+          "Content-Type": "multipart/form-data",
         },
       ),
     );
 
+    print("🔥 UPLOAD RESPONSE: ${response.data}");
+
     return response.data["imageUrl"];
   }
 }
+

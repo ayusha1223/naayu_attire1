@@ -33,7 +33,7 @@ void main() async {
 
        
         ChangeNotifierProvider(
-          create: (_) => AuthViewModel(authRepository),
+          create: (_) => AuthViewModel(authRepository, tokenService),
         ),
       ],
       child: const MyApp(),

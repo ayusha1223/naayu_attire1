@@ -7,8 +7,9 @@ import 'package:naayu_attire1/core/services/storage/token_service.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final IAuthRepository authRepository;
+  final TokenService tokenService;
 
-  AuthViewModel(this.authRepository);
+  AuthViewModel(this.authRepository, this.tokenService);
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -68,34 +69,31 @@ class AuthViewModel extends ChangeNotifier {
 
   // ---------------- LOGIN ----------------
   Future<bool> login({
-    required String email,
-    required String password,
-    required BuildContext context, // ✅ context REQUIRED
-  }) async {
-    _setLoading(true);
-    _setError(null);
+  required String email,
+  required String password,
+}) async {
+  _setLoading(true);
+  _setError(null);
 
-    final result = await authRepository.login(email, password);
+  final result = await authRepository.login(email, password);
 
-    _setLoading(false);
+  _setLoading(false);
 
-    return result.fold(
-      (failure) {
-        _setError(failure.message);
-        return false;
-      },
-      (authEntity) async {
-        // 🔐 SAVE TOKEN AFTER LOGIN
-        final tokenService =
-            Provider.of<TokenService>(context, listen: false);
+  return result.fold(
+    (failure) {
+      _setError(failure.message);
+      return false;
+    },
+    (authEntity) async {
+  print("🔥 SAVED TOKEN: ${authEntity.token}");
 
-        await tokenService.saveToken(authEntity.token);
+  await tokenService.saveToken(authEntity.token);
+  return true;
+}
 
-        _setError(null);
-        return true;
-      },
-    );
-  }
+  );
+}
+
 
   // ---------------- LOGOUT (future) ----------------
   Future<void> logout(BuildContext context) async {

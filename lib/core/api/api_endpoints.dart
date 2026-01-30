@@ -3,10 +3,10 @@ class ApiEndpoints {
 
   // ================= Base URL =================
   // Android Emulator
-  static const String baseUrl = 'http://10.0.2.2:3000/api/v1';
+  // static const String baseUrl = 'http://10.0.2.2:3000/api/v1';
 
   // Physical Device (example)
-  // static const String baseUrl = 'http://192.168.1.5:3000/api/v1';
+   static const String baseUrl = 'http://192.168.1.74:3000/api/v1';
 
   // ================= Auth Endpoints =================
   static const String studentRegister = '/students/register';

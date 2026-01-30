@@ -112,8 +112,8 @@ class _LoginPageState extends State<LoginPage> {
                             final success = await authVM.login(
   email: emailController.text.trim(),
   password: passwordController.text.trim(),
-  context: context, 
 );
+
 
 
                             if (success && mounted) {
