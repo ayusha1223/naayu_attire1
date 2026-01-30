@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // 🔹 Controllers (same as old code)
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -40,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const SizedBox(height: 40),
 
-                /// Title (UNCHANGED)
+                /// Title
                 const Text(
                   "Log into\nyour account",
                   style: TextStyle(
@@ -50,54 +49,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(height: 40),
-                const SizedBox(height: 16),
 
-SizedBox(
-  width: double.infinity,
-  height: 50,
-  child: OutlinedButton.icon(
-    icon: const Icon(Icons.fingerprint),
-    label: const Text("Login with Fingerprint"),
-    onPressed: () async {
-      final fingerprintService = FingerprintService();
-      final isAuthenticated = await fingerprintService.authenticate();
-
-      if (!isAuthenticated) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Fingerprint authentication failed")),
-        );
-        return;
-      }
-
-      final tokenService =
-          Provider.of<TokenService>(context, listen: false);
-
-      final token = tokenService.getToken();
-
-      if (token == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Please login once with email & password"),
-          ),
-        );
-        return;
-      }
-
-      // ✅ Token exists → go to Home
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const HomeScreen(),
-          ),
-        );
-      }
-    },
-  ),
-),
-
-
-                /// Email (NOW CONNECTED)
+                /// Email
                 TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
@@ -108,7 +61,7 @@ SizedBox(
 
                 const SizedBox(height: 20),
 
-                /// Password (NOW CONNECTED)
+                /// Password
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -120,7 +73,7 @@ SizedBox(
 
                 const SizedBox(height: 10),
 
-                /// Forgot password (UNCHANGED)
+                /// Forgot password
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -134,7 +87,7 @@ SizedBox(
 
                 const SizedBox(height: 20),
 
-                /// 🔴 Error message (FROM API)
+                /// Error message
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
@@ -143,7 +96,7 @@ SizedBox(
 
                 const SizedBox(height: 20),
 
-                /// LOGIN BUTTON (API FLOW)
+                /// LOGIN BUTTON
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -158,11 +111,9 @@ SizedBox(
                         ? null
                         : () async {
                             final success = await authVM.login(
-  email: emailController.text.trim(),
-  password: passwordController.text.trim(),
-);
-
-
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
 
                             if (success && mounted) {
                               Navigator.pushReplacement(
@@ -186,9 +137,61 @@ SizedBox(
                   ),
                 ),
 
+                const SizedBox(height: 16),
+
+                /// 🔐 FINGERPRINT LOGIN (MOVED HERE)
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: OutlinedButton.icon(
+                    icon: const Icon(Icons.fingerprint),
+                    label: const Text("Login with Fingerprint"),
+                    onPressed: () async {
+                      final fingerprintService = FingerprintService();
+                      final isAuthenticated =
+                          await fingerprintService.authenticate();
+
+                      if (!isAuthenticated) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text("Fingerprint authentication failed"),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final tokenService =
+                          Provider.of<TokenService>(context, listen: false);
+
+                      final token = tokenService.getToken();
+
+                      if (token == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Please login once with email & password",
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      if (mounted) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const HomeScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
+
                 const SizedBox(height: 20),
 
-                /// Or login with (UNCHANGED)
+                /// Or login with
                 const Center(
                   child: Text(
                     "or log in with",
@@ -198,7 +201,7 @@ SizedBox(
 
                 const SizedBox(height: 20),
 
-                /// Social buttons (UNCHANGED)
+                /// Social buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
@@ -210,7 +213,7 @@ SizedBox(
 
                 const SizedBox(height: 40),
 
-                /// Sign up (UNCHANGED)
+                /// Sign up
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -243,7 +246,7 @@ SizedBox(
   }
 }
 
-/// Social button widget (UNCHANGED)
+/// Social button widget
 class _SocialButton extends StatelessWidget {
   final IconData icon;
 
