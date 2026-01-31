@@ -7,11 +7,12 @@ class AuthRemoteModel {
   final String token;
 
   AuthRemoteModel({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.token,
-  });
+  required this.id,
+  required this.name,
+  required this.email,
+  required this.token,
+});
+
 
   // ================= FROM JSON (Login Response) =================
   factory AuthRemoteModel.fromJson(Map<String, dynamic> json) {
