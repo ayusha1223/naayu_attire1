@@ -9,6 +9,9 @@ class WeddingData {
       price: 5999,
       oldPrice: 7999,
       color: "gold",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "w2",
@@ -16,6 +19,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding2.png",
       price: 6999,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "w3",
@@ -23,6 +29,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding3.png",
       price: 7499,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w4",
@@ -30,6 +39,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding4.png",
       price: 7499,
       color: "gold",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w5",
@@ -37,6 +49,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding5.png",
       price: 7499,
       color: "gold",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w6",
@@ -44,6 +59,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding6.png",
       price: 7499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w7",
@@ -51,6 +69,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding7.png",
       price: 7499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w8",
@@ -58,6 +79,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding8.png",
       price: 7499,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w9",
@@ -65,6 +89,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding9.png",
       price: 7499,
       color: "gold",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w10",
@@ -72,6 +99,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding10.png",
       price: 7499,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w11",
@@ -79,6 +109,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding11.png",
       price: 7499,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w12",
@@ -86,6 +119,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding12.png",
       price: 7499,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w13",
@@ -93,6 +129,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding13.png",
       price: 7499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w14",
@@ -100,6 +139,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding14.png",
       price: 7499,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w15",
@@ -107,6 +149,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding15.png",
       price: 7499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w16",
@@ -114,6 +159,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding16.png",
       price: 7499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w17",
@@ -121,6 +169,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding17.png",
       price: 7499,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w18",
@@ -128,6 +179,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding18.png",
       price: 7499,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w19",
@@ -135,6 +189,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding19.png",
       price: 7499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w20",
@@ -142,6 +199,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding20.png",
       price: 7499,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w21",
@@ -149,6 +209,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding21.png",
       price: 7499,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w22",
@@ -156,6 +219,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding22.png",
       price: 7499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w23",
@@ -163,6 +229,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding23.png",
       price: 7499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
       ProductModel(
       id: "w24",
@@ -170,6 +239,9 @@ class WeddingData {
       image: "assets/images/wedding/wedding24.png",
       price: 7499,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
   ];
 }

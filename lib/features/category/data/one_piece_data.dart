@@ -9,6 +9,9 @@ class OnePieceData {
       price: 1799,
       oldPrice: 2199,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op2",
@@ -16,6 +19,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece2.png",
       price: 1999,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op3",
@@ -23,6 +29,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece3.png",
       price: 1499,
       color: "maroon",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op4",
@@ -30,6 +39,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece4.png",
       price: 2499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op5",
@@ -37,6 +49,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece5.png",
       price: 2499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op6",
@@ -44,6 +59,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece6.png",
       price: 2499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op7",
@@ -51,6 +69,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece7.png",
       price: 2499,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op8",
@@ -58,13 +79,20 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece8.png",
       price: 2499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
+    
     ProductModel(
       id: "op9",
       name: "Elegant Evening Dress",
       image: "assets/images/onepiece/onepiece9.png",
       price: 2499,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op10",
@@ -72,6 +100,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece10.png",
       price: 2499,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op11",
@@ -79,6 +110,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece11.png",
       price: 2499,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op12",
@@ -86,6 +120,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece12.png",
       price: 2499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op13",
@@ -93,6 +130,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece13.png",
       price: 2499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op14",
@@ -100,6 +140,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece14.png",
       price: 2499,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op15",
@@ -107,6 +150,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece15.png",
       price: 2499,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op16",
@@ -114,6 +160,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece16.png",
       price: 2499,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op17",
@@ -121,6 +170,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece17.png",
       price: 2499,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op18",
@@ -128,6 +180,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece18.png",
       price: 2499,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op19",
@@ -135,6 +190,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece19.png",
       price: 2499,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op20",
@@ -142,6 +200,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece20.png",
       price: 2499,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op21",
@@ -149,6 +210,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece21.png",
       price: 2499,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op22",
@@ -156,6 +220,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece22.png",
       price: 2499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op23",
@@ -163,6 +230,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece23.png",
       price: 2499,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "op24",
@@ -170,6 +240,9 @@ class OnePieceData {
       image: "assets/images/onepiece/onepiece24.png",
       price: 2499,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
   ];
 }

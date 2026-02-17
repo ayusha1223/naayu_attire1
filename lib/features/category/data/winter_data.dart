@@ -9,6 +9,9 @@ class WinterData {
       price: 2199,
       oldPrice: 2599,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "wtr2",
@@ -16,6 +19,9 @@ class WinterData {
       image: "assets/images/winter/winter2.png",
       price: 2899,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "wtr3",
@@ -23,6 +29,9 @@ class WinterData {
       image: "assets/images/winter/winter3.png",
       price: 2499,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "wtr4",
@@ -30,6 +39,9 @@ class WinterData {
       image: "assets/images/winter/winter4.png",
       price: 1999,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr5",
@@ -37,6 +49,9 @@ class WinterData {
       image: "assets/images/winter/winter5.png",
       price: 1999,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr6",
@@ -44,6 +59,9 @@ class WinterData {
       image: "assets/images/winter/winter6.png",
       price: 1999,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr7",
@@ -51,6 +69,9 @@ class WinterData {
       image: "assets/images/winter/winter7.png",
       price: 1999,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr8",
@@ -58,6 +79,9 @@ class WinterData {
       image: "assets/images/winter/winter8.png",
       price: 1999,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr9",
@@ -65,6 +89,9 @@ class WinterData {
       image: "assets/images/winter/winter9.png",
       price: 1999,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr10",
@@ -72,6 +99,9 @@ class WinterData {
       image: "assets/images/winter/winter10.png",
       price: 1999,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr11",
@@ -79,6 +109,9 @@ class WinterData {
       image: "assets/images/winter/winter11.png",
       price: 1999,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr12",
@@ -86,6 +119,9 @@ class WinterData {
       image: "assets/images/winter/winter12.png",
       price: 1999,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr13",
@@ -93,6 +129,9 @@ class WinterData {
       image: "assets/images/winter/winter13.png",
       price: 1999,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr14",
@@ -100,6 +139,9 @@ class WinterData {
       image: "assets/images/winter/winter14.png",
       price: 1999,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr15",
@@ -107,6 +149,9 @@ class WinterData {
       image: "assets/images/winter/winter15.png",
       price: 1999,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr16",
@@ -114,6 +159,9 @@ class WinterData {
       image: "assets/images/winter/winter16.png",
       price: 1999,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr17",
@@ -121,6 +169,9 @@ class WinterData {
       image: "assets/images/winter/winter17.png",
       price: 1999,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr18",
@@ -128,6 +179,9 @@ class WinterData {
       image: "assets/images/winter/winter18.png",
       price: 1999,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr19",
@@ -135,6 +189,9 @@ class WinterData {
       image: "assets/images/winter/winter19.png",
       price: 1999,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr20",
@@ -142,6 +199,9 @@ class WinterData {
       image: "assets/images/winter/winter20.png",
       price: 1999,
       color: "grey",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr21",
@@ -149,6 +209,9 @@ class WinterData {
       image: "assets/images/winter/winter21.png",
       price: 1999,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr22",
@@ -156,6 +219,9 @@ class WinterData {
       image: "assets/images/winter/winter22.png",
       price: 1999,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr23",
@@ -163,6 +229,9 @@ class WinterData {
       image: "assets/images/winter/winter23.png",
       price: 1999,
       color: "yellow",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "wtr24",
@@ -170,6 +239,9 @@ class WinterData {
       image: "assets/images/winter/winter24.png",
       price: 1999,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
   ];
 }

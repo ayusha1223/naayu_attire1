@@ -9,6 +9,9 @@ class PartyData {
       price: 2499,
       oldPrice: 2999,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "p2",
@@ -16,6 +19,9 @@ class PartyData {
       image: "assets/images/party/party2.png",
       price: 3299,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "p3",
@@ -23,6 +29,9 @@ class PartyData {
       image: "assets/images/party/party3.png",
       price: 1899,
       color: "purple",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
       id: "p4",
@@ -30,6 +39,9 @@ class PartyData {
       image: "assets/images/party/party4.png",
       price: 2799,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p5",
@@ -37,6 +49,9 @@ class PartyData {
       image: "assets/images/party/party5.png",
       price: 2799,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p6",
@@ -44,6 +59,9 @@ class PartyData {
       image: "assets/images/party/party6.png",
       price: 2799,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p7",
@@ -51,6 +69,9 @@ class PartyData {
       image: "assets/images/party/party7.png",
       price: 2799,
       color: "yellow",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p8",
@@ -58,6 +79,9 @@ class PartyData {
       image: "assets/images/party/party8.png",
       price: 2799,
       color: "yellow",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p9",
@@ -65,6 +89,9 @@ class PartyData {
       image: "assets/images/party/party9.png",
       price: 2799,
       color: "gold",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p10",
@@ -72,6 +99,9 @@ class PartyData {
       image: "assets/images/party/party10.png",
       price: 2799,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p11",
@@ -79,6 +109,9 @@ class PartyData {
       image: "assets/images/party/party11.png",
       price: 2799,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p12",
@@ -86,6 +119,9 @@ class PartyData {
       image: "assets/images/party/party12.png",
       price: 2799,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p13",
@@ -93,6 +129,9 @@ class PartyData {
       image: "assets/images/party/party13.png",
       price: 2799,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p14",
@@ -100,6 +139,9 @@ class PartyData {
       image: "assets/images/party/party14.png",
       price: 2799,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p15",
@@ -107,6 +149,9 @@ class PartyData {
       image: "assets/images/party/party15.png",
       price: 2799,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p16",
@@ -114,6 +159,9 @@ class PartyData {
       image: "assets/images/party/party16.png",
       price: 2799,
       color: "gold",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p17",
@@ -121,6 +169,9 @@ class PartyData {
       image: "assets/images/party/party17.png",
       price: 2799,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p18",
@@ -128,6 +179,9 @@ class PartyData {
       image: "assets/images/party/party18.png",
       price: 2799,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p19",
@@ -135,6 +189,9 @@ class PartyData {
       image: "assets/images/party/party19.png",
       price: 2799,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p20",
@@ -142,6 +199,9 @@ class PartyData {
       image: "assets/images/party/party20.png",
       price: 2799,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p21",
@@ -149,6 +209,9 @@ class PartyData {
       image: "assets/images/party/party21.png",
       price: 2799,
       color: "black",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p22",
@@ -156,6 +219,9 @@ class PartyData {
       image: "assets/images/party/party22.png",
       price: 2799,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p23",
@@ -163,6 +229,9 @@ class PartyData {
       image: "assets/images/party/party23.png",
       price: 2799,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
       id: "p24",
@@ -170,6 +239,9 @@ class PartyData {
       image: "assets/images/party/party24.png",
       price: 2799,
       color: "yellow",
+      sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
   ];
 }

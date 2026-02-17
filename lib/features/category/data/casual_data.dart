@@ -9,23 +9,35 @@ class CasualData {
       price: 1299,
       oldPrice: 1599,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.2,
+      description: "Lightweight and breathable fabric. Perfect for daily wear. Stylish floral print."
+      
     ),
-    ProductModel(
-      id: "c2",
-      name: "Cotton Daily Wear",
-      image: "assets/images/casual/casual2.png",
-      price: 999,
-      oldPrice: 1299,
-      color: "white",
-    ),
-    ProductModel(
-      id: "c3",
-      name: "Summer Light Kurti",
-      image: "assets/images/casual/casual3.png",
-      price: 1499,
-      oldPrice: 1799,
-      color: "orange",
-    ),
+   ProductModel(
+  id: "c2",
+  name: "Cotton Daily Wear",
+  image: "assets/images/casual/casual2.png",
+  price: 999,
+  oldPrice: 1299,
+  color: "white",
+  sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.0,
+  description: "Soft cotton material. Comfortable fit for all-day wear. Ideal for casual outings.",
+),
+
+ProductModel(
+  id: "c3",
+  name: "Summer Light Kurti",
+  image: "assets/images/casual/casual3.png",
+  price: 1499,
+  oldPrice: 1799,
+  color: "orange",
+  sizes: ["XS", "S", "M", "L", "XL"],
+  rating: 4.5,
+  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+),
+   
  ProductModel(
       id: "c4",
       name: "Summer Light Kurti",
@@ -33,6 +45,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.3,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c5",
@@ -41,6 +56,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1899,
       color: "yellow",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.4,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c6",
@@ -49,6 +67,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1899,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.1,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c7",
@@ -57,6 +78,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1999,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.6,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c8",
@@ -65,6 +89,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "red",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.0,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c9",
@@ -73,6 +100,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1899,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.2,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c10",
@@ -81,6 +111,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1899,
       color: "yellow",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.3,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
 
     ),
      ProductModel(
@@ -90,6 +123,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.5,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c12",
@@ -98,6 +134,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1899,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.4,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
 
     ),
      ProductModel(
@@ -107,6 +146,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1699,
       color: "brown",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.1,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c14",
@@ -115,6 +157,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.2,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c15",
@@ -123,6 +168,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1699,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.3,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c16",
@@ -131,6 +179,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "pink",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.4,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c17",
@@ -139,6 +190,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1899,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.2,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c18",
@@ -147,6 +201,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1699,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.5,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c19",
@@ -155,6 +212,10 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.3,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+
     ),
      ProductModel(
       id: "c20",
@@ -163,6 +224,10 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "green",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.1,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+    
     ),
      ProductModel(
       id: "c21",
@@ -171,6 +236,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1699,
       color: "blue",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.4,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c22",
@@ -179,6 +247,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1599,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.5,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
      ProductModel(
       id: "c23",
@@ -187,6 +258,10 @@ class CasualData {
       price: 1499,
       oldPrice: 1699,
       color: "orange",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.3,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+
     ),
      ProductModel(
       id: "c24",
@@ -195,6 +270,9 @@ class CasualData {
       price: 1499,
       oldPrice: 1799,
       color: "white",
+      sizes: ["XS", "S", "M", "L", "XL"],
+      rating: 4.5,
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
     ),
   ];
 }
