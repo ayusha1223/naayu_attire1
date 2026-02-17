@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/screens/home_screen.dart';
+import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'signup_page.dart';
@@ -118,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const HomeScreen(),
+                                  builder: (_) => const MainNavigation(),
                                 ),
                               );
                             }

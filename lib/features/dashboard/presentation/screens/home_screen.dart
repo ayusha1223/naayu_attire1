@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/dashboard/bottom_nav_bar.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/widgets/service_footer_section.dart';
 import '../widgets/flash_sale_header.dart';
 import '../widgets/product_grid.dart';
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: const [
 
-              SizedBox(height: 20),
+              SizedBox(height: 1),
 
               LocationHeader(),
               
@@ -54,8 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
-      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
