@@ -55,9 +55,10 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/home/
     - assets/images/
     - assets/images/onboarding/
     - assets/images/auth/
-    - assets/videos/
+    - assets/videos/hero.mp4
     - assets/images/splash/
 
