@@ -5,6 +5,7 @@ import '../widgets/product_grid.dart';
 import '../widgets/location_header.dart';
 import '../widgets/search_bar_section.dart';
 import '../widgets/banner_section.dart';
+import '../widgets/feature_tab_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,14 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
               LocationHeader(),
               
-
               SearchBarSection(),
               SizedBox(height: 20),
 
               BannerSection(),
               SizedBox(height: 15),
+              FeatureTabSection(),
+              const SizedBox(height: 30),
 
-             const FlashSaleHeader(),
+              const FlashSaleHeader(),
               SizedBox(height: 20),
 
               ProductGrid(),

@@ -28,17 +28,18 @@ class ProductCard extends StatelessWidget {
         children: [
 
           /// PRICE ABOVE IMAGE
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              price,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-
+Padding(
+  padding: const EdgeInsets.symmetric(vertical: 4),
+  child: Text(
+    "Rs $price",
+    textScaler: const TextScaler.linear(1.0),
+    style: const TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 10, // 👈 now this WILL shrink
+      letterSpacing: 0.3,
+    ),
+  ),
+),
           /// IMAGE + ICONS
           Expanded(
             child: Stack(
@@ -75,7 +76,7 @@ class ProductCard extends StatelessWidget {
                   right: 8,
                   child: CircleAvatar(
                     radius: 16,
-                    
+                    backgroundColor: Colors.black,
                     child: const Icon(
                       Icons.shopping_cart_outlined,
                       size: 18,

@@ -5,12 +5,10 @@ class FlashSaleHeader extends StatefulWidget {
   const FlashSaleHeader({super.key});
 
   @override
-  State<FlashSaleHeader> createState() =>
-      _FlashSaleHeaderState();
+  State<FlashSaleHeader> createState() => _FlashSaleHeaderState();
 }
 
-class _FlashSaleHeaderState
-    extends State<FlashSaleHeader> {
+class _FlashSaleHeaderState extends State<FlashSaleHeader> {
   late Timer _timer;
   Duration _timeLeft = Duration.zero;
 
@@ -25,17 +23,13 @@ class _FlashSaleHeaderState
 
   void _startTimer() {
     _updateTime();
-
-    _timer =
-        Timer.periodic(const Duration(seconds: 1),
-            (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _updateTime();
     });
   }
 
   void _updateTime() {
-    final difference =
-        _endDate.difference(DateTime.now());
+    final difference = _endDate.difference(DateTime.now());
 
     if (difference.isNegative) {
       _timer.cancel();
@@ -55,77 +49,52 @@ class _FlashSaleHeaderState
     super.dispose();
   }
 
-  Widget _timeBox(String value, String label) {
-    return Container(
-      padding:
-          const EdgeInsets.symmetric(
-              horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xff6C6A8D),
-        borderRadius:
-            BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Text(
-            value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 10,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+
+          /// 🔥 Fancy Flash Sale Text
           const Text(
             "Flash Sale",
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontFamily: "Times New Roman",
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 1.2,
+              color: Color.fromARGB(255, 20, 20, 20),
             ),
           ),
-          Row(
-            children: [
-              _timeBox(
-                  _timeLeft.inDays.toString(), "Day"),
-              const SizedBox(width: 6),
-              _timeBox(
-                  _timeLeft.inHours
-                      .remainder(24)
-                      .toString(),
-                  "Hour"),
-              const SizedBox(width: 6),
-              _timeBox(
-                  _timeLeft.inMinutes
-                      .remainder(60)
-                      .toString(),
-                  "Minutes"),
-              const SizedBox(width: 6),
-              _timeBox(
-                  _timeLeft.inSeconds
-                      .remainder(60)
-                      .toString(),
-                  "Second"),
-            ],
+
+          /// ⏳ Inline Timer (No Boxes)
+          Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 113, 162, 212),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.access_time,
+                    color: Colors.white, size: 16),
+                const SizedBox(width: 6),
+                Text(
+                  "${_timeLeft.inDays}d "
+                  "${_timeLeft.inHours.remainder(24)}h "
+                  "${_timeLeft.inMinutes.remainder(60)}m "
+                  "${_timeLeft.inSeconds.remainder(60)}s",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
