@@ -34,6 +34,7 @@ dependencies:
 
   # Media
   image_picker: ^1.0.7
+  video_player: ^2.8.2 
 
   # Networking (Sprint 4 - API)
   dio: ^5.4.1
@@ -55,3 +56,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/onboarding/
+    - assets/images/auth/
+    - assets/videos/
+    - assets/images/splash/
+

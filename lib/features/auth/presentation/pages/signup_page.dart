@@ -11,24 +11,21 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // Controllers (UNCHANGED)
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  // 👁️ Password visibility (UNCHANGED)
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
 
-  // 🔴 Local validation error (same as old code)
   String? localError;
 
   @override
   void initState() {
     super.initState();
-    // Clear any previous backend error
     Future.microtask(() {
       context.read<AuthViewModel>().clearError();
     });
@@ -56,20 +53,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 const SizedBox(height: 40),
 
-                /// Title (UNCHANGED)
                 const Text(
                   "Create\nyour account",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
 
                 const SizedBox(height: 40),
 
-                /// Name (UNCHANGED)
                 TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
@@ -80,7 +76,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 20),
 
-                /// Email (UNCHANGED)
                 TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
@@ -91,7 +86,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 20),
 
-                /// Password (UNCHANGED UI)
                 TextField(
                   controller: passwordController,
                   obscureText: !isPasswordVisible,
@@ -115,7 +109,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 20),
 
-                /// Confirm Password (UNCHANGED UI)
                 TextField(
                   controller: confirmPasswordController,
                   obscureText: !isConfirmPasswordVisible,
@@ -140,14 +133,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 16),
 
-                // 🔴 Local password mismatch error (OLD LOGIC)
                 if (localError != null)
                   Text(
                     localError!,
                     style: const TextStyle(color: Colors.red),
                   ),
 
-                // 🔴 Backend / API error (OLD LOGIC)
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
@@ -156,15 +147,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 30),
 
-                /// SIGN UP button (API WIRED)
                 SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: 55,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff7c5cff),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     onPressed: authVM.isLoading
@@ -174,7 +164,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               localError = null;
                             });
 
-                            // 🔹 Local validation (same as old)
                             if (passwordController.text.trim() !=
                                 confirmPasswordController.text.trim()) {
                               setState(() {
@@ -183,29 +172,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return;
                             }
 
-                            // 🔹 API call (same as old)
                             final success = await authVM.register(
-  nameController.text.trim(),
-  emailController.text.trim(),
-  passwordController.text.trim(),
-);
-
-
+                              nameController.text.trim(),
+                              emailController.text.trim(),
+                              passwordController.text.trim(),
+                            );
 
                             if (success && mounted) {
-                              nameController.clear();
-                              emailController.clear();
-                              passwordController.clear();
-                              confirmPasswordController.clear();
-
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Signup successful. Please login.',
-                                  ),
-                                ),
-                              );
-
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -227,9 +200,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
 
-                /// Or sign up with (UNCHANGED)
                 const Center(
                   child: Text(
                     "or sign up with",
@@ -239,19 +211,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 const SizedBox(height: 20),
 
-                /// Social buttons (UNCHANGED)
+                /// 🔥 UPDATED SOCIAL BUTTONS
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    _SocialButton(icon: Icons.g_mobiledata),
+                    SocialButton(
+                      imagePath: "assets/images/auth/google.png",
+                    ),
                     SizedBox(width: 20),
-                    _SocialButton(icon: Icons.facebook),
+                    SocialButton(
+                      imagePath: "assets/images/auth/facebook.png",
+                    ),
                   ],
                 ),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
 
-                /// Already have account (UNCHANGED)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -284,22 +259,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 }
 
-/// Social button widget (UNCHANGED)
-class _SocialButton extends StatelessWidget {
-  final IconData icon;
+/// 🔥 NEW SOCIAL BUTTON WIDGET
+class SocialButton extends StatelessWidget {
+  final String imagePath;
 
-  const _SocialButton({required this.icon});
+  const SocialButton({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
-      width: 48,
+      height: 55,
+      width: 55,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(color: Colors.grey.shade300),
+        color: Colors.white,
       ),
-      child: Icon(icon, size: 28),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Image.asset(imagePath),
+      ),
     );
   }
 }

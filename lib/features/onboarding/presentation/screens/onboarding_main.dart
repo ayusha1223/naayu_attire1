@@ -34,23 +34,29 @@ class _OnboardingMainState extends State<OnboardingMain> {
           ),
 
           // SKIP BUTTON
-          Positioned(
-            top: 50,
-            right: 20,
-            child: GestureDetector(
-              onTap: () {
-                _controller.jumpToPage(2);
-              },
-              child: const Text(
-                "Skip",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-          ),
+         Positioned(
+  top: 50,
+  right: 20,
+  child: GestureDetector(
+    onTap: () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => LoginPage(),
+        ),
+      );
+    },
+    child: const Text(
+      "Skip",
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: Colors.black87,
+      ),
+    ),
+  ),
+),
+
 
           // DOTS + NEXT/GET STARTED
           Positioned(
@@ -93,22 +99,21 @@ class _OnboardingMainState extends State<OnboardingMain> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  onPressed: () {
-                    if (_currentPage == 2) {
-                    
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => LoginPage(),
-                        ),
-                      );
-                    } else {
-                      _controller.nextPage(
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
+                 onPressed: () {
+  if (_currentPage == 2) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => LoginPage(),
+      ),
+    );
+  } else {
+    _controller.nextPage(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
+},
                   child: Text(
                     _currentPage == 2 ? "Get Started" : "Next",
                   ),

@@ -5,56 +5,77 @@ class Onboarding1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xffc4b3ae),
-      child: Column(
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: Stack(
         children: [
-          const SizedBox(height: 100),
 
-          const Text(
-            "Discover something new",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            "Special new arrivals just for you",
-            style: TextStyle(fontSize: 14, color: Colors.black54),
-          ),
-
-          const SizedBox(height: 40),
-
-         
+          /// 🔹 TOP GREY SECTION
           Container(
-            height: 120,
-            width: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.pink.shade50,
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                "assets/images/SAASHI.jpeg",  // <-- your actual image
-                fit: BoxFit.cover,
-              ),
+            height: screenHeight * 0.65,
+            width: double.infinity,
+            color: const Color(0xFFF2F2F2),
+            child: Column(
+              children: const [
+                SizedBox(height: 100),
+                Text(
+                  "Discover something new",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Special new arrivals just for you",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
             ),
           ),
 
-          const SizedBox(height: 40),
-
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black87,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
+          /// 🔹 BOTTOM MAUVE SECTION
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: screenHeight * 0.45,
+              width: double.infinity,
+              color: const Color(0xffc4b3ae),
             ),
-            onPressed: () {},
-            child: const Text("Shop now"),
           ),
 
-          const Spacer(),
+          /// 🔥 FLOATING IMAGE (OVERLAPPING)
+          Positioned(
+            top: screenHeight * 0.30,
+            left: 40,
+            right: 40,
+            child: Container(
+              height: 350,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.grey.shade200,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  )
+                ],
+              ),
+              padding: const EdgeInsets.all(12),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  "assets/images/onboarding/image12.jpeg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

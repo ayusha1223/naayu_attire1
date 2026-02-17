@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/bottom_screens/presentation/screens/cart_screen.dart';
-import 'package:naayu_attire1/features/bottom_screens/presentation/screens/category_screen.dart';
-import 'package:naayu_attire1/features/bottom_screens/presentation/screens/home_screen.dart';
-import 'package:naayu_attire1/features/bottom_screens/presentation/screens/profile_screen.dart';
-import 'package:naayu_attire1/features/bottom_screens/presentation/screens/tryon_screen.dart';
+import 'package:naayu_attire1/features/cart/presentation/screens/cart_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/category_screen.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/screens/home_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/profile_screen.dart';
+import 'package:naayu_attire1/features/tryon/presentation/screens/tryon_screen.dart';
+
+// Clean Architecture Imports
+
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -38,11 +41,16 @@ class _MainNavigationState extends State<MainNavigation> {
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: "Category"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.camera), label: "Try-On"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: "Category"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: "Cart"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt), label: "Try-On"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );

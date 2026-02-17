@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
-import 'package:naayu_attire1/features/bottom_screens/presentation/screens/home_screen.dart';
 import 'signup_page.dart';
 import 'package:naayu_attire1/core/services/sensors/fingerprint_service.dart';
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
@@ -37,20 +37,21 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 const SizedBox(height: 40),
 
-                /// Title
+                /// TITLE
                 const Text(
                   "Log into\nyour account",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
 
                 const SizedBox(height: 40),
 
-                /// Email
+                /// EMAIL
                 TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 20),
 
-                /// Password
+                /// PASSWORD
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -73,7 +74,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
-                /// Forgot password
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -87,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 20),
 
-                /// Error message
                 if (authVM.errorMessage != null)
                   Text(
                     authVM.errorMessage!,
@@ -99,12 +98,12 @@ class _LoginPageState extends State<LoginPage> {
                 /// LOGIN BUTTON
                 SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: 55,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff7c5cff),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     onPressed: authVM.isLoading
@@ -139,13 +138,18 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 16),
 
-                /// 🔐 FINGERPRINT LOGIN (MOVED HERE)
+                /// FINGERPRINT
                 SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: 55,
                   child: OutlinedButton.icon(
                     icon: const Icon(Icons.fingerprint),
                     label: const Text("Login with Fingerprint"),
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
                     onPressed: () async {
                       final fingerprintService = FingerprintService();
                       final isAuthenticated =
@@ -189,9 +193,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
 
-                /// Or login with
+                /// OR
                 const Center(
                   child: Text(
                     "or log in with",
@@ -201,19 +205,23 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 20),
 
-                /// Social buttons
+                /// SOCIAL BUTTONS (UPDATED)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    _SocialButton(icon: Icons.g_mobiledata),
+                    SocialButton(
+                      imagePath: "assets/images/auth/google.png",
+                    ),
                     SizedBox(width: 20),
-                    _SocialButton(icon: Icons.facebook),
+                    SocialButton(
+                      imagePath: "assets/images/auth/facebook.png",
+                    ),
                   ],
                 ),
 
                 const SizedBox(height: 40),
 
-                /// Sign up
+                /// SIGN UP
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -246,22 +254,26 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-/// Social button widget
-class _SocialButton extends StatelessWidget {
-  final IconData icon;
+/// 🔥 NEW SOCIAL BUTTON WIDGET
+class SocialButton extends StatelessWidget {
+  final String imagePath;
 
-  const _SocialButton({required this.icon});
+  const SocialButton({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
-      width: 48,
+      height: 55,
+      width: 55,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(color: Colors.grey.shade300),
+        color: Colors.white,
       ),
-      child: Icon(icon, size: 28),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Image.asset(imagePath),
+      ),
     );
   }
 }
