@@ -26,4 +26,8 @@ final List<CategoryModel> categories = [
     title: "One Piece",
     image: "assets/images/categories/onepiece.jpg",
   ),
+   CategoryModel(
+    title: "Winter",
+    image: "assets/images/categories/winter.jpg",
+  ),
 ];

@@ -65,4 +65,11 @@ flutter:
     - assets/images/auth/
     - assets/videos/hero.mp4
     - assets/images/splash/
+    - assets/images/casual/
+    - assets/images/coord/
+    - assets/images/wedding/
+    - assets/images/party/
+    - assets/images/onepiece/
+    - assets/images/winter/
+    
 

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/casual_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/coord_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/onepiece_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/party_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/wedding_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/winter_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -6,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Scaffold(
         backgroundColor: Colors.white,
 
@@ -29,17 +35,19 @@ class CategoryScreen extends StatelessWidget {
               Tab(text: "Wedding"),
               Tab(text: "Party"),
               Tab(text: "One Piece"),
+              Tab(text: "Winter"),
             ],
           ),
         ),
 
         body: const TabBarView(
           children: [
-            CasualPage(),
-            CoordPage(),
-            WeddingPage(),
-            PartyPage(),
-            OnePiecePage(),
+            CasualScreen(),
+            CoordScreen(),
+            WeddingScreen(),
+            PartyScreen(),
+            OnePieceScreen(),
+            WinterScreen()
           ],
         ),
       ),
