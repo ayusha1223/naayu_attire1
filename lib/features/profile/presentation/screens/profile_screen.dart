@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/profile/presentation/screens/EditProfile_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/widgets/profile_menu_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 import 'package:provider/provider.dart';
+import 'package:naayu_attire1/features/profile/presentation/widgets/profile_header_widget.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/editprofile_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/about_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/contact_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/terms_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/my_orders_screen.dart';
+import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -49,19 +55,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget buildMenuItem({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: onTap,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,93 +62,92 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text("My Profile"),
         centerTitle: true,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
 
-          const SizedBox(height: 30),
-
-          // 🔥 PROFILE IMAGE
-          CircleAvatar(
-            radius: 50,
-            backgroundImage:
-                profileImage != null ? NetworkImage(profileImage!) : null,
-            child: profileImage == null
-                ? const Icon(Icons.person, size: 50)
-                : null,
-          ),
-
-          const SizedBox(height: 12),
-
-          // 🔥 NAME
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+            // 🔥 HEADER WIDGET
+            ProfileHeaderWidget(
+              name: name,
+              imageUrl: profileImage,
+              onEdit: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const EditprofileScreen(),
+                  ),
+                );
+                loadProfile(); // refresh after edit
+              },
             ),
-          ),
 
-          const SizedBox(height: 10),
+            const Divider(),
 
-          // 🔥 EDIT PROFILE BUTTON
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
+            // 🔥 MENU OPTIONS
+
+            ProfileMenuTile(
+              icon: Icons.shopping_bag_outlined,
+              title: "My Orders",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MyOrdersScreen(),
+                  ),
+                );
+              },
             ),
-           onPressed: () async {
-  await Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const EditprofileScreen(),
-    ),
-  );
 
-  // 🔥 Reload profile after returning
-  loadProfile();
-},
+            ProfileMenuTile(
+              icon: Icons.support_agent_outlined,
+              title: "Contact Us",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ContactScreen(),
+                  ),
+                );
+              },
+            ),
 
-            child: const Text("Edit Profile"),
-          ),
+            ProfileMenuTile(
+              icon: Icons.info_outline,
+              title: "About Us",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const AboutScreen(),
+                  ),
+                );
+              },
+            ),
 
-          const SizedBox(height: 30),
+            ProfileMenuTile(
+              icon: Icons.description_outlined,
+              title: "Terms & Conditions",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TermsScreen(),
+                  ),
+                );
+              },
+            ),
 
-          const Divider(),
+            ProfileMenuTile(
+              icon: Icons.logout,
+              title: "Logout",
+              onTap: logout,
+            ),
 
-          // 🔥 MENU OPTIONS
-          buildMenuItem(
-            icon: Icons.shopping_bag_outlined,
-            title: "My Orders",
-            onTap: () {},
-          ),
-
-          buildMenuItem(
-            icon: Icons.support_agent_outlined,
-            title: "Contact Us",
-            onTap: () {},
-          ),
-
-          buildMenuItem(
-            icon: Icons.info_outline,
-            title: "About Us",
-            onTap: () {},
-          ),
-
-          buildMenuItem(
-            icon: Icons.description_outlined,
-            title: "Terms & Conditions",
-            onTap: () {},
-          ),
-
-          buildMenuItem(
-            icon: Icons.logout,
-            title: "Logout",
-            onTap: logout,
-          ),
-        ],
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
