@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/cart/presentation/screens/cart_screen.dart';
 import 'package:naayu_attire1/features/category/presentation/screens/category_screen.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/screens/home_screen.dart';
-import 'package:naayu_attire1/features/profile/presentation/screens/profile_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/EditProfile_screen.dart';
+import 'package:naayu_attire1/features/profile/presentation/screens/Profile_screen.dart';
 import 'package:naayu_attire1/features/tryon/presentation/screens/tryon_screen.dart';
 
 class MainNavigation extends StatefulWidget {
