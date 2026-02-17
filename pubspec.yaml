@@ -40,6 +40,10 @@ dependencies:
   dio: ^5.4.1
   connectivity_plus: ^6.0.5
 
+  geolocator: ^10.1.0
+  geocoding: ^2.1.0
+  google_maps_flutter: ^2.5.0
+
 
 dev_dependencies:
   flutter_test:

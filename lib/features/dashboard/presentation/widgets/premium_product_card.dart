@@ -1,71 +1,66 @@
 import 'package:flutter/material.dart';
 
-class PremiumProductCard extends StatefulWidget {
-  final String imagePath;
+class PremiumProductCard extends StatelessWidget {
+  final String image;
+  final String title;
   final int price;
+  final int oldPrice;
 
   const PremiumProductCard({
     super.key,
-    required this.imagePath,
+    required this.image,
+    required this.title,
     required this.price,
+    required this.oldPrice,
   });
 
   @override
-  State<PremiumProductCard> createState() =>
-      _PremiumProductCardState();
-}
-
-class _PremiumProductCardState
-    extends State<PremiumProductCard> {
-  bool isFav = false;
-
-  @override
   Widget build(BuildContext context) {
+    double discount =
+        ((oldPrice - price) / oldPrice) * 100;
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
+            color: Colors.grey.shade300,
+            blurRadius: 8,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.start,
         children: [
 
-          /// IMAGE + FAVORITE
-          Expanded(
+          /// IMAGE
+          Flexible(
             child: Stack(
               children: [
 
-                /// IMAGE
-                Positioned.fill(
+                /// FULL IMAGE VISIBLE
+                Center(
                   child: Image.asset(
-                    widget.imagePath,
-                    fit: BoxFit.contain,
+                    image,
+                    fit: BoxFit.contain, // 🔥 FIXED
                   ),
                 ),
 
-                /// FAVORITE ICON (TOP RIGHT)
+                /// FAVORITE
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFav = !isFav;
-                      });
-                    },
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundColor: Colors.white,
                     child: Icon(
-                      isFav
-                          ? Icons.favorite
-                          : Icons.favorite_border,
+                      Icons.favorite_border,
+                      size: 18,
                       color: Colors.red,
-                      size: 20,
                     ),
                   ),
                 ),
@@ -75,28 +70,73 @@ class _PremiumProductCardState
 
           const SizedBox(height: 8),
 
-          /// PRICE + CART ROW (BELOW IMAGE)
-          Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
-            children: [
+          /// TITLE
+          Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
 
-              /// PRICE TEXT
+          const SizedBox(height: 6),
+
+          /// PRICE ROW
+          Row(
+            children: [
               Text(
-                "₹${widget.price}",
+                "Rs.$price",
                 style: const TextStyle(
-                  fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  fontSize: 14,
                 ),
               ),
-
-              /// SMALL CART ICON (NO BACKGROUND)
-              const Icon(
-                Icons.shopping_cart_outlined,
-                size: 20,
-                color: Colors.black,
+              const SizedBox(width: 6),
+              Text(
+                "Rs.$oldPrice",
+                style: const TextStyle(
+                  decoration:
+                      TextDecoration.lineThrough,
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text(
+                "${discount.toStringAsFixed(0)}% off",
+                style: const TextStyle(
+                  color: Colors.pink,
+                  fontSize: 12,
+                ),
               ),
             ],
+          ),
+
+          const SizedBox(height: 8),
+
+          /// ADD TO CART BUTTON
+          SizedBox(
+            width: double.infinity,
+            height: 40,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    const Color.fromARGB(255, 199, 157, 211),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(30),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text(
+                "Add to cart",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
           ),
         ],
       ),

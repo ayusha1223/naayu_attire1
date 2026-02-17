@@ -18,14 +18,14 @@ class ProductGrid extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 14,
           mainAxisSpacing: 14,
-          childAspectRatio: 0.9,
+          childAspectRatio: 0.60, // 🔥 More height = no overflow
         ),
         itemBuilder: (context, index) {
-          final product = flashProducts[index];
-
           return PremiumProductCard(
-            imagePath: product.imagePath,
-            price: product.price,
+            image: flashProducts[index].imagePath,
+            title: flashProducts[index].title,
+            price: flashProducts[index].price,
+            oldPrice: flashProducts[index].oldPrice,
           );
         },
       ),
