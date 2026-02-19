@@ -446,9 +446,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            const PaymentMethodScreen(),
-      ),
+       builder: (context) =>
+    PaymentMethodScreen(
+      totalAmount: totalPayment,
+    ),
+      )
     );
   },
   child: const Text("Proceed"),

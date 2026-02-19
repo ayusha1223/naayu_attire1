@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:naayu_attire1/core/providers/shop_provider.dart';
+import 'package:naayu_attire1/features/payment/presentation/payment_success_screen.dart';
 
 class CardPaymentScreen extends StatefulWidget {
-  const CardPaymentScreen({super.key});
+  final double amount;
+
+  const CardPaymentScreen({
+    super.key,
+    required this.amount,
+  });
 
   @override
   State<CardPaymentScreen> createState() =>
@@ -21,7 +25,7 @@ class _CardPaymentScreenState
   String? selectedMonth;
   String? selectedYear;
 
-  int currentStep = 0; // 0=Payment,1=Review,2=Receipt
+  int currentStep = 0;
 
   List<String> months = List.generate(
       12, (index) => (index + 1).toString().padLeft(2, '0'));
@@ -33,7 +37,6 @@ class _CardPaymentScreenState
 
   @override
   Widget build(BuildContext context) {
-    final shop = context.watch<ShopProvider>();
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
@@ -51,8 +54,7 @@ class _CardPaymentScreenState
               CrossAxisAlignment.start,
           children: [
 
-            // ================= TOTAL =================
-
+            // ===== TOTAL =====
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -61,7 +63,7 @@ class _CardPaymentScreenState
                     BorderRadius.circular(15),
               ),
               child: Text(
-                "Rs.${shop.finalTotal.toStringAsFixed(2)}",
+                "Rs. ${widget.amount.toStringAsFixed(2)}",
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -71,8 +73,7 @@ class _CardPaymentScreenState
 
             const SizedBox(height: 25),
 
-            // ================= STEP BAR =================
-
+            // ===== STEP BAR =====
             Row(
               mainAxisAlignment:
                   MainAxisAlignment.spaceBetween,
@@ -85,12 +86,8 @@ class _CardPaymentScreenState
 
             const SizedBox(height: 25),
 
-            // ================= BODY BASED ON STEP =================
-
             if (currentStep == 0) paymentStep(),
-
             if (currentStep == 1) reviewStep(),
-
             if (currentStep == 2) receiptStep(),
           ],
         ),
@@ -98,9 +95,7 @@ class _CardPaymentScreenState
     );
   }
 
-  // ==============================================================
-  // ===================== PAYMENT STEP ===========================
-  // ==============================================================
+  // ================= PAYMENT STEP =================
 
   Widget paymentStep() {
     return Form(
@@ -206,7 +201,7 @@ class _CardPaymentScreenState
                     .validate()) {
 
                   setState(() {
-                    currentStep = 1; // GO TO REVIEW
+                    currentStep = 1;
                   });
                 }
               },
@@ -218,9 +213,7 @@ class _CardPaymentScreenState
     );
   }
 
-  // ==============================================================
-  // ===================== REVIEW STEP ============================
-  // ==============================================================
+  // ================= REVIEW STEP =================
 
   Widget reviewStep() {
     return Column(
@@ -240,14 +233,15 @@ class _CardPaymentScreenState
 
         const SizedBox(height: 10),
 
-        Text("Card: **** **** **** ${cardController.text.substring(cardController.text.length - 4)}"),
+        Text(
+            "Card: **** **** **** ${cardController.text.substring(cardController.text.length - 4)}"),
 
         const SizedBox(height: 20),
 
         ElevatedButton(
           onPressed: () {
             setState(() {
-              currentStep = 2; // GO TO RECEIPT
+              currentStep = 2;
             });
           },
           child: const Text("Confirm Payment"),
@@ -256,9 +250,7 @@ class _CardPaymentScreenState
     );
   }
 
-  // ==============================================================
-  // ===================== RECEIPT STEP ===========================
-  // ==============================================================
+  // ================= RECEIPT STEP =================
 
   Widget receiptStep() {
     return Column(
@@ -285,16 +277,25 @@ class _CardPaymentScreenState
 
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => PaymentSuccessScreen(
+                  amount: widget.amount,
+                  paymentMethod: "card",
+                ),
+              ),
+            );
           },
-          child: const Text("Back to Home"),
+          child: const Text("Continue"),
         ),
       ],
     );
   }
 }
 
-// ==============================================================
+// ================= STEP CHIP =================
+
 class stepChip extends StatelessWidget {
   final String title;
   final bool active;

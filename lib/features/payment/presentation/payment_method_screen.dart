@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/payment/presentation/web_view_screen.dart';
+import 'package:naayu_attire1/features/payment/presentation/payment_success_screen.dart';
 import 'card_payment_screen.dart';
-import 'esewa_payment_screen.dart';
+import 'paypal_screen.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
-  const PaymentMethodScreen({super.key});
+  final double totalAmount;
+
+  const PaymentMethodScreen({
+    super.key,
+    required this.totalAmount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +43,7 @@ class PaymentMethodScreen extends StatelessWidget {
                 mainAxisSpacing: 15,
                 children: [
 
+                  // CARD
                   _paymentCard(
                     context,
                     title: "Card",
@@ -45,12 +53,15 @@ class PaymentMethodScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (_) =>
-                              const CardPaymentScreen(),
+                              CardPaymentScreen(
+                                amount: totalAmount,
+                              ),
                         ),
                       );
                     },
                   ),
 
+                  // COD
                   _paymentCard(
                     context,
                     title: "Cash on Delivery",
@@ -60,6 +71,7 @@ class PaymentMethodScreen extends StatelessWidget {
                     },
                   ),
 
+                  // ESEWA
                   _paymentCard(
                     context,
                     title: "eSewa",
@@ -69,12 +81,15 @@ class PaymentMethodScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (_) =>
-                              const EsewaPaymentScreen(),
+                              EsewaWebviewScreen(
+                                amount: totalAmount,
+                              ),
                         ),
                       );
                     },
                   ),
 
+                  // PAYPAL
                   _paymentCard(
                     context,
                     title: "PayPal",
@@ -84,7 +99,9 @@ class PaymentMethodScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (_) =>
-                              const EsewaPaymentScreen(),
+                              PaypalScreen(
+                                amount: totalAmount,
+                              ),
                         ),
                       );
                     },
@@ -95,31 +112,26 @@ class PaymentMethodScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // ===== ORDER DETAILS =====
+            // ===== ORDER SUMMARY =====
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Column(
-                children: const [
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Total Payment",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold)),
-                      Text("Rs. 1,418",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold)),
-                    ],
+              child: Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Total Payment",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
                   Text(
-                    "Get reward points on this purchase 🎁",
-                    style: TextStyle(color: Colors.pink),
+                    "Rs. ${totalAmount.toStringAsFixed(0)}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -129,50 +141,10 @@ class PaymentMethodScreen extends StatelessWidget {
           ],
         ),
       ),
-
-      // ===== BOTTOM CHECKOUT BAR =====
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              color: Colors.grey,
-            )
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
-          children: [
-
-            const Text(
-              "Rs. 1,418",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pink,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {},
-              child: const Text("Checkout"),
-            )
-          ],
-        ),
-      ),
     );
   }
+
+  // ================= PAYMENT CARD WIDGET =================
 
   Widget _paymentCard(BuildContext context,
       {required String title,
@@ -210,6 +182,8 @@ class PaymentMethodScreen extends StatelessWidget {
     );
   }
 
+  // ================= COD DIALOG =================
+
   void _showCODDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -227,11 +201,16 @@ class PaymentMethodScreen extends StatelessWidget {
             child: const Text("Confirm"),
             onPressed: () {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(
-                const SnackBar(
-                  content:
-                      Text("Order Placed Successfully!"),
+
+              // 🔥 Go directly to success screen
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) =>
+                      PaymentSuccessScreen(
+                        amount: totalAmount,
+                        paymentMethod: "cod",
+                      ),
                 ),
               );
             },
