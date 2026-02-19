@@ -12,6 +12,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "w2",
@@ -22,6 +23,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "w3",
@@ -32,6 +34,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w4",
@@ -42,6 +45,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w5",
@@ -52,6 +56,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w6",
@@ -62,6 +67,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w7",
@@ -72,6 +78,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w8",
@@ -82,6 +89,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w9",
@@ -92,6 +100,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w10",
@@ -102,6 +111,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w11",
@@ -112,6 +122,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w12",
@@ -122,6 +133,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w13",
@@ -132,6 +144,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w14",
@@ -142,6 +155,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w15",
@@ -152,6 +166,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w16",
@@ -162,6 +177,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w17",
@@ -172,6 +188,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w18",
@@ -182,6 +199,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w19",
@@ -192,6 +210,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w20",
@@ -202,6 +221,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w21",
@@ -212,6 +232,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w22",
@@ -222,6 +243,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w23",
@@ -232,6 +254,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
       ProductModel(
       id: "w24",
@@ -242,6 +265,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
   ];
 }

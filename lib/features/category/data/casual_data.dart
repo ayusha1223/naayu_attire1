@@ -11,7 +11,8 @@ class CasualData {
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Lightweight and breathable fabric. Perfect for daily wear. Stylish floral print."
+      description: "Lightweight and breathable fabric. Perfect for daily wear. Stylish floral print.",
+      isNew: true, 
       
     ),
    ProductModel(
@@ -24,6 +25,7 @@ class CasualData {
   sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.0,
   description: "Soft cotton material. Comfortable fit for all-day wear. Ideal for casual outings.",
+  isNew: true, 
 ),
 
 ProductModel(
@@ -36,6 +38,7 @@ ProductModel(
   sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
 ),
    
  ProductModel(
@@ -47,7 +50,8 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c5",
@@ -58,7 +62,8 @@ ProductModel(
       color: "yellow",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c6",
@@ -69,7 +74,8 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c7",
@@ -80,7 +86,8 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.6,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c8",
@@ -91,7 +98,8 @@ ProductModel(
       color: "red",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.0,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c9",
@@ -102,7 +110,8 @@ ProductModel(
       color: "brown",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c10",
@@ -113,7 +122,8 @@ ProductModel(
       color: "yellow",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
 
     ),
      ProductModel(
@@ -125,7 +135,8 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c12",
@@ -136,7 +147,8 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
 
     ),
      ProductModel(
@@ -148,7 +160,8 @@ ProductModel(
       color: "brown",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c14",
@@ -159,7 +172,8 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c15",
@@ -170,7 +184,8 @@ ProductModel(
       color: "orange",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c16",
@@ -181,7 +196,8 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c17",
@@ -192,7 +208,8 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c18",
@@ -203,7 +220,8 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c19",
@@ -214,7 +232,8 @@ ProductModel(
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
 
     ),
      ProductModel(
@@ -226,7 +245,8 @@ ProductModel(
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     
     ),
      ProductModel(
@@ -238,7 +258,8 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c22",
@@ -249,7 +270,8 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
      ProductModel(
       id: "c23",
@@ -260,7 +282,8 @@ ProductModel(
       color: "orange",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
 
     ),
      ProductModel(
@@ -272,7 +295,8 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design."
+      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      isNew: true, 
     ),
   ];
 }

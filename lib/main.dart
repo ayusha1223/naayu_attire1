@@ -21,20 +21,22 @@ void main() async {
   final authRepository = AuthRepositoryImpl(authDatasource);
 
   runApp(
-    MultiProvider(
-      providers: [
-        Provider<TokenService>(
-          create: (_) => tokenService,
-        ),
-        ChangeNotifierProvider(
-          create: (_) => AuthViewModel(authRepository, tokenService),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ShopProvider(),
-        ),
-      ],
-      child: const MyApp(),
+MultiProvider(
+  providers: [
+    Provider<TokenService>(
+      create: (_) => tokenService,
     ),
+    ChangeNotifierProvider(
+      create: (_) =>
+          AuthViewModel(authRepository, tokenService),
+    ),
+    ChangeNotifierProvider(
+      lazy: false,   // 🔥 ADD THIS
+      create: (_) => ShopProvider(),
+    ),
+  ],
+  child: const MyApp(),
+),
   );
 }
 

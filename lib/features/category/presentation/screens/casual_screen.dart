@@ -11,7 +11,6 @@ class CasualScreen extends StatefulWidget {
 }
 
 class _CasualScreenState extends State<CasualScreen> {
-
   late List<ProductModel> products;
   String selectedColor = "all";
 
@@ -21,18 +20,21 @@ class _CasualScreenState extends State<CasualScreen> {
     products = List.from(CasualData.products);
   }
 
+  // 🔥 SORT LOW TO HIGH
   void sortLowToHigh() {
     setState(() {
       products.sort((a, b) => a.price.compareTo(b.price));
     });
   }
 
+  // 🔥 SORT HIGH TO LOW
   void sortHighToLow() {
     setState(() {
       products.sort((a, b) => b.price.compareTo(a.price));
     });
   }
 
+  // 🔥 FILTER BY COLOR
   void filterByColor(String color) {
     setState(() {
       selectedColor = color;
@@ -54,28 +56,15 @@ class _CasualScreenState extends State<CasualScreen> {
 
         // 🔥 SORT + FILTER BAR
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
 
-              // SORT
+              // 🔽 SORT BUTTON
               PopupMenuButton<String>(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.grey.shade300),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.sort, size: 18),
-                      SizedBox(width: 6),
-                      Text("Sort"),
-                    ],
-                  ),
-                ),
                 onSelected: (value) {
                   if (value == "low") {
                     sortLowToHigh();
@@ -93,72 +82,83 @@ class _CasualScreenState extends State<CasualScreen> {
                     child: Text("Price: High to Low"),
                   ),
                 ],
-              ),
-
-              // COLOR FILTER
-              PopupMenuButton<String>(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius:
+                        BorderRadius.circular(20),
+                    border: Border.all(
+                        color: Colors.grey.shade300),
                   ),
                   child: const Row(
                     children: [
-                      Icon(Icons.color_lens_outlined, size: 18),
+                      Icon(Icons.sort, size: 18),
                       SizedBox(width: 6),
-                      Text("Color"),
+                      Text("Sort"),
                     ],
                   ),
                 ),
+              ),
+
+              // 🎨 COLOR FILTER
+              PopupMenuButton<String>(
                 onSelected: (value) {
                   filterByColor(value);
                 },
                 itemBuilder: (context) => const [
                   PopupMenuItem(
-                    value: "all",
-                    child: Text("All"),
-                  ),
+                      value: "all",
+                      child: Text("All")),
                   PopupMenuItem(
-                    value: "white",
-                    child: Text("White"),
-                  ),
+                      value: "white",
+                      child: Text("White")),
                   PopupMenuItem(
-                    value: "blue",
-                    child: Text("Blue"),
-                  ),
+                      value: "blue",
+                      child: Text("Blue")),
                   PopupMenuItem(
-                    value: "pink",
-                    child: Text("Pink"),
-                  ),
+                      value: "pink",
+                      child: Text("Pink")),
                   PopupMenuItem(
-                    value: "yellow",
-                    child: Text("Yellow"),
-                  ),
+                      value: "yellow",
+                      child: Text("Yellow")),
                   PopupMenuItem(
-                    value: "orange",
-                    child: Text("Orange"),
-                  ),
+                      value: "orange",
+                      child: Text("Orange")),
                   PopupMenuItem(
-                    value: "brown",
-                    child: Text("Brown"),
-                  ),
+                      value: "brown",
+                      child: Text("Brown")),
                   PopupMenuItem(
-                    value: "green",
-                    child: Text("Green"),
-                  ),
+                      value: "green",
+                      child: Text("Green")),
                   PopupMenuItem(
-                    value: "red",
-                    child: Text("Red"),
-                  ),
+                      value: "red",
+                      child: Text("Red")),
                 ],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 8),
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(20),
+                    border: Border.all(
+                        color: Colors.grey.shade300),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.color_lens_outlined,
+                          size: 18),
+                      SizedBox(width: 6),
+                      Text("Color"),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
         ),
 
-        // GRID
+        // 🔥 PRODUCT GRID
         Expanded(
           child: ProductGrid(
             products: products,

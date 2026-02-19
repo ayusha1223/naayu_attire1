@@ -12,6 +12,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "p2",
@@ -22,6 +23,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "p3",
@@ -32,6 +34,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "p4",
@@ -42,6 +45,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p5",
@@ -52,6 +56,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p6",
@@ -62,6 +67,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p7",
@@ -72,6 +78,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p8",
@@ -81,6 +88,7 @@ class PartyData {
       color: "yellow",
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
+  isNew: true, 
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
@@ -92,6 +100,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p10",
@@ -102,6 +111,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p11",
@@ -112,6 +122,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p12",
@@ -122,6 +133,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p13",
@@ -131,6 +143,7 @@ class PartyData {
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
+  isNew: true, 
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
      ProductModel(
@@ -142,6 +155,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p15",
@@ -152,6 +166,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p16",
@@ -162,6 +177,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p17",
@@ -172,6 +188,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p18",
@@ -182,6 +199,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p19",
@@ -192,6 +210,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p20",
@@ -202,6 +221,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p21",
@@ -212,6 +232,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p22",
@@ -222,6 +243,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p23",
@@ -232,6 +254,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "p24",
@@ -242,6 +265,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
   ];
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:naayu_attire1/core/providers/shop_provider.dart';
 import '../../domain/models/product_model.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -7,16 +9,18 @@ class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.product});
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  State<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _ProductDetailScreenState
+    extends State<ProductDetailScreen> {
   int selectedSizeIndex = 0;
-  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
+    final shop = context.watch<ShopProvider>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -24,7 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: Column(
           children: [
 
-            // 🔥 TOP IMAGE SECTION
+            // 🔥 IMAGE SECTION
             Expanded(
               child: Stack(
                 children: [
@@ -38,7 +42,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
 
-                  // BACK BUTTON
+                  // BACK
                   Positioned(
                     top: 16,
                     left: 16,
@@ -46,12 +50,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       backgroundColor: Colors.white,
                       child: IconButton(
                         icon: const Icon(Icons.arrow_back),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () =>
+                            Navigator.pop(context),
                       ),
                     ),
                   ),
 
-                  // FAVORITE BUTTON
+                  // FAVORITE
                   Positioned(
                     top: 16,
                     right: 16,
@@ -59,38 +64,40 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       backgroundColor: Colors.white,
                       child: IconButton(
                         icon: Icon(
-                          isFavorite
+                          shop.isFavorite(product)
                               ? Icons.favorite
                               : Icons.favorite_border,
                           color: Colors.red,
                         ),
                         onPressed: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                          });
+                          shop.toggleFavorite(product);
                         },
                       ),
                     ),
                   ),
 
-                  // 🆕 NEW BADGE
+                  // NEW BADGE
                   if (product.isNew)
                     Positioned(
                       top: 16,
                       left: 80,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
+                        padding:
+                            const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4),
                         decoration: BoxDecoration(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius:
+                              BorderRadius.circular(20),
                         ),
                         child: const Text(
                           "NEW",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                            fontWeight:
+                                FontWeight.bold,
                           ),
                         ),
                       ),
@@ -105,32 +112,45 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 padding: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
 
                       // NAME + RATING
                       Row(
                         mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            MainAxisAlignment
+                                .spaceBetween,
                         children: [
                           Expanded(
                             child: Text(
                               product.name,
-                              style: const TextStyle(
+                              style:
+                                  const TextStyle(
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontWeight:
+                                    FontWeight.bold,
                               ),
                             ),
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.star,
-                                  color: Colors.orange, size: 18),
-                              const SizedBox(width: 4),
+                              const Icon(
+                                Icons.star,
+                                color:
+                                    Colors.orange,
+                                size: 18,
+                              ),
+                              const SizedBox(
+                                  width: 4),
                               Text(
-                                product.rating.toString(),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                product.rating
+                                    .toString(),
+                                style:
+                                    const TextStyle(
+                                        fontWeight:
+                                            FontWeight
+                                                .bold),
                               ),
                             ],
                           )
@@ -139,19 +159,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                       const SizedBox(height: 12),
 
-                      // DESCRIPTION
                       Text(
                         product.description,
-                        style: const TextStyle(color: Colors.grey),
+                        style:
+                            const TextStyle(
+                                color: Colors.grey),
                       ),
 
                       const SizedBox(height: 20),
 
-                      // 🔥 SELECT SIZE
+                      // SIZE
                       const Text(
                         "Select Size",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight:
+                                FontWeight.bold,
                             fontSize: 16),
                       ),
                       const SizedBox(height: 10),
@@ -159,35 +181,51 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         children: List.generate(
                           product.sizes.length,
-                          (index) => GestureDetector(
+                          (index) =>
+                              GestureDetector(
                             onTap: () {
                               setState(() {
-                                selectedSizeIndex = index;
+                                selectedSizeIndex =
+                                    index;
                               });
                             },
                             child: Container(
-                              margin: const EdgeInsets.only(
-                                  right: 10),
+                              margin:
+                                  const EdgeInsets
+                                      .only(
+                                          right: 10),
                               padding:
-                                  const EdgeInsets.symmetric(
-                                      horizontal: 14,
-                                      vertical: 8),
-                              decoration: BoxDecoration(
+                                  const EdgeInsets
+                                      .symmetric(
+                                          horizontal:
+                                              14,
+                                          vertical:
+                                              8),
+                              decoration:
+                                  BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.circular(8),
-                                color: selectedSizeIndex ==
-                                        index
-                                    ? Colors.brown
-                                    : Colors.grey.shade200,
+                                    BorderRadius
+                                        .circular(
+                                            8),
+                                color:
+                                    selectedSizeIndex ==
+                                            index
+                                        ? Colors
+                                            .brown
+                                        : Colors
+                                            .grey
+                                            .shade200,
                               ),
                               child: Text(
-                                product.sizes[index],
+                                product
+                                    .sizes[index],
                                 style: TextStyle(
-                                  color:
-                                      selectedSizeIndex ==
-                                              index
-                                          ? Colors.white
-                                          : Colors.black,
+                                  color: selectedSizeIndex ==
+                                          index
+                                      ? Colors
+                                          .white
+                                      : Colors
+                                          .black,
                                 ),
                               ),
                             ),
@@ -197,12 +235,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                       const SizedBox(height: 20),
 
-                      // 🔥 COLOR DISPLAY
                       Text(
                         "Color : ${product.color}",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                        style:
+                            const TextStyle(
+                                fontWeight:
+                                    FontWeight.bold,
+                                fontSize: 16),
                       ),
 
                       const SizedBox(height: 20),
@@ -212,19 +251,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         children: [
                           Text(
                             "Rs.${product.price.toStringAsFixed(0)}",
-                            style: const TextStyle(
+                            style:
+                                const TextStyle(
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight:
+                                  FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          if (product.oldPrice != null)
+                          const SizedBox(
+                              width: 10),
+                          if (product
+                                  .oldPrice !=
+                              null)
                             Text(
                               "Rs.${product.oldPrice!.toStringAsFixed(0)}",
-                              style: const TextStyle(
+                              style:
+                                  const TextStyle(
                                 decoration:
-                                    TextDecoration.lineThrough,
-                                color: Colors.grey,
+                                    TextDecoration
+                                        .lineThrough,
+                                color:
+                                    Colors.grey,
                               ),
                             ),
                         ],
@@ -238,51 +285,93 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                           // ADD TO CART
                           Expanded(
-                            child: ElevatedButton(
+                            child:
+                                ElevatedButton(
                               style:
-                                  ElevatedButton.styleFrom(
+                                  ElevatedButton
+                                      .styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 175, 171, 175),
+                                    const Color
+                                        .fromARGB(
+                                            255,
+                                            175,
+                                            171,
+                                            175),
                                 padding:
                                     const EdgeInsets
                                         .symmetric(
-                                            vertical: 14),
+                                            vertical:
+                                                14),
                                 shape:
                                     RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius
-                                          .circular(12),
+                                          .circular(
+                                              12),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                shop.addToCart(
+                                    product);
+
+                                ScaffoldMessenger
+                                        .of(context)
+                                    .showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        "Added to Cart"),
+                                    duration:
+                                        Duration(
+                                            seconds:
+                                                1),
+                                  ),
+                                );
+                              },
                               child:
-                                  const Text("Add to Cart"),
+                                  const Text(
+                                      "Add to Cart"),
                             ),
                           ),
 
-                          const SizedBox(width: 10),
+                          const SizedBox(
+                              width: 10),
 
                           // BUY NOW
                           Expanded(
-                            child: ElevatedButton(
+                            child:
+                                ElevatedButton(
                               style:
-                                  ElevatedButton.styleFrom(
+                                  ElevatedButton
+                                      .styleFrom(
                                 backgroundColor:
-                                    const Color.fromARGB(255, 233, 146, 146),
+                                    const Color
+                                        .fromARGB(
+                                            255,
+                                            233,
+                                            146,
+                                            146),
                                 padding:
                                     const EdgeInsets
                                         .symmetric(
-                                            vertical: 14),
+                                            vertical:
+                                                14),
                                 shape:
                                     RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius
-                                          .circular(12),
+                                          .circular(
+                                              12),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                shop.addToCart(
+                                    product);
+                                Navigator.pop(
+                                    context);
+                              },
                               child:
-                                  const Text("Buy Now"),
+                                  const Text(
+                                      "Buy Now"),
                             ),
                           ),
                         ],

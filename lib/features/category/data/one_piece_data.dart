@@ -12,6 +12,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op2",
@@ -22,6 +23,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op3",
@@ -32,6 +34,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op4",
@@ -42,6 +45,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op5",
@@ -52,6 +56,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op6",
@@ -62,6 +67,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op7",
@@ -72,6 +78,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op8",
@@ -82,6 +89,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     
     ProductModel(
@@ -93,6 +101,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op10",
@@ -103,6 +112,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op11",
@@ -113,6 +123,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op12",
@@ -123,6 +134,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op13",
@@ -133,6 +145,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op14",
@@ -143,6 +156,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op15",
@@ -153,6 +167,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op16",
@@ -163,6 +178,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op17",
@@ -172,6 +188,7 @@ class OnePieceData {
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
+  isNew: true, 
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
     ),
     ProductModel(
@@ -183,6 +200,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op19",
@@ -193,6 +211,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op20",
@@ -203,6 +222,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op21",
@@ -213,6 +233,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op22",
@@ -223,6 +244,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op23",
@@ -233,6 +255,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "op24",
@@ -243,6 +266,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
   ];
 }

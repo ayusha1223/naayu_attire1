@@ -1,31 +1,74 @@
 class ProductModel {
   final String id;
-  final String name;
   final String image;
+  final String name;
   final double price;
-  final double? oldPrice;
-
-  final String? color; // keep existing
-  final bool isNew;    // keep existing
-
-  // 🔥 NEW FIELDS
-  final List<String> sizes;
   final String description;
   final double rating;
+  final List<String> sizes;
+  final String color;
+  final bool isNew;
+  final double? oldPrice;
+  int quantity;
 
   ProductModel({
     required this.id,
-    required this.name,
     required this.image,
+    required this.name,
     required this.price,
+    required this.description,
+    required this.rating,
+    required this.sizes,
     required this.color,
+    required this.isNew,
     this.oldPrice,
-    this.isNew = false,
-
-    // 🔥 NEW FIELDS (with defaults so old data doesn’t break)
-    this.sizes = const ["S", "M", "L", "XL"],
-    this.description =
-        "Premium quality fabric. Comfortable fit. Perfect for any occasion.",
-    this.rating = 4.5,
+    this.quantity = 1,
   });
+
+  // 🔥 equality for cart
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProductModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
+  // ✅ Convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'image': image,
+      'name': name,
+      'price': price,
+      'description': description,
+      'rating': rating,
+      'sizes': sizes,
+      'color': color,
+      'isNew': isNew,
+      'oldPrice': oldPrice,
+      'quantity': quantity,
+    };
+  }
+
+  // ✅ Convert from JSON
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'],
+      image: json['image'],
+      name: json['name'],
+      price: (json['price'] as num).toDouble(),
+      description: json['description'],
+      rating: (json['rating'] as num).toDouble(),
+      sizes: List<String>.from(json['sizes']),
+      color: json['color'],
+      isNew: json['isNew'],
+      oldPrice: json['oldPrice'] != null
+          ? (json['oldPrice'] as num).toDouble()
+          : null,
+      quantity: json['quantity'] ?? 1,
+    );
+  }
 }

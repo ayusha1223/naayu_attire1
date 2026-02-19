@@ -12,6 +12,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co2",
@@ -22,6 +23,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co3",
@@ -32,6 +34,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co4",
@@ -42,6 +45,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co5",
@@ -52,6 +56,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co6",
@@ -62,6 +67,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co7",
@@ -72,6 +78,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co8",
@@ -82,6 +89,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co9",
@@ -92,6 +100,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co10",
@@ -102,6 +111,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co11",
@@ -112,6 +122,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co12",
@@ -122,6 +133,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co13",
@@ -132,6 +144,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co14",
@@ -142,6 +155,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co15",
@@ -152,6 +166,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co16",
@@ -162,6 +177,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co17",
@@ -172,6 +188,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co18",
@@ -181,6 +198,7 @@ class CoordData {
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
+  isNew: true, 
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
 
     ),
@@ -193,6 +211,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
 
     ),
     ProductModel(
@@ -204,6 +223,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
 
     ),
     ProductModel(
@@ -215,6 +235,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
 
     ),
     ProductModel(
@@ -226,6 +247,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co23",
@@ -236,6 +258,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "co24",
@@ -246,6 +269,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
   ];
 }

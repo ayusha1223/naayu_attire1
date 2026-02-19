@@ -12,6 +12,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "wtr2",
@@ -22,6 +23,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "wtr3",
@@ -32,6 +34,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
     ProductModel(
       id: "wtr4",
@@ -42,6 +45,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr5",
@@ -52,6 +56,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr6",
@@ -62,6 +67,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr7",
@@ -72,6 +78,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr8",
@@ -82,6 +89,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr9",
@@ -92,6 +100,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr10",
@@ -102,6 +111,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr11",
@@ -112,6 +122,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr12",
@@ -122,6 +133,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr13",
@@ -132,6 +144,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr14",
@@ -142,6 +155,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr15",
@@ -152,6 +166,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr16",
@@ -162,6 +177,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr17",
@@ -172,6 +188,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr18",
@@ -182,6 +199,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr19",
@@ -192,6 +210,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr20",
@@ -202,6 +221,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr21",
@@ -212,6 +232,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr22",
@@ -222,6 +243,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr23",
@@ -232,6 +254,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
      ProductModel(
       id: "wtr24",
@@ -242,6 +265,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  isNew: true, 
     ),
   ];
 }
