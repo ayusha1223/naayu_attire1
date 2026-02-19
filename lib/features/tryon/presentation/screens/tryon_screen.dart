@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+import 'package:provider/provider.dart';
+import 'package:naayu_attire1/core/providers/shop_provider.dart';
+
 
 class DressModel {
   final String image;
@@ -15,6 +19,7 @@ class DressModel {
     required this.offsetY,
   });
 }
+
 class TryOnScreen extends StatefulWidget {
   const TryOnScreen({super.key});
 
@@ -27,63 +32,64 @@ class _TryOnScreenState extends State<TryOnScreen> {
   final PageController _pageController = PageController();
 
   final List<DressModel> dresses = [
-  DressModel(
-    image: "assets/images/tryon/view1.png",
-    widthFactor: 0.92,
-    heightFactor: 0.60,
-    offsetX:-2,
-    offsetY: 75,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view2.png",
-    widthFactor: 0.80,
-    heightFactor: 0.70,
-    offsetX: -5,
-    offsetY: 43,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view3.png",
-    widthFactor: 0.78,
-    heightFactor: 0.60,
-    offsetX: -2,
-    offsetY: 45,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view4.png",
-    widthFactor: 0.80,
-    heightFactor: 2.80,
-    offsetX: 0,
-    offsetY: 5,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view5.png",
-    widthFactor: 0.75,
-    heightFactor: 0.65,
-    offsetX: 5,
-    offsetY: 45,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view6.png",
-    widthFactor: 0.77,
-    heightFactor: 0.67,
-    offsetX: -8,
-    offsetY: 50,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view7.png",
-    widthFactor: 0.90,
-    heightFactor: 0.78,
-    offsetX: -5,
-    offsetY: 16,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view8.png",
-    widthFactor: 0.79,
-    heightFactor: 0.69,
-    offsetX: -4,
-    offsetY: 55,
-  ),
-];
+    DressModel(
+      image: "assets/images/tryon/view1.png",
+      widthFactor: 0.92,
+      heightFactor: 0.60,
+      offsetX: -2,
+      offsetY: 75,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view2.png",
+      widthFactor: 0.80,
+      heightFactor: 0.70,
+      offsetX: -5,
+      offsetY: 43,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view3.png",
+      widthFactor: 0.78,
+      heightFactor: 0.60,
+      offsetX: -2,
+      offsetY: 45,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view4.png",
+      widthFactor: 0.80,
+      heightFactor: 0.70, // FIXED (was 2.80)
+      offsetX: 0,
+      offsetY: 40,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view5.png",
+      widthFactor: 0.75,
+      heightFactor: 0.65,
+      offsetX: 5,
+      offsetY: 45,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view6.png",
+      widthFactor: 0.77,
+      heightFactor: 0.67,
+      offsetX: -8,
+      offsetY: 50,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view7.png",
+      widthFactor: 0.90,
+      heightFactor: 0.78,
+      offsetX: -5,
+      offsetY: 16,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view8.png",
+      widthFactor: 0.79,
+      heightFactor: 0.69,
+      offsetX: -4,
+      offsetY: 55,
+    ),
+  ];
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -110,117 +116,106 @@ class _TryOnScreenState extends State<TryOnScreen> {
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: Stack(
-        children: [
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: dresses.length,
+        onPageChanged: (index) {
+          setState(() {
+            currentDressIndex = index;
+          });
+        },
+        itemBuilder: (context, index) {
+          final dress = dresses[index];
 
-          /// ===== AVATAR =====
-          Center(
-            child: Image.asset(
-              'assets/images/tryon/avatar.png',   // ✅ corrected path
-              width: screenWidth * 0.95,
-              height: screenHeight * 0.85,
-              fit: BoxFit.contain,
-            ),
-          ),
+          final product = ProductModel(
+            id: index.toString(),
+            image: dress.image,
+            name: "Kurtha ${index + 1}",
+            price: 1999.0, color: '',
+          );
 
-          /// ===== DRESS VIEW =====
-          Center(
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: dresses.length,
-              onPageChanged: (index) {
-                setState(() {
-                  currentDressIndex = index;
-                });
-              },
-          itemBuilder: (context, index) {
-  final dress = dresses[index];
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
-  return Center(
-    child: Transform.translate(
-      offset: Offset(dress.offsetX, dress.offsetY),
-      child: Image.asset(
-        dress.image,
-        width: screenWidth * dress.widthFactor,
-        height: screenHeight * dress.heightFactor,
-        fit: BoxFit.contain,
-      ),
-    ),
-  );
-},
-
-            ),
-          ),
-
-          /// ===== DRESS COUNTER =====
-          Positioned(
-            bottom: 40,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "Dress ${currentDressIndex + 1} / ${dresses.length}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+              /// Avatar + Dress Stack
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/tryon/avatar.png',
+                    width: screenWidth * 0.95,
+                    height: screenHeight * 0.85,
+                    fit: BoxFit.contain,
                   ),
+                  Transform.translate(
+                    offset: Offset(dress.offsetX, dress.offsetY),
+                    child: Image.asset(
+                      dress.image,
+                      width: screenWidth * dress.widthFactor,
+                      height: screenHeight * dress.heightFactor,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 10),
+
+              Text(
+                "Rs. ${product.price}",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-          ),
 
-          /// ===== LEFT ARROW =====
-          Positioned(
-            left: 20,
-            top: 0,
-            bottom: 0,
-            child: Center(
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 30),
-                onPressed: currentDressIndex > 0
-                    ? () {
-                        _pageController.previousPage(
-                          duration:
-                              const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    : null,
-                color: Colors.black54,
-              ),
-            ),
-          ),
+              const SizedBox(height: 10),
 
-          /// ===== RIGHT ARROW =====
-          Positioned(
-            right: 20,
-            top: 0,
-            bottom: 0,
-            child: Center(
-              child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 30),
-                onPressed: currentDressIndex <
-                        dresses.length - 1
-                    ? () {
-                        _pageController.nextPage(
-                          duration:
-                              const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    : null,
-                color: Colors.black54,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+
+                  /// Favorite
+                  Consumer<ShopProvider>(
+                    builder: (context, shop, _) {
+                      final isFav = shop.isFavorite(product);
+
+                      return IconButton(
+                        icon: Icon(
+                          isFav ? Icons.favorite : Icons.favorite_border,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          shop.toggleFavorite(product);
+                        },
+                      );
+                    },
+                  ),
+
+                  const SizedBox(width: 20),
+
+                  /// Add To Cart
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFE91E63),
+                    ),
+                    onPressed: () {
+                      context.read<ShopProvider>().addToCart(product);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Added to Cart"),
+                        ),
+                      );
+                    },
+                    child: const Text("Add to Cart"),
+                  ),
+                ],
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
