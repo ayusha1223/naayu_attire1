@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/widgets/best_selling_section.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/widgets/service_footer_section.dart';
 import '../widgets/flash_sale_header.dart';
 import '../widgets/product_grid.dart';
@@ -36,18 +37,31 @@ class _HomeScreenState extends State<HomeScreen> {
               SearchBarSection(),
               SizedBox(height: 20),
 
-              BannerSection(),
+              BannerSection(imagePath: '',),
               SizedBox(height: 15),
+
               FeatureTabSection(),
               const SizedBox(height: 30),
 
               const FlashSaleHeader(),
               SizedBox(height: 20),
+            
+                  PromoBox(
+      image: "assets/images/splash/promo1.jpeg",
+      title: "UPTO 30% OFF",
+    ),
 
-              ProductGrid(),
-              SizedBox(height: 1),
+    const SizedBox(height: 25),
 
-              PromoSection(),
+    BestSellingSection(),   // 👈 HERE
+
+    const SizedBox(height: 25),
+
+    PromoBox(
+      image: "assets/images/splash/promo2.jpeg",
+      title: "FLAT 16% OFF",
+    ),
+    const SizedBox(height: 30),
               ServiceFooterSection()
             ],
           ),

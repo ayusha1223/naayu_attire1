@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:naayu_attire1/core/providers/shop_provider.dart';
+import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/product_detail_screen.dart';
+import 'package:naayu_attire1/features/favorites/presentation/screens/favorites_screen.dart';
+import 'package:naayu_attire1/features/cart/presentation/screens/cart_screen.dart';
 
 class PremiumProductCard extends StatelessWidget {
   final String image;
@@ -16,6 +22,22 @@ class PremiumProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shop = context.watch<ShopProvider>();
+
+    /// Convert to ProductModel internally
+    final product = ProductModel(
+      id: title, // using title as id for now
+      image: image,
+      name: title,
+      price: price.toDouble(),
+      oldPrice: oldPrice.toDouble(),
+      description: "Beautiful traditional outfit",
+      rating: 4.5,
+      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+      color: "Red",
+      isNew: true,
+    );
+
     double discount =
         ((oldPrice - price) / oldPrice) * 100;
 
@@ -33,34 +55,58 @@ class PremiumProductCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          /// IMAGE
+          /// IMAGE CLICK → PRODUCT DETAILS
           Flexible(
             child: Stack(
               children: [
 
-                /// FULL IMAGE VISIBLE
-                Center(
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.contain, // 🔥 FIXED
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            ProductDetailScreen(product: product),
+                      ),
+                    );
+                  },
+                  child: Center(
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
 
-                /// FAVORITE
+                /// FAVORITE CLICK
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.favorite_border,
-                      size: 18,
-                      color: Colors.red,
+                  child: GestureDetector(
+                    onTap: () {
+                      shop.toggleFavorite(product);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              const FavoritesScreen(),
+                        ),
+                      );
+                    },
+                    child: CircleAvatar(
+                      radius: 16,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        shop.isFavorite(product)
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        size: 18,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
@@ -83,22 +129,24 @@ class PremiumProductCard extends StatelessWidget {
 
           const SizedBox(height: 6),
 
-          /// PRICE ROW
+          /// PRICE
+          Text(
+            "Rs.$price",
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+
+          const SizedBox(height: 6),
+
+          /// DISCOUNT
           Row(
             children: [
               Text(
-                "Rs.$price",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(width: 6),
-              Text(
                 "Rs.$oldPrice",
                 style: const TextStyle(
-                  decoration:
-                      TextDecoration.lineThrough,
+                  decoration: TextDecoration.lineThrough,
                   color: Colors.grey,
                   fontSize: 12,
                 ),
@@ -116,7 +164,7 @@ class PremiumProductCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          /// ADD TO CART BUTTON
+          /// ADD TO CART CLICK
           SizedBox(
             width: double.infinity,
             height: 40,
@@ -129,7 +177,17 @@ class PremiumProductCard extends StatelessWidget {
                       BorderRadius.circular(30),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                shop.addToCart(product);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        const CartScreen(),
+                  ),
+                );
+              },
               child: const Text(
                 "Add to cart",
                 style: TextStyle(

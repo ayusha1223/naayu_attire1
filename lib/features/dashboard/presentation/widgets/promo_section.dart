@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PromoSection extends StatelessWidget {
-  const PromoSection({super.key});
+  const PromoSection({super.key, required String title});
 
   @override
   Widget build(BuildContext context) {

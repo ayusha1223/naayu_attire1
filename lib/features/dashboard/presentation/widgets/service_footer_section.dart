@@ -140,7 +140,7 @@ class ServiceFooterSection extends StatelessWidget {
 
         /// ===== COPYRIGHT =====
         const Text(
-          "© 2023 foreveryng.com | All Rights Reserved",
+          "© 2023 naayuattire.com | All Rights Reserved",
           style: TextStyle(
               fontSize: 12,
               color: Colors.grey),

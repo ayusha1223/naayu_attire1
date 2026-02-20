@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/core/providers/shop_provider.dart';
 import '../../domain/models/product_model.dart';
+import 'package:naayu_attire1/features/payment/presentation/delivery_details_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final ProductModel product;
@@ -338,42 +339,28 @@ class _ProductDetailScreenState
 
                           // BUY NOW
                           Expanded(
-                            child:
-                                ElevatedButton(
-                              style:
-                                  ElevatedButton
-                                      .styleFrom(
-                                backgroundColor:
-                                    const Color
-                                        .fromARGB(
-                                            255,
-                                            233,
-                                            146,
-                                            146),
-                                padding:
-                                    const EdgeInsets
-                                        .symmetric(
-                                            vertical:
-                                                14),
-                                shape:
-                                    RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius
-                                          .circular(
-                                              12),
-                                ),
-                              ),
-                              onPressed: () {
-                                shop.addToCart(
-                                    product);
-                                Navigator.pop(
-                                    context);
-                              },
-                              child:
-                                  const Text(
-                                      "Buy Now"),
-                            ),
-                          ),
+  child: ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      backgroundColor:
+          const Color.fromARGB(255, 233, 146, 146),
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+    onPressed: () {
+      shop.addToCart(product);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const DeliveryScreen(),
+        ),
+      );
+    },
+    child: const Text("Buy Now"),
+  ),
+),
                         ],
                       ),
                     ],

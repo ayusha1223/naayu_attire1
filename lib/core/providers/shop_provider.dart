@@ -6,6 +6,23 @@ import 'package:naayu_attire1/features/address/domain/models/address_model.dart'
 
 class ShopProvider extends ChangeNotifier {
 
+  // ================= USER =================
+
+  String? _userId;
+
+  void setUser(String userId) async {
+    _userId = userId;
+    await loadData();
+  }
+
+  void logout() {
+    _userId = null;
+    _cart.clear();
+    _favorites.clear();
+    _address = null;
+    notifyListeners();
+  }
+
   // ================= VARIABLES =================
 
   final List<ProductModel> _cart = [];
@@ -20,7 +37,6 @@ class ShopProvider extends ChangeNotifier {
 
   List<ProductModel> get cart => _cart;
   List<ProductModel> get favorites => _favorites;
-
   AddressModel? get address => _address;
 
   String get deliveryType => _deliveryType;
@@ -34,17 +50,10 @@ class ShopProvider extends ChangeNotifier {
 
   double get finalTotal => totalPrice + shippingCharge;
 
-  // ================= CONSTRUCTOR =================
-
-  ShopProvider() {
-    loadData();
-  }
-
   // ================= CART =================
 
   void addToCart(ProductModel product) {
-    int index =
-        _cart.indexWhere((item) => item.id == product.id);
+    int index = _cart.indexWhere((item) => item.id == product.id);
 
     if (index >= 0) {
       _cart[index].quantity++;
@@ -63,8 +72,7 @@ class ShopProvider extends ChangeNotifier {
   }
 
   void increaseQty(ProductModel product) {
-    int index =
-        _cart.indexWhere((item) => item.id == product.id);
+    int index = _cart.indexWhere((item) => item.id == product.id);
 
     if (index >= 0) {
       _cart[index].quantity++;
@@ -74,11 +82,9 @@ class ShopProvider extends ChangeNotifier {
   }
 
   void decreaseQty(ProductModel product) {
-    int index =
-        _cart.indexWhere((item) => item.id == product.id);
+    int index = _cart.indexWhere((item) => item.id == product.id);
 
-    if (index >= 0 &&
-        _cart[index].quantity > 1) {
+    if (index >= 0 && _cart[index].quantity > 1) {
       _cart[index].quantity--;
       saveData();
       notifyListeners();
@@ -95,8 +101,7 @@ class ShopProvider extends ChangeNotifier {
 
   void toggleFavorite(ProductModel product) {
     if (_favorites.any((item) => item.id == product.id)) {
-      _favorites.removeWhere(
-          (item) => item.id == product.id);
+      _favorites.removeWhere((item) => item.id == product.id);
     } else {
       _favorites.add(product);
     }
@@ -106,9 +111,32 @@ class ShopProvider extends ChangeNotifier {
   }
 
   bool isFavorite(ProductModel product) {
-    return _favorites
-        .any((item) => item.id == product.id);
+    return _favorites.any((item) => item.id == product.id);
   }
+  // ================= LOCATION =================
+
+String _selectedLocation = "Select Location";
+String get selectedLocation => _selectedLocation;
+
+void setLocation(String location) {
+  _selectedLocation = location;
+  notifyListeners();
+}
+
+// ================= NOTIFICATIONS =================
+
+int _notificationCount = 0;
+int get notificationCount => _notificationCount;
+
+void addNotification() {
+  _notificationCount++;
+  notifyListeners();
+}
+
+void clearNotifications() {
+  _notificationCount = 0;
+  notifyListeners();
+}
 
   // ================= ADDRESS =================
 
@@ -143,105 +171,91 @@ class ShopProvider extends ChangeNotifier {
   // ================= LOCAL STORAGE =================
 
   Future<void> saveData() async {
-    final prefs =
-        await SharedPreferences.getInstance();
+    if (_userId == null) return;
+
+    final prefs = await SharedPreferences.getInstance();
 
     // CART
     prefs.setString(
-      'cart',
-      jsonEncode(
-          _cart.map((e) => e.toJson()).toList()),
+      'cart_$_userId',
+      jsonEncode(_cart.map((e) => e.toJson()).toList()),
     );
 
     // FAVORITES
     prefs.setString(
-      'favorites',
-      jsonEncode(
-          _favorites.map((e) => e.toJson()).toList()),
+      'favorites_$_userId',
+      jsonEncode(_favorites.map((e) => e.toJson()).toList()),
     );
 
     // ADDRESS
     if (_address != null) {
       prefs.setString(
-        'address',
+        'address_$_userId',
         jsonEncode({
           'name': _address!.name,
-          'fullAddress':
-              _address!.fullAddress,
+          'fullAddress': _address!.fullAddress,
           'phone': _address!.phone,
           'email': _address!.email,
         }),
       );
     } else {
-      prefs.remove('address');
+      prefs.remove('address_$_userId');
     }
 
     // DELIVERY TYPE
-    prefs.setString(
-        'deliveryType', _deliveryType);
+    prefs.setString('deliveryType_$_userId', _deliveryType);
 
     // PAYMENT METHOD
-    prefs.setString(
-        'paymentMethod', _paymentMethod);
+    prefs.setString('paymentMethod_$_userId', _paymentMethod);
   }
 
   Future<void> loadData() async {
-    final prefs =
-        await SharedPreferences.getInstance();
+    if (_userId == null) return;
 
-    final cartData =
-        prefs.getString('cart');
-    final favData =
-        prefs.getString('favorites');
-    final addressData =
-        prefs.getString('address');
-    final deliveryTypeData =
-        prefs.getString('deliveryType');
-    final paymentMethodData =
-        prefs.getString('paymentMethod');
+    final prefs = await SharedPreferences.getInstance();
+
+    _cart.clear();
+    _favorites.clear();
+    _address = null;
+
+    final cartData = prefs.getString('cart_$_userId');
+    final favData = prefs.getString('favorites_$_userId');
+    final addressData = prefs.getString('address_$_userId');
+    final deliveryTypeData = prefs.getString('deliveryType_$_userId');
+    final paymentMethodData = prefs.getString('paymentMethod_$_userId');
 
     // CART
     if (cartData != null) {
-      List decoded =
-          jsonDecode(cartData);
-      _cart.addAll(decoded.map(
-          (e) =>
-              ProductModel.fromJson(e)));
+      List decoded = jsonDecode(cartData);
+      _cart.addAll(decoded.map((e) => ProductModel.fromJson(e)));
     }
 
     // FAVORITES
     if (favData != null) {
-      List decoded =
-          jsonDecode(favData);
-      _favorites.addAll(decoded.map(
-          (e) =>
-              ProductModel.fromJson(e)));
+      List decoded = jsonDecode(favData);
+      _favorites.addAll(decoded.map((e) => ProductModel.fromJson(e)));
     }
 
     // ADDRESS
     if (addressData != null) {
-      final decoded =
-          jsonDecode(addressData);
+      final decoded = jsonDecode(addressData);
 
       _address = AddressModel(
         name: decoded['name'],
-        fullAddress:
-            decoded['fullAddress'],
+        fullAddress: decoded['fullAddress'],
         phone: decoded['phone'],
         email: decoded['email'],
       );
     }
 
-    // DELIVERY TYPE
+    // DELIVERY
     if (deliveryTypeData != null) {
-      _deliveryType =
-          deliveryTypeData;
+      _deliveryType = deliveryTypeData;
     }
 
-    // PAYMENT METHOD
+    // PAYMENT
     if (paymentMethodData != null) {
-      _paymentMethod =
-          paymentMethodData;
+      _paymentMethod = paymentMethodData;
     }
 
     notifyListeners();

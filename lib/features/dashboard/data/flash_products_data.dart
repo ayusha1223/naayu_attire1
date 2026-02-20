@@ -20,33 +20,9 @@ final List<FlashProduct> flashProducts = [
     oldPrice: 1999,
   ),
   FlashProduct(
-    imagePath: "assets/images/splash/onepiece3.png",
+    imagePath: "assets/images/onepiece/onepiece3.png",
     title: "Cotton",
     price: 999,
     oldPrice: 1299,
-  ),
-  FlashProduct(
-    imagePath: "assets/images/splash/onepiece4.png",
-    title: "Siyaa",
-    price: 1199,
-    oldPrice: 1899,
-  ),
-  FlashProduct(
-    imagePath: "assets/images/splash/onepiece14.png",
-    title: "V-neck",
-    price: 1099,
-    oldPrice: 1299,
-  ),
-  FlashProduct(
-    imagePath: "assets/images/splash/onepiece4.png",
-    title: "Royal Lehenga Set",
-    price: 2799,
-    oldPrice: 3099,
-  ),
-  FlashProduct(
-    imagePath: "assets/images/splash/onepiece14.png",
-    title: "Designer Bridal Wear",
-    price: 3999,
-    oldPrice: 4399,
   ),
 ];
