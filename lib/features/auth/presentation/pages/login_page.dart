@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/admin/presentation/screens/admin_dashboard_screen.dart';
+import 'package:naayu_attire1/features/admin/presentation/pages/admin_dashboard_page.dart';
+import 'package:naayu_attire1/features/admin/presentation/pages/admin_main_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
@@ -107,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (_) =>
-                                        const AdminDashboardPage(),
+                                        const AdminMainNavigation(),
                                   ),
                                 );
                               } else {
