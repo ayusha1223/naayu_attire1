@@ -18,11 +18,19 @@ class AuthHiveModel extends HiveObject {
   @HiveField(3)
   final String? password;
 
+  @HiveField(4)
+  final String? token;   
+
+  @HiveField(5)
+  final String? role;    
+
   AuthHiveModel({
     this.id,
     this.fullName,
     this.email,
     this.password,
+    this.token,
+    this.role,
   });
 
   // 🔁 Hive → Entity
@@ -32,7 +40,8 @@ class AuthHiveModel extends HiveObject {
       fullName: fullName ?? '',
       email: email ?? '',
       password: password ?? '',
-      token: '',
+      token: token ?? '',
+      role: role ?? 'user',
     );
   }
 
@@ -43,6 +52,8 @@ class AuthHiveModel extends HiveObject {
       fullName: entity.fullName.isEmpty ? null : entity.fullName,
       email: entity.email.isEmpty ? null : entity.email,
       password: entity.password.isEmpty ? null : entity.password,
+      token: entity.token.isEmpty ? null : entity.token,
+      role: entity.role.isEmpty ? null : entity.role,
     );
   }
 }

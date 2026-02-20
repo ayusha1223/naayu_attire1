@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/dashboard/presentation/screens/home_screen.dart';
-import 'package:naayu_attire1/navigation/main_navigation.dart';
+import 'package:naayu_attire1/features/admin/presentation/screens/admin_dashboard_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'signup_page.dart';
 import 'package:naayu_attire1/core/services/sensors/fingerprint_service.dart';
@@ -41,7 +41,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 40),
 
-                /// TITLE
                 const Text(
                   "Log into\nyour account",
                   style: TextStyle(
@@ -52,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 40),
 
-                /// EMAIL
                 TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
@@ -63,26 +61,12 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 20),
 
-                /// PASSWORD
                 TextField(
                   controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: "Password",
                     border: UnderlineInputBorder(),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade600,
-                    ),
                   ),
                 ),
 
@@ -115,17 +99,31 @@ class _LoginPageState extends State<LoginPage> {
                               password: passwordController.text.trim(),
                             );
 
-                            if (success && mounted) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const MainNavigation(),
-                                ),
-                              );
+                            if (!mounted) return;
+
+                            if (success) {
+                              if (authVM.role == "admin") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const AdminDashboardPage(),
+                                  ),
+                                );
+                              } else {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const MainNavigation(),
+                                  ),
+                                );
+                              }
                             }
                           },
                     child: authVM.isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? const CircularProgressIndicator(
+                            color: Colors.white)
                         : const Text(
                             "LOG IN",
                             style: TextStyle(
@@ -139,18 +137,13 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 16),
 
-                /// FINGERPRINT
+                /// FINGERPRINT LOGIN
                 SizedBox(
                   width: double.infinity,
                   height: 55,
                   child: OutlinedButton.icon(
                     icon: const Icon(Icons.fingerprint),
                     label: const Text("Login with Fingerprint"),
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
                     onPressed: () async {
                       final fingerprintService = FingerprintService();
                       final isAuthenticated =
@@ -159,8 +152,8 @@ class _LoginPageState extends State<LoginPage> {
                       if (!isAuthenticated) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content:
-                                Text("Fingerprint authentication failed"),
+                            content: Text(
+                                "Fingerprint authentication failed"),
                           ),
                         );
                         return;
@@ -182,11 +175,20 @@ class _LoginPageState extends State<LoginPage> {
                         return;
                       }
 
-                      if (mounted) {
+                      if (authVM.role == "admin") {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const HomeScreen(),
+                            builder: (_) =>
+                                const AdminDashboardPage(),
+                          ),
+                        );
+                      } else {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                const MainNavigation(),
                           ),
                         );
                       }
@@ -194,35 +196,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                const SizedBox(height: 30),
-
-                /// OR
-                const Center(
-                  child: Text(
-                    "or log in with",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-
-                const SizedBox(height: 20),
-
-                /// SOCIAL BUTTONS (UPDATED)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SocialButton(
-                      imagePath: "assets/images/auth/google.png",
-                    ),
-                    SizedBox(width: 20),
-                    SocialButton(
-                      imagePath: "assets/images/auth/facebook.png",
-                    ),
-                  ],
-                ),
-
                 const SizedBox(height: 40),
 
-                /// SIGN UP
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -250,30 +225,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-/// 🔥 NEW SOCIAL BUTTON WIDGET
-class SocialButton extends StatelessWidget {
-  final String imagePath;
-
-  const SocialButton({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 55,
-      width: 55,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.grey.shade300),
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Image.asset(imagePath),
       ),
     );
   }

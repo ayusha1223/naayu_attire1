@@ -14,12 +14,14 @@ class PaypalSuccessScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
+              const SizedBox(height: 120),
 
               const Icon(
                 Icons.check_circle,
@@ -46,7 +48,6 @@ class PaypalSuccessScreen extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              // Continue Shopping Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -59,7 +60,6 @@ class PaypalSuccessScreen extends StatelessWidget {
 
               const SizedBox(height: 15),
 
-              // Track My Order Button
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
@@ -74,6 +74,8 @@ class PaypalSuccessScreen extends StatelessWidget {
                   child: const Text("Track My Order"),
                 ),
               ),
+
+              const SizedBox(height: 40),
             ],
           ),
         ),

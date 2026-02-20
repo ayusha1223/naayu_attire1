@@ -13,11 +13,11 @@ class AuthViewModel extends ChangeNotifier {
 
   bool _isLoading = false;
   String? _errorMessage;
+  String? _role; // 🔥 STORE ROLE
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-
-  // ---------------- STATE HELPERS ----------------
+  String? get role => _role; // 🔥 EXPOSE ROLE
 
   void _setLoading(bool value) {
     _isLoading = value;
@@ -34,7 +34,7 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ---------------- SIGN UP ----------------
+  // ---------------- REGISTER ----------------
   Future<bool> register(
     String name,
     String email,
@@ -50,6 +50,7 @@ class AuthViewModel extends ChangeNotifier {
         email: email,
         password: password,
         token: '',
+        role: 'user', // default
       ),
     );
 
@@ -69,37 +70,39 @@ class AuthViewModel extends ChangeNotifier {
 
   // ---------------- LOGIN ----------------
   Future<bool> login({
-  required String email,
-  required String password,
-}) async {
-  _setLoading(true);
-  _setError(null);
+    required String email,
+    required String password,
+  }) async {
+    _setLoading(true);
+    _setError(null);
 
-  final result = await authRepository.login(email, password);
+    final result = await authRepository.login(email, password);
 
-  _setLoading(false);
+    _setLoading(false);
 
-  return result.fold(
-    (failure) {
-      _setError(failure.message);
-      return false;
-    },
-    (authEntity) async {
-  print("🔥 SAVED TOKEN: ${authEntity.token}");
+    return result.fold(
+      (failure) {
+        _setError(failure.message);
+        return false;
+      },
+      (authEntity) async {
+        await tokenService.saveToken(authEntity.token);
 
-  await tokenService.saveToken(authEntity.token);
-  return true;
-}
+        _role = authEntity.role; // 🔥 SAVE ROLE HERE
+        notifyListeners();
 
-  );
-}
+        return true;
+      },
+    );
+  }
 
-
-  // ---------------- LOGOUT (future) ----------------
+  // ---------------- LOGOUT ----------------
   Future<void> logout(BuildContext context) async {
     final tokenService =
         Provider.of<TokenService>(context, listen: false);
 
     await tokenService.removeToken();
+    _role = null;
+    notifyListeners();
   }
 }

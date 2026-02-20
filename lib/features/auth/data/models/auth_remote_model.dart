@@ -5,22 +5,26 @@ class AuthRemoteModel {
   final String name;
   final String email;
   final String token;
+  final String role;   // 🔥 ADD
 
   AuthRemoteModel({
-  required this.id,
-  required this.name,
-  required this.email,
-  required this.token,
-});
-
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.token,
+    required this.role,
+  });
 
   // ================= FROM JSON (Login Response) =================
   factory AuthRemoteModel.fromJson(Map<String, dynamic> json) {
+    final data = json['data'] ?? json;
+
     return AuthRemoteModel(
-      id: json['_id'] ?? '',
-      name: json['name'] ?? '',
-      email: json['email'] ?? '',
-      token: json['token'] ?? '',
+      id: data['_id'] ?? '',
+      name: data['name'] ?? '',
+      email: data['email'] ?? '',
+      token: data['token'] ?? '',
+      role: data['role'] ?? 'user',   // 🔥 IMPORTANT
     );
   }
 
@@ -30,8 +34,9 @@ class AuthRemoteModel {
       id: id,
       fullName: name,
       email: email,
-      password: '', 
-      token: token
+      password: '',
+      token: token,
+      role: role,
     );
   }
 
@@ -42,6 +47,7 @@ class AuthRemoteModel {
       name: entity.fullName,
       email: entity.email,
       token: '',
+      role: entity.role,
     );
   }
 

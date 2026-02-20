@@ -24,7 +24,7 @@ class TestAuthDatasource implements IAuthDatasource {
       id: '1',
       name: 'Test User',
       email: email,
-      token: 'test-token',
+      token: 'test-token', role: '',
     );
   }
 }
