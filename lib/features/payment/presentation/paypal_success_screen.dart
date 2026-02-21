@@ -67,7 +67,7 @@ class PaypalSuccessScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const OrderTrackingScreen(),
+                        builder: (_) => const OrderTrackingScreen(currentStage: 0, orderId: '', estimatedDelivery: '',),
                       ),
                     );
                   },

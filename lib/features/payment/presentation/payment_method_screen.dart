@@ -4,7 +4,7 @@ import 'package:naayu_attire1/features/payment/presentation/payment_success_scre
 import 'card_payment_screen.dart';
 import 'paypal_screen.dart';
 
-class PaymentMethodScreen extends StatelessWidget {
+class PaymentMethodScreen extends StatefulWidget {
   final double totalAmount;
 
   const PaymentMethodScreen({
@@ -13,173 +13,205 @@ class PaymentMethodScreen extends StatelessWidget {
   });
 
   @override
+  State<PaymentMethodScreen> createState() => _PaymentMethodScreenState();
+}
+
+class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
+
+  String selectedMethod = "card";
+
+  static const Color kPrimary = Color.fromARGB(255, 110, 82, 188);
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
       appBar: AppBar(
-        backgroundColor: Colors.pink.shade50,
+        backgroundColor: Colors.white,
         elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
-          "Checkout",
-          style: TextStyle(
-            color: Colors.pink,
-            fontWeight: FontWeight.bold,
-          ),
+          "Payment Method",
+          style: TextStyle(color: Colors.black),
         ),
-        iconTheme: const IconThemeData(color: Colors.pink),
+        centerTitle: true,
       ),
 
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            // ===== PAYMENT OPTIONS GRID =====
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                children: [
-
-                  // CARD
-                  _paymentCard(
-                    context,
-                    title: "Card",
-                    icon: Icons.credit_card,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              CardPaymentScreen(
-                                amount: totalAmount,
-                              ),
-                        ),
-                      );
-                    },
-                  ),
-
-                  // COD
-                  _paymentCard(
-                    context,
-                    title: "Cash on Delivery",
-                    icon: Icons.money,
-                    onTap: () {
-                      _showCODDialog(context);
-                    },
-                  ),
-
-                  // ESEWA
-                  _paymentCard(
-                    context,
-                    title: "eSewa",
-                    icon: Icons.account_balance_wallet,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              EsewaWebviewScreen(
-                                amount: totalAmount,
-                              ),
-                        ),
-                      );
-                    },
-                  ),
-
-                  // PAYPAL
-                  _paymentCard(
-                    context,
-                    title: "PayPal",
-                    icon: Icons.payment,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              PaypalScreen(
-                                amount: totalAmount,
-                              ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+            const Text(
+              "Select your payment method.",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
               ),
             ),
 
             const SizedBox(height: 20),
 
-            // ===== ORDER SUMMARY =====
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Total Payment",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Rs. ${totalAmount.toStringAsFixed(0)}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
+            paymentTile("card", "Credit / Debit Card", Icons.credit_card),
+            paymentTile("cod", "Cash on Delivery", Icons.money),
+            paymentTile("esewa", "eSewa", Icons.account_balance_wallet),
+            paymentTile("paypal", "PayPal", Icons.payment),
+
+            const Spacer(),
+
+            // ===== TOTAL DISPLAY =====
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Total Payment",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+                Text(
+                  "Rs. ${widget.totalAmount.toStringAsFixed(0)}",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+
+      // ===== BOTTOM BUTTON =====
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(16),
+        color: Colors.white,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 100, 111, 186),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+          onPressed: proceedPayment,
+          child: const Text(
+            "Add",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ================= PAYMENT TILE =================
+
+  Widget paymentTile(String method, String title, IconData icon) {
+    bool isSelected = selectedMethod == method;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedMethod = method;
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? kPrimary : Colors.grey.shade300,
+            width: 1.5,
+          ),
+        ),
+        child: Row(
+          children: [
+
+            Icon(
+              icon,
+              color: isSelected ? kPrimary : Colors.grey,
+            ),
+
+            const SizedBox(width: 15),
+
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: isSelected ? kPrimary : Colors.black,
+                ),
               ),
             ),
 
-            const SizedBox(height: 15),
+            Radio<String>(
+              value: method,
+              groupValue: selectedMethod,
+              activeColor: kPrimary,
+              onChanged: (value) {
+                setState(() {
+                  selectedMethod = value!;
+                });
+              },
+            ),
           ],
         ),
       ),
     );
   }
 
-  // ================= PAYMENT CARD WIDGET =================
+  // ================= PROCEED LOGIC =================
 
-  Widget _paymentCard(BuildContext context,
-      {required String title,
-      required IconData icon,
-      required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              blurRadius: 8,
-            )
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.center,
-          children: [
-            Icon(icon,
-                size: 45, color: Colors.pink),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold),
+  void proceedPayment() {
+
+    switch (selectedMethod) {
+
+      case "card":
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CardPaymentScreen(
+              amount: widget.totalAmount,
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
+        break;
+
+      case "cod":
+        _showCODDialog(context);
+        break;
+
+      case "esewa":
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => EsewaWebviewScreen(
+              amount: widget.totalAmount,
+            ),
+          ),
+        );
+        break;
+
+      case "paypal":
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PaypalScreen(
+              amount: widget.totalAmount,
+            ),
+          ),
+        );
+        break;
+    }
   }
 
   // ================= COD DIALOG =================
@@ -189,28 +221,27 @@ class PaymentMethodScreen extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         title: const Text("Confirm Order"),
-        content: const Text(
-            "Place order with Cash on Delivery?"),
+        content: const Text("Place order with Cash on Delivery?"),
         actions: [
           TextButton(
             child: const Text("Cancel"),
-            onPressed: () =>
-                Navigator.pop(context),
+            onPressed: () => Navigator.pop(context),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 100, 111, 186),
+              foregroundColor: Colors.white,
+            ),
             child: const Text("Confirm"),
             onPressed: () {
               Navigator.pop(context);
-
-              // 🔥 Go directly to success screen
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (_) =>
-                      PaymentSuccessScreen(
-                        amount: totalAmount,
-                        paymentMethod: "cod",
-                      ),
+                  builder: (_) => PaymentSuccessScreen(
+                    amount: widget.totalAmount,
+                    paymentMethod: "cod",
+                  ),
                 ),
               );
             },

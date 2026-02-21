@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'payment_success_screen.dart';
 
-class EsewaOtpScreen extends StatelessWidget {
+class EsewaOtpScreen extends StatefulWidget {
   final double amount;
 
   const EsewaOtpScreen({
@@ -10,10 +10,33 @@ class EsewaOtpScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController otpController =
-        TextEditingController();
+  State<EsewaOtpScreen> createState() => _EsewaOtpScreenState();
+}
 
+class _EsewaOtpScreenState extends State<EsewaOtpScreen> {
+  final TextEditingController otpController = TextEditingController();
+  bool isOtpValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    otpController.addListener(() {
+      final otp = otpController.text.trim();
+      setState(() {
+        isOtpValid = otp.length == 6;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    otpController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("OTP Verification"),
@@ -24,20 +47,20 @@ class EsewaOtpScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 30),
-
             const Text(
               "Enter 6-digit OTP sent to your mobile",
               style: TextStyle(fontSize: 16),
             ),
-
             const SizedBox(height: 30),
 
             TextField(
               controller: otpController,
               keyboardType: TextInputType.number,
+              maxLength: 6,
               decoration: const InputDecoration(
                 labelText: "Enter OTP",
                 border: OutlineInputBorder(),
+                counterText: "",
               ),
             ),
 
@@ -45,18 +68,23 @@ class EsewaOtpScreen extends StatelessWidget {
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF60BB46),
+                backgroundColor:
+                    isOtpValid ? const Color(0xFF60BB46) : Colors.grey,
                 minimumSize: const Size(double.infinity, 50),
               ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        PaymentSuccessScreen(amount: amount, paymentMethod: 'esewa',),
-                  ),
-                );
-              },
+              onPressed: isOtpValid
+                  ? () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PaymentSuccessScreen(
+                            amount: widget.amount,
+                            paymentMethod: 'esewa',
+                          ),
+                        ),
+                      );
+                    }
+                  : null,
               child: const Text("Confirm Payment"),
             ),
           ],

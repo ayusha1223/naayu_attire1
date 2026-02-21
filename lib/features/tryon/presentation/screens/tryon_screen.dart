@@ -31,9 +31,9 @@ class _TryOnScreenState extends State<TryOnScreen> {
   DressModel(
     image: "assets/images/tryon/view1.png",
     widthFactor: 0.92,
-    heightFactor: 0.60,
+    heightFactor: 0.62,
     offsetX:-2,
-    offsetY: 75,
+    offsetY: 85,
   ),
   DressModel(
     image: "assets/images/tryon/view2.png",
@@ -51,10 +51,10 @@ class _TryOnScreenState extends State<TryOnScreen> {
   ),
   DressModel(
     image: "assets/images/tryon/view4.png",
-    widthFactor: 0.80,
-    heightFactor: 2.80,
-    offsetX: 0,
-    offsetY: 5,
+    widthFactor: 0.65,
+    heightFactor: 0.75,
+    offsetX: -5,
+    offsetY: 25,
   ),
   DressModel(
     image: "assets/images/tryon/view5.png",
@@ -72,10 +72,10 @@ class _TryOnScreenState extends State<TryOnScreen> {
   ),
   DressModel(
     image: "assets/images/tryon/view7.png",
-    widthFactor: 0.90,
-    heightFactor: 0.78,
-    offsetX: -5,
-    offsetY: 16,
+    widthFactor: 0.92,
+    heightFactor: 0.80,
+    offsetX: -8,
+    offsetY: 18,
   ),
   DressModel(
     image: "assets/images/tryon/view8.png",

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'paypal_success_screen.dart';
 import 'package:naayu_attire1/features/payment/presentation/payment_success_screen.dart';
@@ -19,7 +20,7 @@ class PaypalOtpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("PayPal OTP"),
-        backgroundColor: const Color(0xFF003087),
+        backgroundColor: const Color.fromARGB(255, 100, 111, 186),
       ),
 
       body: Padding(
@@ -52,7 +53,8 @@ class PaypalOtpScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0070BA),
+                  backgroundColor: const Color.fromARGB(255, 100, 111, 186),
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
                 onPressed: () {

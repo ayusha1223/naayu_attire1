@@ -25,7 +25,7 @@ class _PaypalScreenState extends State<PaypalScreen> {
 
       appBar: AppBar(
         title: const Text("PayPal"),
-        backgroundColor: const Color.fromARGB(255, 137, 167, 221),
+        backgroundColor: const Color.fromARGB(255, 248, 248, 249),
       ),
 
       body: Padding(
@@ -61,7 +61,8 @@ class _PaypalScreenState extends State<PaypalScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 187, 213, 231),
+                  backgroundColor: const Color.fromARGB(255, 100, 111, 186),
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
                 onPressed: () {

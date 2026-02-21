@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
@@ -69,33 +69,42 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   // ---------------- LOGIN ----------------
-  Future<bool> login({
-    required String email,
-    required String password,
-  }) async {
-    _setLoading(true);
-    _setError(null);
+  // ---------------- LOGIN ----------------
+Future<bool> login({
+  required String email,
+  required String password,
+}) async {
+  _setLoading(true);
+  _setError(null);
 
-    final result = await authRepository.login(email, password);
+  final result = await authRepository.login(email, password);
 
-    _setLoading(false);
+  _setLoading(false);
 
-    return result.fold(
-      (failure) {
-        _setError(failure.message);
-        return false;
-      },
-      (authEntity) async {
-        await tokenService.saveToken(authEntity.token);
+  return result.fold(
+    (failure) {
+      _setError(failure.message);
+      return false;
+    },
+    (authEntity) async {
+      /// SAVE TOKEN
+      await tokenService.saveToken(authEntity.token);
 
-        _role = authEntity.role; // 🔥 SAVE ROLE HERE
-        notifyListeners();
+      /// SAVE ROLE
+      _role = authEntity.role;
 
-        return true;
-      },
-    );
-  }
+      /// 🔥 SAVE USER NAME & EMAIL
+      final prefs = await SharedPreferences.getInstance();
 
+      prefs.setString("user_name", authEntity.fullName);
+      prefs.setString("user_email", authEntity.email);
+
+      notifyListeners();
+
+      return true;
+    },
+  );
+}
   // ---------------- LOGOUT ----------------
   Future<void> logout(BuildContext context) async {
     final tokenService =

@@ -1,12 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
-import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 import 'package:naayu_attire1/core/services/storage/image_service.dart';
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
 
@@ -22,47 +21,93 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
 
   String? profileImageUrl;
   bool isUploading = false;
+  bool isSaving = false;
+  String? savedEmail;
 
-  // Controllers
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  // ---------------- INIT ----------------
   @override
   void initState() {
     super.initState();
     loadProfileData();
   }
 
-  // ---------------- LOAD SAVED DATA ----------------
   Future<void> loadProfileData() async {
     final prefs = await SharedPreferences.getInstance();
+    savedEmail = prefs.getString('user_email');
+
+    if (savedEmail == null) return;
 
     setState(() {
-      profileImageUrl = prefs.getString('profile_image');
-      nameController.text = prefs.getString('profile_name') ?? '';
-      emailController.text = prefs.getString('profile_email') ?? '';
-      phoneController.text = prefs.getString('profile_phone') ?? '';
+      profileImageUrl =
+          prefs.getString('profile_image_$savedEmail');
+      nameController.text =
+          prefs.getString('user_name') ?? '';
+      emailController.text = savedEmail!;
+      phoneController.text =
+          prefs.getString('user_phone_$savedEmail') ?? '';
     });
   }
 
-  // ---------------- SAVE PROFILE DATA ----------------
   Future<void> saveProfileData() async {
-    final prefs = await SharedPreferences.getInstance();
+    FocusScope.of(context).unfocus();
 
-    await prefs.setString('profile_name', nameController.text);
-await prefs.setString('profile_phone', phoneController.text);
-await prefs.setString('profile_image', profileImageUrl ?? '');
+    if (savedEmail == null) return;
 
+    setState(() => isSaving = true);
+
+    try {
+      final tokenService =
+          Provider.of<TokenService>(context, listen: false);
+
+      final token = await tokenService.getToken();
+
+      final dio = Dio();
+
+      await dio.put(
+        "http://192.168.1.74:3000/api/v1/students/update-profile",
+        data: {
+          "name": nameController.text,
+          if (passwordController.text.isNotEmpty)
+            "password": passwordController.text,
+        },
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+      );
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("user_name", nameController.text);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Profile Updated Successfully"),
+        ),
+      );
+
+      passwordController.clear();
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Update Failed")),
+      );
+    }
+
+    if (mounted) {
+      setState(() => isSaving = false);
+    }
   }
 
-  // ---------------- IMAGE PICK & UPLOAD ----------------
   Future<void> pickAndUploadProfileImage() async {
     final pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
-
     if (pickedFile == null) return;
 
     setState(() => isUploading = true);
@@ -77,147 +122,153 @@ await prefs.setString('profile_image', profileImageUrl ?? '');
       );
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('profile_image', imageUrl);
+      await prefs.setString(
+          'profile_image_$savedEmail', imageUrl);
 
       setState(() {
         profileImageUrl = imageUrl;
       });
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Profile image upload failed")),
-      );
-    } finally {
+
+    } catch (e) {}
+
+    if (mounted) {
       setState(() => isUploading = false);
     }
   }
 
-  // ---------------- LOGOUT ----------------
- Future<void> logout() async {
-  final tokenService =
-      Provider.of<TokenService>(context, listen: false);
-
-  await tokenService.removeToken();
-
-  if (!mounted) return;
-
-  Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const LoginPage(),
-    ),
-    (route) => false, // 🔥 clears entire stack
-  );
-}
-
-
-  // ---------------- UI ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        title: const Text("Profile"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: logout,
-          ),
-        ],
+        title: const Text("Edit Profile"),
+        centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
 
-            // 👤 PROFILE IMAGE
-            GestureDetector(
-              onTap: isUploading ? null : pickAndUploadProfileImage,
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: profileImageUrl != null
-                        ? NetworkImage(profileImageUrl!)
-                        : null,
-                    child: profileImageUrl == null
-                        ? const Icon(Icons.person, size: 60)
-                        : null,
+              const SizedBox(height: 20),
+
+              /// PROFILE IMAGE SECTION
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                    )
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage:
+                          profileImageUrl != null
+                              ? NetworkImage(profileImageUrl!)
+                              : null,
+                      child: profileImageUrl == null
+                          ? const Icon(Icons.person, size: 60)
+                          : null,
+                    ),
+                    const SizedBox(height: 12),
+                    TextButton(
+                      onPressed:
+                          isUploading ? null : pickAndUploadProfileImage,
+                      child: const Text(
+                        "Change Picture",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              /// NAME
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: "Full Name",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              /// EMAIL
+              TextField(
+                controller: emailController,
+                readOnly: true,
+                decoration: const InputDecoration(
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              /// PHONE
+              TextField(
+                controller: phoneController,
+                decoration: const InputDecoration(
+                  labelText: "Phone Number",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              /// PASSWORD
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: "Change Password ",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              /// UPDATE BUTTON
+              SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff7c5cff),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
-                  const CircleAvatar(
-                    radius: 18,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.camera_alt, size: 18),
-                  ),
-                ],
+                  onPressed:
+                      isSaving ? null : saveProfileData,
+                  child: isSaving
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : const Text(
+                          "Update Profile",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                ),
               ),
-            ),
-
-            const SizedBox(height: 10),
-            if (isUploading) const CircularProgressIndicator(),
-            const SizedBox(height: 30),
-
-            // NAME
-            TextField(
-              controller: nameController,
-              onChanged: (_) => saveProfileData(),
-              decoration: const InputDecoration(
-                labelText: "Name",
-                prefixIcon: Icon(Icons.person_outline),
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // EMAIL (READ ONLY)
-            TextField(
-              controller: emailController,
-              readOnly: true,
-              decoration: const InputDecoration(
-                labelText: "Email",
-                prefixIcon: Icon(Icons.email_outlined),
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // PHONE
-            TextField(
-              controller: phoneController,
-              keyboardType: TextInputType.phone,
-              onChanged: (_) => saveProfileData(),
-              decoration: const InputDecoration(
-                labelText: "Phone Number",
-                prefixIcon: Icon(Icons.phone_outlined),
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // CHANGE PASSWORD (TEXT FIELD)
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: "Change Password",
-                prefixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // TERMS
-            TextButton(
-              onPressed: () {},
-              child: const Text("Terms & Conditions"),
-            ),
-
-            const SizedBox(height: 20),
-          ],
+            ],
+          ),
         ),
       ),
     );
