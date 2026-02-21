@@ -9,9 +9,40 @@ import 'package:naayu_attire1/features/auth/data/repositories/auth_repository_im
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+/// 🔥 Background message handler
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling background message: ${message.messageId}");
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // 🔥 Initialize Firebase
+  await Firebase.initializeApp();
+
+  // 🔔 Set background handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+// 🔔 Request notification permission
+FirebaseMessaging messaging = FirebaseMessaging.instance;
+await messaging.requestPermission(
+  alert: true,
+  badge: true,
+  sound: true,
+);
+
+// 🔑 Get FCM token (IMPORTANT)
+String? token = await FirebaseMessaging.instance.getToken();
+print("FCM TOKEN: $token");
+
+// 🔔 Foreground message listener
+FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  print("Foreground message received: ${message.notification?.title}");
+});
 
   final sharedPreferences = await SharedPreferences.getInstance();
   final apiClient = ApiClient();

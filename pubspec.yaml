@@ -56,6 +56,8 @@ dependencies:
 
    # Date formatting (for invoice date, etc.)
   intl: ^0.19.0
+  firebase_core: ^4.4.0
+  firebase_messaging: ^16.1.1
 
 dev_dependencies:
   flutter_test:

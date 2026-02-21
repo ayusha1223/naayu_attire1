@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "375868262621",
+    "project_id": "naayuattire",
+    "storage_bucket": "naayuattire.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375868262621:android:71bdb308c2af09abaff334",
+        "android_client_info": {
+          "package_name": "com.example.naayu_attire1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiJamSN0csBEyFh2wDf2KwunwUwM_Z-08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
