@@ -9,4 +9,6 @@ abstract interface class IAuthRepository {
     String email,
     String password,
   );
-}
+Future<Either<Failure, void>> forgotPassword(String email);
+Future<Either<Failure, void>> verifyOtp(String email, String otp);
+Future<Either<Failure, void>> resetPassword(String email, String newPassword);}

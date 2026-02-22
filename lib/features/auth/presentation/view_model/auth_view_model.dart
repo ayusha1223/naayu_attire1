@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
@@ -13,11 +12,11 @@ class AuthViewModel extends ChangeNotifier {
 
   bool _isLoading = false;
   String? _errorMessage;
-  String? _role; // 🔥 STORE ROLE
+  String? _role;
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-  String? get role => _role; // 🔥 EXPOSE ROLE
+  String? get role => _role;
 
   void _setLoading(bool value) {
     _isLoading = value;
@@ -34,7 +33,7 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ---------------- REGISTER ----------------
+  // ================= REGISTER =================
   Future<bool> register(
     String name,
     String email,
@@ -50,7 +49,7 @@ class AuthViewModel extends ChangeNotifier {
         email: email,
         password: password,
         token: '',
-        role: 'user', // default
+        role: 'user',
       ),
     );
 
@@ -61,55 +60,101 @@ class AuthViewModel extends ChangeNotifier {
         _setError(failure.message);
         return false;
       },
-      (_) {
-        _setError(null);
+      (_) => true,
+    );
+  }
+
+  // ================= LOGIN =================
+  Future<bool> login({
+    required String email,
+    required String password,
+  }) async {
+    _setLoading(true);
+    _setError(null);
+
+    final result = await authRepository.login(email, password);
+
+    _setLoading(false);
+
+    return result.fold(
+      (failure) {
+        _setError(failure.message);
+        return false;
+      },
+      (authEntity) async {
+        await tokenService.saveToken(authEntity.token);
+        _role = authEntity.role;
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("user_name", authEntity.fullName);
+        await prefs.setString("user_email", authEntity.email);
+
+        notifyListeners();
         return true;
       },
     );
   }
 
-  // ---------------- LOGIN ----------------
-  // ---------------- LOGIN ----------------
-Future<bool> login({
-  required String email,
-  required String password,
-}) async {
-  _setLoading(true);
-  _setError(null);
+  // ================= FORGOT PASSWORD =================
+  Future<bool> forgotPassword(String email) async {
+    _setLoading(true);
+    _setError(null);
 
-  final result = await authRepository.login(email, password);
+    final result = await authRepository.forgotPassword(email);
 
-  _setLoading(false);
+    _setLoading(false);
 
-  return result.fold(
-    (failure) {
-      _setError(failure.message);
-      return false;
-    },
-    (authEntity) async {
-      /// SAVE TOKEN
-      await tokenService.saveToken(authEntity.token);
+    return result.fold(
+      (failure) {
+        _setError(failure.message);
+        return false;
+      },
+      (_) => true,
+    );
+  }
 
-      /// SAVE ROLE
-      _role = authEntity.role;
+  // ================= VERIFY OTP =================
+  Future<bool> verifyOtp(String email, String otp) async {
+    _setLoading(true);
+    _setError(null);
 
-      /// 🔥 SAVE USER NAME & EMAIL
-      final prefs = await SharedPreferences.getInstance();
+    final result = await authRepository.verifyOtp(email, otp);
 
-      prefs.setString("user_name", authEntity.fullName);
-      prefs.setString("user_email", authEntity.email);
+    _setLoading(false);
 
-      notifyListeners();
+    return result.fold(
+      (failure) {
+        _setError(failure.message);
+        return false;
+      },
+      (_) => true,
+    );
+  }
 
-      return true;
-    },
-  );
-}
-  // ---------------- LOGOUT ----------------
+  // ================= RESET PASSWORD =================
+  Future<bool> resetPassword(
+    String email,
+    String newPassword,
+  ) async {
+    _setLoading(true);
+    _setError(null);
+
+    final result =
+        await authRepository.resetPassword(email, newPassword);
+
+    _setLoading(false);
+
+    return result.fold(
+      (failure) {
+        _setError(failure.message);
+        return false;
+      },
+      (_) => true,
+    );
+  }
+
+  // ================= LOGOUT =================
   Future<void> logout(BuildContext context) async {
-    final tokenService =
-        Provider.of<TokenService>(context, listen: false);
-
     await tokenService.removeToken();
     _role = null;
     notifyListeners();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/onboarding/presentation/screens/onboarding_main.dart';
 import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/core/providers/theme_provider.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
       ),
 
       /// FIRST SCREEN
-      home: const MainNavigation(),
+      home: const OnboardingMain(),
     );
   }
 }

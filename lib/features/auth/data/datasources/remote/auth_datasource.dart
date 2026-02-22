@@ -1,17 +1,23 @@
 import 'package:naayu_attire1/features/auth/data/models/auth_remote_model.dart';
 
-/// Remote Auth Datasource (API only)
-abstract interface class IAuthDatasource {
-  /// Signup
+abstract class IAuthDatasource {
   Future<bool> register(
     String name,
     String email,
     String password,
   );
 
-  /// Login
   Future<AuthRemoteModel> login(
     String email,
     String password,
+  );
+
+  Future<bool> forgotPassword(String email);
+
+  Future<bool> verifyOtp(String email, String otp);
+
+  Future<bool> resetPassword(
+    String email,
+    String newPassword,
   );
 }

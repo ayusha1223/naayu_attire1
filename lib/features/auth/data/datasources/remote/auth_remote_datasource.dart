@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:naayu_attire1/core/api/api_client.dart';
 import 'package:naayu_attire1/core/api/api_endpoints.dart';
@@ -10,33 +9,30 @@ class AuthRemoteDatasourceImpl implements IAuthDatasource {
 
   AuthRemoteDatasourceImpl(this.apiClient);
 
-  // ================= SIGN UP =================
-@override
-Future<bool> register(
-  String name,
-  String email,
-  String password,
-) async {
-  try {
-    final response = await apiClient.dio.post(
-      ApiEndpoints.studentRegister,
-      data: {
-        'name': name,
-        'email': email,
-        'password': password,
-      },
-    );
+  // ================= REGISTER =================
+  @override
+  Future<bool> register(
+    String name,
+    String email,
+    String password,
+  ) async {
+    try {
+      final response = await apiClient.dio.post(
+        ApiEndpoints.studentRegister,
+        data: {
+          'name': name,
+          'email': email,
+          'password': password,
+        },
+      );
 
-    print('REGISTER STATUS: ${response.statusCode}');
-    print('REGISTER RESPONSE: ${response.data}');
-
-    return response.statusCode == 200 || response.statusCode == 201;
-  } on DioException catch (e) {
-    print('REGISTER ERROR: ${e.response?.data}');
-    return false;
+      return response.statusCode == 200 ||
+          response.statusCode == 201;
+    } on DioException catch (e) {
+      print('REGISTER ERROR: ${e.response?.data}');
+      return false;
+    }
   }
-}
-
 
   // ================= LOGIN =================
   @override
@@ -52,7 +48,65 @@ Future<bool> register(
       },
     );
 
-    // assuming backend returns { data: {...user} }
     return AuthRemoteModel.fromJson(response.data['data']);
+  }
+
+  // ================= FORGOT PASSWORD =================
+  @override
+  Future<bool> forgotPassword(String email) async {
+    try {
+      final response = await apiClient.dio.post(
+        ApiEndpoints.forgotPassword,
+        data: {
+          'email': email,
+        },
+      );
+
+      return response.statusCode == 200;
+    } on DioException catch (e) {
+      print('FORGOT ERROR: ${e.response?.data}');
+      return false;
+    }
+  }
+
+  // ================= VERIFY OTP =================
+  @override
+  Future<bool> verifyOtp(String email, String otp) async {
+    try {
+      final response = await apiClient.dio.post(
+        ApiEndpoints.verifyOtp,
+        data: {
+          'email': email,
+          'otp': otp,
+        },
+      );
+
+      return response.statusCode == 200;
+    } on DioException catch (e) {
+      print('VERIFY OTP ERROR: ${e.response?.data}');
+      return false;
+    }
+  }
+
+  // ================= RESET PASSWORD =================
+  @override
+  Future<bool> resetPassword(
+    String email,
+    String newPassword,
+  ) async {
+    try {
+      final response = await apiClient.dio.post(
+        ApiEndpoints.resetPassword,
+        data: {
+          'email': email,
+          'newPassword': newPassword,
+        },
+      );
+
+      return response.statusCode == 200;
+    } on DioException catch (e) {
+      print('RESET PASSWORD ERROR: ${e.response?.data}');
+      return false;
+    }
   }
 }

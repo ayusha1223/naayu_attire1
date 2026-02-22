@@ -11,6 +11,9 @@ class ApiEndpoints {
   // ================= Auth Endpoints =================
   static const String studentRegister = '/students/register';
   static const String studentLogin = '/students/login';
+  static const String forgotPassword = "/students/forgot-password";
+  static const String resetPassword = "/students/reset-password";
+  static const String verifyOtp = "/students/verify-otp";
 
   // ================= Other Endpoints (future) =================
   static const String students = '/students';

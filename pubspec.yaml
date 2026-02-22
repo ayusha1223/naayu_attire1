@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
 
   local_auth: ^2.2.0
+  sensors_plus: ^3.0.3
   shared_preferences: ^2.2.2   
 
   cupertino_icons: ^1.0.8
@@ -48,6 +49,7 @@ dependencies:
   webview_flutter: ^4.4.2
   url_launcher: ^6.3.0
   fl_chart: ^0.66.0
+  pin_code_fields: ^8.0.1
 
   # PDF generation
   pdf: ^3.10.7
