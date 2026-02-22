@@ -11,45 +11,42 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-/// 🔥 Background message handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("Handling background message: ${message.messageId}");
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 🔥 Initialize Firebase
+  /// FIREBASE
   await Firebase.initializeApp();
 
-  // 🔔 Set background handler
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  /// HIVE
+  await Hive.initFlutter();
+  await Hive.openBox("cartBox");
+  await Hive.openBox("wishlistBox");
+  await Hive.openBox("authBox");
 
-// 🔔 Request notification permission
-FirebaseMessaging messaging = FirebaseMessaging.instance;
-await messaging.requestPermission(
-  alert: true,
-  badge: true,
-  sound: true,
-);
+  /// NOTIFICATIONS
+  FirebaseMessaging.onBackgroundMessage(
+      _firebaseMessagingBackgroundHandler);
 
-// 🔑 Get FCM token (IMPORTANT)
-String? token = await FirebaseMessaging.instance.getToken();
-print("FCM TOKEN: $token");
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  await messaging.requestPermission();
 
-// 🔔 Foreground message listener
-FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  print("Foreground message received: ${message.notification?.title}");
-});
-
+  /// SERVICES
   final sharedPreferences = await SharedPreferences.getInstance();
   final apiClient = ApiClient();
   final tokenService = TokenService(sharedPreferences);
 
   final authDatasource = AuthRemoteDatasourceImpl(apiClient);
   final authRepository = AuthRepositoryImpl(authDatasource);
+
+  /// CHECK LOGIN STATE
+  bool isLoggedIn =
+      sharedPreferences.getBool("isLoggedIn") ?? false;
 
   runApp(
     MultiProvider(
@@ -63,13 +60,17 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         ),
         ChangeNotifierProvider(
           lazy: false,
-          create: (_) => ShopProvider(),
+          create: (_) {
+            final provider = ShopProvider();
+            provider.initializeUser();
+            return provider;
+          },
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
         ),
       ],
-      child: const MyApp(),
+      child: MyApp(isLoggedIn: isLoggedIn),
     ),
   );
 }

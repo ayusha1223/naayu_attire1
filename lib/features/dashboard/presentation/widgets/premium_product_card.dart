@@ -35,7 +35,7 @@ class PremiumProductCard extends StatelessWidget {
       rating: 4.5,
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
       color: "Red",
-      isNew: true,
+      isNew: true, 
     );
 
     double discount =

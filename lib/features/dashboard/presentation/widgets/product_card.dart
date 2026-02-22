@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/core/services/hive/cart_service.dart';
+import 'package:naayu_attire1/core/services/hive/wishlist_service.dart';
 
 class ProductCard extends StatelessWidget {
   final String image;
@@ -18,6 +20,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartService = CartService();
+    final wishlistService = WishlistService();
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -103,17 +108,34 @@ class ProductCard extends StatelessWidget {
                 Row(
                   children: [
 
-                    /// FAVORITE BUTTON (Outlined Square)
-                    Container(
-                      height: 45,
-                      width: 45,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.pink),
-                      ),
-                      child: const Icon(
-                        Icons.favorite_border,
-                        color: Colors.pink,
+                    /// WISHLIST BUTTON
+                    GestureDetector(
+                      onTap: () {
+                        wishlistService.addToWishlist({
+                          "image": image,
+                          "title": title,
+                          "price": price,
+                          "oldPrice": oldPrice,
+                          "discount": discount,
+                        });
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Added to wishlist"),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.pink),
+                        ),
+                        child: const Icon(
+                          Icons.favorite_border,
+                          color: Colors.pink,
+                        ),
                       ),
                     ),
 
@@ -130,7 +152,21 @@ class ProductCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            cartService.addToCart({
+                              "image": image,
+                              "title": title,
+                              "price": price,
+                              "oldPrice": oldPrice,
+                              "discount": discount,
+                            });
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Added to cart"),
+                              ),
+                            );
+                          },
                           child: const Text(
                             "Add to cart",
                             style: TextStyle(

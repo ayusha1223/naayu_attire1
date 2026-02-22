@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/onboarding/presentation/screens/onboarding_main.dart';
 import 'package:naayu_attire1/navigation/main_navigation.dart';
+import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/core/providers/theme_provider.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+
+  const MyApp({
+    super.key,
+    required this.isLoggedIn,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +55,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      /// FIRST SCREEN
-      home: const OnboardingMain(),
+      /// START SCREEN LOGIC
+      home: isLoggedIn
+          ? const MainNavigation()
+          : const OnboardingMain(),
     );
   }
 }

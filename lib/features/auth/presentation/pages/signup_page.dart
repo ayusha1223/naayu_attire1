@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'login_page.dart';
@@ -39,6 +42,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
     confirmPasswordController.dispose();
     super.dispose();
   }
+  /// ===============================
+/// GOOGLE SIGN UP
+/// ===============================
+Future<void> _signUpWithGoogle() async {
+  try {
+    final GoogleSignInAccount? googleUser =
+        await GoogleSignIn().signIn();
+
+    if (googleUser == null) return;
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Google Sign Up Successful")),
+    );
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const MainNavigation(),
+      ),
+    );
+  } catch (e) {
+    print("Google SignUp Error: $e");
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Google Sign Up Failed")),
+    );
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -212,18 +254,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 20),
 
                 /// 🔥 UPDATED SOCIAL BUTTONS
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    SocialButton(
-                      imagePath: "assets/images/auth/google.png",
-                    ),
-                    SizedBox(width: 20),
-                    SocialButton(
-                      imagePath: "assets/images/auth/facebook.png",
-                    ),
-                  ],
-                ),
+Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    Material(
+      color: Colors.white,
+      shape: const CircleBorder(),
+      elevation: 4,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: () {
+          print("Google SignUp tapped");
+          _signUpWithGoogle();
+        },
+        child: Container(
+          height: 55,
+          width: 55,
+          alignment: Alignment.center,
+          child: Image.asset(
+            "assets/images/auth/google.png",
+            height: 28,
+          ),
+        ),
+      ),
+    ),
+  ],
+),
 
                 const SizedBox(height: 20),
 

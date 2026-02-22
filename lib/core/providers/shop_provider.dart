@@ -1,25 +1,67 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
 import 'package:naayu_attire1/features/address/domain/models/address_model.dart';
+import 'package:naayu_attire1/features/category/data/casual_data.dart';
+import 'package:naayu_attire1/features/category/data/coord_data.dart';
+import 'package:naayu_attire1/features/category/data/one_piece_data.dart';
+import 'package:naayu_attire1/features/category/data/party_data.dart';
+import 'package:naayu_attire1/features/category/data/wedding_data.dart';
+import 'package:naayu_attire1/features/category/data/winter_data.dart';
 
 class ShopProvider extends ChangeNotifier {
+  // ================= ALL PRODUCTS =================
+
+  late final List<ProductModel> _allProducts = [
+    ...CasualData.products,
+    ...CoordData.products,
+    ...OnePieceData.products,
+    ...PartyData.products,
+    ...WeddingData.products,
+    ...WinterData.products,
+  ];
+
+  List<ProductModel> get allProducts => _allProducts;
 
   // ================= USER =================
 
   String? _userId;
 
-  void setUser(String userId) async {
+  Future<void> setUser(String userId) async {
     _userId = userId;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("currentUser", userId);
+
+    Hive.box("authBox").put("currentUser", userId);
+
     await loadData();
   }
+
+Future<void> initializeUser() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  String? savedUser =
+      Hive.box("authBox").get("currentUser") ??
+      prefs.getString("currentUser");
+
+  if (savedUser != null) {
+    _userId = savedUser;
+    await loadData();
+    notifyListeners();
+  }
+}
 
   void logout() {
     _userId = null;
     _cart.clear();
     _favorites.clear();
     _address = null;
+
+    Hive.box("authBox").delete("currentUser");
+
     notifyListeners();
   }
 
@@ -113,30 +155,31 @@ class ShopProvider extends ChangeNotifier {
   bool isFavorite(ProductModel product) {
     return _favorites.any((item) => item.id == product.id);
   }
+
   // ================= LOCATION =================
 
-String _selectedLocation = "Select Location";
-String get selectedLocation => _selectedLocation;
+  String _selectedLocation = "Select Location";
+  String get selectedLocation => _selectedLocation;
 
-void setLocation(String location) {
-  _selectedLocation = location;
-  notifyListeners();
-}
+  void setLocation(String location) {
+    _selectedLocation = location;
+    notifyListeners();
+  }
 
-// ================= NOTIFICATIONS =================
+  // ================= NOTIFICATIONS =================
 
-int _notificationCount = 0;
-int get notificationCount => _notificationCount;
+  int _notificationCount = 0;
+  int get notificationCount => _notificationCount;
 
-void addNotification() {
-  _notificationCount++;
-  notifyListeners();
-}
+  void addNotification() {
+    _notificationCount++;
+    notifyListeners();
+  }
 
-void clearNotifications() {
-  _notificationCount = 0;
-  notifyListeners();
-}
+  void clearNotifications() {
+    _notificationCount = 0;
+    notifyListeners();
+  }
 
   // ================= ADDRESS =================
 
@@ -175,87 +218,60 @@ void clearNotifications() {
 
     final prefs = await SharedPreferences.getInstance();
 
-    // CART
-    prefs.setString(
-      'cart_$_userId',
-      jsonEncode(_cart.map((e) => e.toJson()).toList()),
-    );
+    final cartJson = _cart.map((e) => e.toJson()).toList();
+    final favJson = _favorites.map((e) => e.toJson()).toList();
 
-    // FAVORITES
-    prefs.setString(
-      'favorites_$_userId',
-      jsonEncode(_favorites.map((e) => e.toJson()).toList()),
-    );
+    // Save in SharedPreferences (your original system)
+// SAVE TO HIVE
+Hive.box("cartBox").put(
+  "cart_data",
+  _cart.map((e) => e.toJson()).toList(),
+);
 
-    // ADDRESS
-    if (_address != null) {
-      prefs.setString(
-        'address_$_userId',
-        jsonEncode({
-          'name': _address!.name,
-          'fullAddress': _address!.fullAddress,
-          'phone': _address!.phone,
-          'email': _address!.email,
-        }),
-      );
-    } else {
-      prefs.remove('address_$_userId');
-    }
+Hive.box("wishlistBox").put(
+  "favorites_data",
+  _favorites.map((e) => e.toJson()).toList(),
+);
 
-    // DELIVERY TYPE
+// SAVE TO SHARED PREFS
+prefs.setString(
+  "cart_data",
+  jsonEncode(_cart.map((e) => e.toJson()).toList()),
+);
+
+prefs.setString(
+  "favorites_data",
+  jsonEncode(_favorites.map((e) => e.toJson()).toList()),
+);
+
     prefs.setString('deliveryType_$_userId', _deliveryType);
-
-    // PAYMENT METHOD
     prefs.setString('paymentMethod_$_userId', _paymentMethod);
   }
 
   Future<void> loadData() async {
     if (_userId == null) return;
 
-    final prefs = await SharedPreferences.getInstance();
-
     _cart.clear();
     _favorites.clear();
-    _address = null;
 
-    final cartData = prefs.getString('cart_$_userId');
-    final favData = prefs.getString('favorites_$_userId');
-    final addressData = prefs.getString('address_$_userId');
-    final deliveryTypeData = prefs.getString('deliveryType_$_userId');
-    final paymentMethodData = prefs.getString('paymentMethod_$_userId');
+    // Try Hive first
+final hiveCart =
+    Hive.box("cartBox").get("cart_data") as List?;
+final hiveFav =
+    Hive.box("wishlistBox").get("favorites_data") as List?;
 
-    // CART
-    if (cartData != null) {
-      List decoded = jsonDecode(cartData);
-      _cart.addAll(decoded.map((e) => ProductModel.fromJson(e)));
-    }
-
-    // FAVORITES
-    if (favData != null) {
-      List decoded = jsonDecode(favData);
-      _favorites.addAll(decoded.map((e) => ProductModel.fromJson(e)));
-    }
-
-    // ADDRESS
-    if (addressData != null) {
-      final decoded = jsonDecode(addressData);
-
-      _address = AddressModel(
-        name: decoded['name'],
-        fullAddress: decoded['fullAddress'],
-        phone: decoded['phone'],
-        email: decoded['email'],
+    if (hiveCart != null) {
+      _cart.addAll(
+        hiveCart.map((e) =>
+            ProductModel.fromJson(Map<String, dynamic>.from(e))),
       );
     }
 
-    // DELIVERY
-    if (deliveryTypeData != null) {
-      _deliveryType = deliveryTypeData;
-    }
-
-    // PAYMENT
-    if (paymentMethodData != null) {
-      _paymentMethod = paymentMethodData;
+    if (hiveFav != null) {
+      _favorites.addAll(
+        hiveFav.map((e) =>
+            ProductModel.fromJson(Map<String, dynamic>.from(e))),
+      );
     }
 
     notifyListeners();

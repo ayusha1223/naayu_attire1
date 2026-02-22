@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/core/providers/shop_provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/pages/forgot_password_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
 import 'package:naayu_attire1/features/admin/presentation/pages/admin_main_navigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'signup_page.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -86,6 +90,43 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
   }
+  /// ===============================
+/// GOOGLE LOGIN
+/// ===============================
+Future<void> _signInWithGoogle() async {
+  try {
+    final GoogleSignInAccount? googleUser =
+        await GoogleSignIn().signIn();
+
+    if (googleUser == null) return;
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Google Login Successful")),
+    );
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const MainNavigation()),
+    );
+  } catch (e) {
+    print("Google Login Error: $e");
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Google Login Failed")),
+    );
+  }
+}
 
   @override
   void dispose() {
@@ -209,6 +250,10 @@ class _LoginPageState extends State<LoginPage> {
                           if (!mounted) return;
 
                           if (success) {
+                            context.read<ShopProvider>().setUser(emailController.text.trim());
+                             final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool("isLoggedIn", true);
+
                             if (authVM.role == "admin") {
                               Navigator.pushReplacement(
                                 context,
@@ -290,29 +335,46 @@ class _LoginPageState extends State<LoginPage> {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      "or sign in with",
+                      "or login with",
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
                   Expanded(child: Divider(color: Colors.grey.shade400)),
                 ],
               ),
+              
 
               const SizedBox(height: 25),
+              
 
               /// SOCIAL BUTTONS
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  SocialButton(
-                    imagePath: "assets/images/auth/google.png",
-                  ),
-                  SizedBox(width: 20),
-                  SocialButton(
-                    imagePath: "assets/images/auth/facebook.png",
-                  ),
-                ],
-              ),
+             /// SOCIAL BUTTONS (Google Only)
+Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    Material(
+      color: Colors.white,
+      shape: const CircleBorder(),
+      elevation: 4,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: () {
+          print("Google tapped");
+          _signInWithGoogle();
+        },
+        child: Container(
+          height: 55,
+          width: 55,
+          alignment: Alignment.center,
+          child: Image.asset(
+            "assets/images/auth/google.png",
+            height: 28,
+          ),
+        ),
+      ),
+    ),
+  ],
+),
 
               const SizedBox(height: 30),
 
@@ -347,6 +409,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+    
   }
 }
 

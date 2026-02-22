@@ -1,6 +1,7 @@
 class ProductModel {
   final String id;
   final String image;
+  final String? previewImage;
   final String name;
   final double price;
   final String description;
@@ -14,6 +15,7 @@ class ProductModel {
   ProductModel({
     required this.id,
     required this.image,
+    this.previewImage,
     required this.name,
     required this.price,
     required this.description,
@@ -22,7 +24,7 @@ class ProductModel {
     required this.color,
     required this.isNew,
     this.oldPrice,
-    this.quantity = 1,
+    this.quantity = 1, 
   });
 
   // 🔥 equality for cart
@@ -68,7 +70,9 @@ class ProductModel {
       oldPrice: json['oldPrice'] != null
           ? (json['oldPrice'] as num).toDouble()
           : null,
-      quantity: json['quantity'] ?? 1,
+      quantity: json['quantity'] ?? 1, 
     );
   }
+
+  get discount => null;
 }

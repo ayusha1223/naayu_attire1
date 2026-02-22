@@ -6,12 +6,13 @@ class CasualData {
       id: "c1",
       name: "Floral Casual Kurti",
       image: "assets/images/casual/casual1.png",
+      previewImage: "assets/images/wedding/wedding1.png",
       price: 1299,
       oldPrice: 1599,
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Lightweight and breathable fabric. Perfect for daily wear. Stylish floral print.",
+      description: "Soft cotton blend fabric with elegant floral patterns. Designed for everyday comfort and effortless style.",
       isNew: true, 
       
     ),
@@ -19,12 +20,13 @@ class CasualData {
   id: "c2",
   name: "Cotton Daily Wear",
   image: "assets/images/casual/casual2.png",
+  previewImage: "assets/images/party/party1.png",
   price: 999,
   oldPrice: 1299,
   color: "white",
   sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.0,
-  description: "Soft cotton material. Comfortable fit for all-day wear. Ideal for casual outings.",
+  description: "Lightweight breathable material perfect for summer days. A graceful silhouette with a modern touch.",
   isNew: true, 
 ),
 
@@ -32,12 +34,13 @@ ProductModel(
   id: "c3",
   name: "Summer Light Kurti",
   image: "assets/images/casual/casual3.png",
+  previewImage: "assets/images/winter/winter1.png",
   price: 1499,
   oldPrice: 1799,
   color: "orange",
   sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
-  description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+  description: "Crafted with premium fabric for all-day comfort. Ideal for office wear and casual outings.",
   isNew: true, 
 ),
    
@@ -45,12 +48,13 @@ ProductModel(
       id: "c4",
       name: "Summer Light Kurti",
       image: "assets/images/casual/casual4.png",
+      previewImage: "assets/images/coord/coord1.png",
       price: 1499,
       oldPrice: 1799,
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Elegant straight-cut design with subtle detailing. Perfect combination of simplicity and charm.",
       isNew: true, 
     ),
      ProductModel(
@@ -62,7 +66,7 @@ ProductModel(
       color: "yellow",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Trendy printed kurti featuring vibrant colors. Keeps you comfortable while looking stylish.",
       isNew: true, 
     ),
      ProductModel(
@@ -74,7 +78,7 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Relaxed fit design made for daily wear. Soft texture and smooth finish for maximum comfort.",
       isNew: true, 
     ),
      ProductModel(
@@ -86,7 +90,7 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.6,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Contemporary style with minimal patterns. Perfect for brunch, shopping, or casual gatherings.",
       isNew: true, 
     ),
      ProductModel(
@@ -98,7 +102,7 @@ ProductModel(
       color: "red",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.0,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Breathable fabric that feels light on the skin. A timeless piece for effortless elegance.",
       isNew: true, 
     ),
      ProductModel(
@@ -110,7 +114,7 @@ ProductModel(
       color: "brown",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Stylish ethnic look with modern tailoring. Designed to enhance both comfort and confidence.",
       isNew: true, 
     ),
      ProductModel(
@@ -122,7 +126,7 @@ ProductModel(
       color: "yellow",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Beautiful color tones with refined stitching. A perfect addition to your casual wardrobe.",
       isNew: true, 
 
     ),
@@ -135,7 +139,7 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Premium quality cotton fabric with neat finishing. Comfortable and versatile for any occasion.",
       isNew: true, 
     ),
      ProductModel(
@@ -147,7 +151,7 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Simple yet classy kurti for everyday fashion. Easy to pair with leggings or palazzos..",
       isNew: true, 
 
     ),
@@ -160,7 +164,7 @@ ProductModel(
       color: "brown",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Comfortable fit with breathable fabric. Keeps you cool and stylish throughout the day.",
       isNew: true, 
     ),
      ProductModel(
@@ -172,7 +176,7 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Eye-catching design with subtle prints. Ideal for college wear and daily office outfits.",
       isNew: true, 
     ),
      ProductModel(
@@ -184,7 +188,7 @@ ProductModel(
       color: "orange",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Elegant kurti crafted for relaxed comfort. Lightweight material perfect for warm weather.",
       isNew: true, 
     ),
      ProductModel(
@@ -196,7 +200,7 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Soft fabric with detailed neckline design. A stylish piece for casual and semi-formal wear.",
       isNew: true, 
     ),
      ProductModel(
@@ -208,7 +212,7 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Chic everyday kurti with modern prints. Designed for effortless elegance.",
       isNew: true, 
     ),
      ProductModel(
@@ -220,7 +224,7 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Comfortable straight-fit kurti with vibrant patterns. Suitable for daily styling.",
       isNew: true, 
     ),
      ProductModel(
@@ -232,7 +236,7 @@ ProductModel(
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Stylish and breathable kurti made for active days. Perfect for a simple yet graceful look.",
       isNew: true, 
 
     ),
@@ -245,7 +249,7 @@ ProductModel(
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Soft-touch fabric with trendy ethnic design. A must-have for your summer collection.",
       isNew: true, 
     
     ),
@@ -258,7 +262,7 @@ ProductModel(
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Elegant printed kurti that blends tradition and modern fashion beautifully",
       isNew: true, 
     ),
      ProductModel(
@@ -270,7 +274,7 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Comfortable casual wear with smooth finishing and durable stitching.",
       isNew: true, 
     ),
      ProductModel(
@@ -282,7 +286,7 @@ ProductModel(
       color: "orange",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Minimalistic design with vibrant colors. Perfect for both indoor and outdoor wear.",
       isNew: true, 
 
     ),
@@ -295,7 +299,7 @@ ProductModel(
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
-      description: "Breathable fabric for hot days. Vibrant colors and trendy design.",
+      description: "Designed for comfort with lightweight breathable fabric and elegant detailing.",
       isNew: true, 
     ),
   ];

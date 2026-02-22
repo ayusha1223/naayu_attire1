@@ -10,6 +10,20 @@ class OrderService {
     ),
   );
 
+  Future<void> cancelOrder({
+  required String orderId,
+  required String token,
+}) async {
+  await _dio.put(
+    "/orders/$orderId/cancel",
+    options: Options(
+      headers: {
+        "Authorization": "Bearer $token",
+      },
+    ),
+  );
+}
+
   /// ==============================
   /// 🛒 CREATE ORDER
   /// ==============================
