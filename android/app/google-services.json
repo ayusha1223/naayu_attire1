@@ -12,7 +12,20 @@
           "package_name": "com.example.naayu_attire1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "375868262621-1vgqnjvku9g8b7uajo7vcffkj6a6ui0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.naayu_attire1",
+            "certificate_hash": "e93e57c9f3d04bc44a2adec2ea4f876badee7c1c"
+          }
+        },
+        {
+          "client_id": "375868262621-g4tv5cn8qjitls9ht9m8s38o1kltmpir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBiJamSN0csBEyFh2wDf2KwunwUwM_Z-08"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375868262621-g4tv5cn8qjitls9ht9m8s38o1kltmpir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
