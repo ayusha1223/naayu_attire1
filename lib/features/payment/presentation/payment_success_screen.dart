@@ -10,11 +10,19 @@ import 'receipt_screen.dart';
 class PaymentSuccessScreen extends StatefulWidget {
   final double amount;
   final String paymentMethod;
+  final String customerName;
+  final String email;
+  final String phone;
+  final String address;
 
   const PaymentSuccessScreen({
     super.key,
     required this.amount,
     required this.paymentMethod,
+    required this.customerName,
+    required this.email,
+    required this.phone,
+    required this.address,
   });
 
   @override
@@ -29,6 +37,9 @@ class _PaymentSuccessScreenState
   bool isError = false;
   String? errorMessage;
   String? orderId;
+
+  List<Map<String, dynamic>> orderedItems = [];
+  DateTime orderDate = DateTime.now();
 
   @override
   void initState() {
@@ -48,21 +59,32 @@ class _PaymentSuccessScreenState
         throw Exception("Token missing. Please login again.");
       }
 
+      // Save cart items
+      orderedItems = shop.cart.map((item) => {
+            "name": item.name,
+            "price": item.price,
+            "quantity": item.quantity,
+          }).toList();
+
       final orderService = OrderService();
       final paymentService = PaymentService();
 
-      final order = await orderService.createOrder(
-        items: shop.cart.map((item) => {
-              "productId": item.id,
-              "name": item.name,
-              "price": item.price,
-              "quantity": item.quantity,
-              "image": item.image,
-            }).toList(),
-        totalAmount: shop.finalTotal,
-        paymentMethod: widget.paymentMethod,
-        token: token,
-      );
+     final order = await orderService.createOrder(
+  items: shop.cart.map((item) => {
+        "productId": item.id,
+        "name": item.name,
+        "price": item.price,
+        "quantity": item.quantity,
+        "image": item.image,
+      }).toList(),
+  totalAmount: shop.finalTotal,
+  paymentMethod: widget.paymentMethod,
+  customerName: widget.customerName,
+  email: widget.email,
+  phone: widget.phone,
+  address: widget.address,
+  token: token,
+);
 
       orderId = order["_id"];
 
@@ -114,24 +136,10 @@ class _PaymentSuccessScreenState
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
-            /// SUCCESS ICON WITH GLOW
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF60BB46)
-                        .withOpacity(0.4),
-                    blurRadius: 25,
-                    spreadRadius: 5,
-                  )
-                ],
-              ),
-              child: const Icon(
-                Icons.check_circle,
-                size: 110,
-                color: Color(0xFF60BB46),
-              ),
+            const Icon(
+              Icons.check_circle,
+              size: 110,
+              color: Color(0xFF60BB46),
             ),
 
             const SizedBox(height: 30),
@@ -165,21 +173,13 @@ class _PaymentSuccessScreenState
               ),
             ),
 
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
 
-            /// TRACK ORDER BUTTON
             SizedBox(
               width: double.infinity,
               height: 55,
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.local_shipping),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 100, 111, 186),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -198,28 +198,25 @@ class _PaymentSuccessScreenState
 
             const SizedBox(height: 15),
 
-            /// RECEIPT BUTTON
             SizedBox(
               width: double.infinity,
               height: 55,
               child: OutlinedButton.icon(
                 icon: const Icon(Icons.receipt_long),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                      color: Color(0xFF60BB46)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => ReceiptScreen(
                         orderId: orderId!,
-                        amount: widget.amount,
-                        paymentMethod:
-                            widget.paymentMethod,
+                        customerName: widget.customerName,
+                        orderDate: orderDate,
+                        totalAmount: widget.amount,
+                        paymentMethod: widget.paymentMethod,
+                        items: orderedItems,
+                        email: widget.email,
+                        phone: widget.phone,
+                        address: widget.address,
                       ),
                     ),
                   );
@@ -230,23 +227,13 @@ class _PaymentSuccessScreenState
 
             const SizedBox(height: 15),
 
-            /// CONTINUE SHOPPING
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.popUntil(
-                      context,
-                      (route) => route.isFirst);
-                },
-                child: const Text(
-                  "Continue Shopping",
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
+            TextButton(
+              onPressed: () {
+                Navigator.popUntil(
+                    context,
+                    (route) => route.isFirst);
+              },
+              child: const Text("Continue Shopping"),
             ),
           ],
         ),

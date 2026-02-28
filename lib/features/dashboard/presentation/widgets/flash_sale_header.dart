@@ -1,20 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'premium_product_card.dart';
-
-class FlashProduct {
-  final String imagePath;
-  final String title;
-  final int price;
-  final int oldPrice;
-
-  FlashProduct({
-    required this.imagePath,
-    required this.title,
-    required this.price,
-    required this.oldPrice,
-  });
-}
+import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+import 'product_card.dart';
 
 class FlashSaleHeader extends StatefulWidget {
   const FlashSaleHeader({super.key});
@@ -30,42 +17,32 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
   final DateTime _endDate =
       DateTime.now().add(const Duration(days: 25));
 
-  final List<FlashProduct> flashProducts = [
-    FlashProduct(
-      imagePath: "assets/images/splash/onepiece2.png",
-      title: "Chaubandi",
+  final List<ProductModel> flashProducts = [
+    ProductModel(
+      id: "1",
+      image: "assets/images/splash/onepiece2.png",
+      name: "Chaubandi",
       price: 1200,
       oldPrice: 1999,
+      description: "Flash sale outfit",
+      rating: 4.5,
+      sizes: ["S", "M", "L"],
+      color: "Blue",
+      isNew: false,
+      category: "casual",
     ),
-    FlashProduct(
-      imagePath: "assets/images/onepiece/onepiece3.png",
-      title: "Cotton",
+    ProductModel(
+      id: "2",
+      image: "assets/images/onepiece/onepiece3.png",
+      name: "Cotton",
       price: 999,
       oldPrice: 1299,
-    ),
-    FlashProduct(
-      imagePath: "assets/images/splash/onepiece4.png",
-      title: "Royal Bridal",
-      price: 1799,
-      oldPrice: 2399,
-    ),
-     FlashProduct(
-      imagePath: "assets/images/onepiece/onepiece6.png",
-      title: "Chaubandi",
-      price: 1200,
-      oldPrice: 1999,
-    ),
-    FlashProduct(
-      imagePath: "assets/images/onepiece/onepiece7.png",
-      title: "Cotton",
-      price: 999,
-      oldPrice: 1299,
-    ),
-    FlashProduct(
-      imagePath: "assets/images/onepiece/onepiece8.png",
-      title: "Royal Bridal",
-      price: 1799,
-      oldPrice: 2399,
+      description: "Comfort daily wear",
+      rating: 4.2,
+      sizes: ["S", "M", "L"],
+      color: "Red",
+      isNew: false,
+      category: "casual",
     ),
   ];
 
@@ -109,7 +86,7 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
-        /// 🔥 HEADER WITH TIMER
+        /// HEADER
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
@@ -130,7 +107,7 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: 14, vertical: 8),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 113, 162, 212),
+                  color: const Color(0xFF71A2D4),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Row(
@@ -158,7 +135,7 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
 
         const SizedBox(height: 15),
 
-        /// 🔥 HORIZONTAL PRODUCT LIST
+        /// PRODUCT LIST
         SizedBox(
           height: 270,
           child: ListView.builder(
@@ -166,18 +143,12 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
             padding: const EdgeInsets.only(left: 16),
             itemCount: flashProducts.length,
             itemBuilder: (context, index) {
-
-              final product = flashProducts[index];
-
               return Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: SizedBox(
                   width: 170,
-                  child: PremiumProductCard(
-                    image: product.imagePath,
-                    title: product.title,
-                    price: product.price,
-                    oldPrice: product.oldPrice,
+                  child: ProductCard(
+                    product: flashProducts[index],
                   ),
                 ),
               );

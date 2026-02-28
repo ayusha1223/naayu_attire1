@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/category/presentation/widgets/product_grid.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/widgets/product_card.dart';
+import 'package:provider/provider.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'dart:async';
-
+import 'package:naayu_attire1/features/dashboard/presentation/provider/flash_product_provider.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/widgets/best_selling_section.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/widgets/service_footer_section.dart';
 import '../widgets/flash_sale_header.dart';
@@ -10,6 +13,7 @@ import '../widgets/search_bar_section.dart';
 import '../widgets/banner_section.dart';
 import '../widgets/feature_tab_section.dart';
 import '../widgets/promo_section.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    // 🔥 LOAD ALL PRODUCTS FOR SEARCH
+    Future.microtask(() {
+      context.read<FlashProductProvider>().loadAllProducts();
+    });
+
     _startShakeDetection();
   }
 
@@ -45,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
             now.difference(_lastShakeTime!) > const Duration(seconds: 3)) {
 
           _lastShakeTime = now;
-
           _showReportBottomSheet();
         }
       }
@@ -64,55 +73,20 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              const Text(
+            children: const [
+              Text(
                 "Report a Technical Problem",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
-              const SizedBox(height: 10),
-
-              const Text(
+              SizedBox(height: 10),
+              Text(
                 "We detected unusual device movement. "
                 "If you're experiencing any technical issue, "
                 "please report it to our support team.",
               ),
-
-              const SizedBox(height: 20),
-
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff7c5cff),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Problem reported successfully."),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "REPORT PROBLEM",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 10),
             ],
           ),
         );
@@ -126,55 +100,111 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xffF6F6F6),
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: const Color(0xffF6F6F6),
+    body: SafeArea(
+      child: Consumer<FlashProductProvider>(
+        builder: (context, provider, _) {
 
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: const [
+          return CustomScrollView(
+            slivers: [
 
-              SizedBox(height: 1),
-
-              LocationHeader(),
-              
-              SearchBarSection(),
-              SizedBox(height: 20),
-
-              BannerSection(imagePath: '',),
-              SizedBox(height: 15),
-
-              FeatureTabSection(),
-              SizedBox(height: 30),
-
-              FlashSaleHeader(),
-              SizedBox(height: 20),
-            
-              PromoBox(
-                image: "assets/images/splash/promo1.jpeg",
-                title: "UPTO 30% OFF",
+              /// 🔹 HEADER ALWAYS VISIBLE
+              SliverToBoxAdapter(
+                child: Column(
+                  children: const [
+                    SizedBox(height: 1),
+                    LocationHeader(),
+                    SearchBarSection(),
+                    SizedBox(height: 20),
+                  ],
+                ),
               ),
 
-              SizedBox(height: 25),
+              /// 🔥 IF SEARCHING → SHOW ONLY SEARCH RESULTS
+              if (provider.isSearching)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final product = provider.allProducts[index];
+                        return ProductCard(product: product);
+                      },
+                      childCount: provider.allProducts.length,
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 14,
+                      mainAxisSpacing: 14,
+                      childAspectRatio: 0.48,
+                    ),
+                  ),
+                )
+              else ...[
 
-              BestSellingSection(),
+                /// 🔹 NORMAL DASHBOARD CONTENT
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: const [
+                      BannerSection(imagePath: ''),
+                      SizedBox(height: 15),
+                      FeatureTabSection(),
+                      SizedBox(height: 30),
+                      FlashSaleHeader(),
+                      SizedBox(height: 20),
+                      PromoBox(
+                        image: "assets/images/splash/promo1.jpeg",
+                        title: "UPTO 30% OFF",
+                      ),
+                      SizedBox(height: 25),
+                    ],
+                  ),
+                ),
 
-              SizedBox(height: 25),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final product = provider.allProducts[index];
+                        return ProductCard(product: product);
+                      },
+                      childCount: provider.allProducts.length,
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 14,
+                      mainAxisSpacing: 14,
+                      childAspectRatio: 0.48,
+                    ),
+                  ),
+                ),
 
-              PromoBox(
-                image: "assets/images/splash/promo2.jpeg",
-                title: "FLAT 16% OFF",
-              ),
-
-              SizedBox(height: 30),
-
-              ServiceFooterSection()
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: const [
+                      SizedBox(height: 25),
+                      PromoBox(
+                        image: "assets/images/splash/promo2.jpeg",
+                        title: "FLAT 16% OFF",
+                      ),
+                      SizedBox(height: 30),
+                      ServiceFooterSection(),
+                      SizedBox(height: 30),
+                    ],
+                  ),
+                ),
+              ],
             ],
-          ),
-        ),
+          );
+        },
       ),
-    );
-  }
+    ),
+  );
+}
 }

@@ -12,6 +12,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Warm woolen kurti crafted to keep you cozy while maintaining elegant winter style.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -23,6 +24,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish winter co-ord set designed with thick fabric for extra warmth and comfort.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -33,6 +35,7 @@ class WinterData {
       color: "black",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "winter",
       description: "Elegant long winter dress perfect for chilly evenings and festive gatherings.",
       isNew: true,
     ),
@@ -45,6 +48,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft knitted sweater dress offering warmth and a flattering winter silhouette.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -56,6 +60,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Cozy white sweater dress crafted with premium knit for stylish comfort.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -67,6 +72,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Warm red knit dress perfect for layering during cold winter days.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -78,6 +84,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Classic black sweater dress combining elegance with cozy winter comfort.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -89,6 +96,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Chic winter knit dress designed to keep you warm in style.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -100,6 +108,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant blue knitted dress offering soft texture and cozy warmth.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -111,6 +120,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright winter sweater dress bringing warmth and vibrant style together.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -122,6 +132,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft knitted winter wear perfect for cozy indoor and outdoor styling.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -133,6 +144,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Minimal black knit dress ideal for a sophisticated winter look.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -144,6 +156,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfortable winter knit crafted to provide warmth and elegance.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -155,6 +168,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Earth-tone sweater dress designed for cozy winter fashion.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -166,6 +180,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Warm brown knit dress combining comfort with modern winter trends.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -176,6 +191,7 @@ class WinterData {
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "winter",
       description: "Stylish blue winter dress offering soft fabric and snug fit.",
       isNew: true,
     ),
@@ -188,6 +204,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant winter knit dress perfect for casual and semi-formal outings.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -199,6 +216,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft white knit dress offering cozy warmth and timeless style.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -210,6 +228,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Premium brown winter dress crafted for warmth and elegance.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -221,6 +240,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Modern grey knit dress designed for comfortable winter layering.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -232,6 +252,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Classic winter sweater dress perfect for cold-weather elegance.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -243,6 +264,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Warm red knit dress adding vibrant style to your winter wardrobe.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -254,6 +276,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright winter knit designed to bring warmth and cheerful style.",
+      category: "winter",
       isNew: true,
     ),
     ProductModel(
@@ -265,6 +288,7 @@ class WinterData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft pink sweater dress crafted for cozy comfort and winter charm.",
+      category: "winter",
       isNew: true,
     ),
   ];

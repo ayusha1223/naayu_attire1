@@ -1,184 +1,160 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'esewa_otp_screen.dart';
+import 'package:http/http.dart' as http;
+import 'payment_success_screen.dart';
 
 class EsewaWebviewScreen extends StatefulWidget {
   final double amount;
 
+  final String customerName;
+  final String email;
+  final String phone;
+  final String address;
+
   const EsewaWebviewScreen({
     super.key,
     required this.amount,
+    required this.customerName,
+    required this.email,
+    required this.phone,
+    required this.address,
   });
-
   @override
   State<EsewaWebviewScreen> createState() => _EsewaWebviewScreenState();
 }
 
 class _EsewaWebviewScreenState extends State<EsewaWebviewScreen> {
-  late final WebViewController controller;
+  WebViewController? _controller;
+  bool _isLoading = true;
+  bool _hasError = false;
+
+  // 🔴 IMPORTANT: Change if your IP changes
+  final String backendUrl =
+      "http://192.168.1.74:3000/api/esewa/create-esewa-payment";
 
   @override
   void initState() {
     super.initState();
-
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onNavigationRequest: (request) {
-            // ✅ Only navigate when success happens
-            if (request.url.contains("success")) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => EsewaOtpScreen(
-                    amount: widget.amount,
-                  ),
-                ),
-              );
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadHtmlString(_fakeEsewaHtml());
+    _initializePayment();
   }
 
-  String _fakeEsewaHtml() {
-    return '''
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial;
-      background: white;
-      padding: 20px;
-    }
-    .logo {
-      color: #60BB46;
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 30px;
-    }
-   input {
-  width: 90%;              /* 👈 smaller width */
-  padding: 10px;           /* 👈 slightly smaller height */
-  margin: 10px auto 18px;  /* 👈 center them */
-  display: block;          /* 👈 needed for centering */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-  outline: none;
+  Future<void> _initializePayment() async {
+    try {
+      setState(() {
+        _isLoading = true;
+        _hasError = false;
+      });
+
+      // 1️⃣ Call backend to get signed data
+      final response = await http.post(
+        Uri.parse(backendUrl),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"amount": widget.amount}),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception("Server responded with ${response.statusCode}");
+      }
+
+      final decoded = jsonDecode(response.body);
+
+      if (decoded["success"] != true) {
+        throw Exception("Backend returned failure");
+      }
+
+      final Map<String, dynamic> paymentData =
+          Map<String, dynamic>.from(decoded["payment"]);
+
+      // 2️⃣ Convert map to form body
+      final String postBody = paymentData.entries
+          .map((e) =>
+              "${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}")
+          .join("&");
+
+      // 3️⃣ Setup WebView safely
+      final controller = WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onPageStarted: (_) {
+              setState(() => _isLoading = true);
+            },
+            onPageFinished: (_) {
+              setState(() => _isLoading = false);
+            },
+            onWebResourceError: (error) {
+              print("WebView Error: ${error.description}");
+              setState(() {
+                _isLoading = false;
+                _hasError = true;
+              });
+            },
+            onNavigationRequest: (request) {
+              final url = request.url;
+
+              print("Redirected URL: $url");
+
+              // SUCCESS
+             if (url.contains("/api/esewa/success")) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) => PaymentSuccessScreen(
+        amount: widget.amount,
+        paymentMethod: "esewa",
+        customerName: widget.customerName,
+        email: widget.email,
+        phone: widget.phone,
+        address: widget.address,
+      ),
+    ),
+  );
+  return NavigationDecision.prevent;
 }
-    input:focus {
-      border: 1px solid #60BB46;
+
+              // FAILURE
+              if (url.contains("/api/esewa/failure")) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Payment Failed")),
+                );
+                return NavigationDecision.prevent;
+              }
+
+              return NavigationDecision.navigate;
+            },
+          ),
+        )
+        ..loadRequest(
+          Uri.parse(
+            "https://rc-epay.esewa.com.np/api/epay/main/v2/form",
+          ),
+          method: LoadRequestMethod.post,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: Uint8List.fromList(utf8.encode(postBody)),
+        );
+
+      setState(() {
+        _controller = controller;
+      });
+    } catch (e) {
+      print("Payment Initialization Error: $e");
+
+      setState(() {
+        _isLoading = false;
+        _hasError = true;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Payment initialization failed"),
+        ),
+      );
     }
-    button {
-      width: 100%;
-      padding: 15px;
-      background: #60BB46;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      opacity: 0.55;   /* disabled look */
-    }
-    button.enabled {
-      opacity: 1;
-    }
-    .welcome {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    /* ✅ Register right side */
-    .registerRow {
-      margin-top: 20px;
-      display: flex;
-      justify-content: flex-end;
-    }
-    .register {
-      color: #60BB46;
-      font-size: 14px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="logo">eSewa</div>
-
-  <div class="welcome">Welcome,</div>
-  <div>Sign in to continue</div>
-
-  <!-- ✅ eSewa ID must be exactly 10 digits -->
-  <input id="esewaId" type="text" placeholder="eSewa ID (10 digit number)" maxlength="10" inputmode="numeric">
-
-  <input id="password" type="password" placeholder="Password">
-
-  <!-- ✅ Disabled until valid -->
-  <button id="loginBtn" onclick="attemptLogin()" disabled>
-    Login
-  </button>
-
-  <div class="registerRow">
-    <div class="register" onclick="alert('This is a demo page')">
-      REGISTER FOR FREE
-    </div>
-  </div>
-
-<script>
-  const esewaId = document.getElementById("esewaId");
-  const password = document.getElementById("password");
-  const loginBtn = document.getElementById("loginBtn");
-
-  // Allow only digits in eSewa ID
-  esewaId.addEventListener("input", () => {
-    esewaId.value = esewaId.value.replace(/[^0-9]/g, "");
-    validateForm();
-  });
-
-  password.addEventListener("input", validateForm);
-
-  function validateForm() {
-    const idOk = esewaId.value.length === 10;
-    const passOk = password.value.trim().length > 0;
-
-    if (idOk && passOk) {
-      loginBtn.disabled = false;
-      loginBtn.classList.add("enabled");
-    } else {
-      loginBtn.disabled = true;
-      loginBtn.classList.remove("enabled");
-    }
-  }
-
-  function attemptLogin() {
-    const idOk = esewaId.value.length === 10;
-    const passOk = password.value.trim().length > 0;
-
-    if (!idOk) {
-      alert("eSewa ID must be exactly 10 digits.");
-      return;
-    }
-    if (!passOk) {
-      alert("Please enter your password.");
-      return;
-    }
-
-    // ✅ Only now redirect to success
-    window.location.href = "https://success";
-  }
-</script>
-
-</body>
-</html>
-''';
   }
 
   @override
@@ -186,9 +162,27 @@ class _EsewaWebviewScreenState extends State<EsewaWebviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("eSewa Payment"),
-        backgroundColor: const Color(0xFF60BB46),
+        backgroundColor: const Color(0xFF6E52BC),
       ),
-      body: WebViewWidget(controller: controller),
+      body: Stack(
+        children: [
+          if (_controller != null)
+            WebViewWidget(controller: _controller!),
+
+          if (_isLoading)
+            const Center(
+              child: CircularProgressIndicator(),
+            ),
+
+          if (_hasError)
+            const Center(
+              child: Text(
+                "Something went wrong.\nPlease try again.",
+                textAlign: TextAlign.center,
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

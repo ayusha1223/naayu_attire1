@@ -7,6 +7,7 @@ import 'package:naayu_attire1/core/services/storage/token_service.dart';
 import 'package:naayu_attire1/features/auth/data/datasources/remote/auth_remote_datasource.dart';
 import 'package:naayu_attire1/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/provider/flash_product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,8 +39,8 @@ Future<void> main() async {
 
   /// SERVICES
   final sharedPreferences = await SharedPreferences.getInstance();
-  final apiClient = ApiClient();
-  final tokenService = TokenService(sharedPreferences);
+final tokenService = TokenService(sharedPreferences);
+final apiClient = ApiClient(tokenService);
 
   final authDatasource = AuthRemoteDatasourceImpl(apiClient);
   final authRepository = AuthRepositoryImpl(authDatasource);
@@ -49,28 +50,42 @@ Future<void> main() async {
       sharedPreferences.getBool("isLoggedIn") ?? false;
 
   runApp(
-    MultiProvider(
-      providers: [
-        Provider<TokenService>(
-          create: (_) => tokenService,
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              AuthViewModel(authRepository, tokenService),
-        ),
-        ChangeNotifierProvider(
-          lazy: false,
-          create: (_) {
-            final provider = ShopProvider();
-            provider.initializeUser();
-            return provider;
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
-        ),
-      ],
-      child: MyApp(isLoggedIn: isLoggedIn),
-    ),
-  );
+  MultiProvider(
+    providers: [
+
+      Provider<TokenService>(
+        create: (_) => tokenService,
+      ),
+
+      ChangeNotifierProvider(
+        create: (_) =>
+            AuthViewModel(authRepository, tokenService),
+      ),
+
+      ChangeNotifierProvider(
+        lazy: false,
+        create: (_) {
+          final provider = ShopProvider(tokenService, apiClient);
+
+          Future.microtask(() async {
+            await provider.initializeUser();
+          });
+
+          return provider;
+        },
+      ),
+
+      ChangeNotifierProvider(
+        create: (_) => ThemeProvider(),
+      ),
+
+      // 🔥 ADD THIS
+      ChangeNotifierProvider(
+        create: (_) => FlashProductProvider(),
+      ),
+
+    ],
+    child: MyApp(isLoggedIn: isLoggedIn),
+  ),
+);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:naayu_attire1/features/auth/domain/entities/auth_entity.dart';
 import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
@@ -13,6 +14,9 @@ class AuthViewModel extends ChangeNotifier {
   bool _isLoading = false;
   String? _errorMessage;
   String? _role;
+
+  String? _userId;
+String? get userId => _userId;
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
@@ -81,17 +85,30 @@ class AuthViewModel extends ChangeNotifier {
         _setError(failure.message);
         return false;
       },
-      (authEntity) async {
-        await tokenService.saveToken(authEntity.token);
-        _role = authEntity.role;
+    (authEntity) async {
 
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString("user_name", authEntity.fullName);
-        await prefs.setString("user_email", authEntity.email);
+  print("=================================");
+  print("TOKEN RECEIVED FROM BACKEND:");
+  print(authEntity.token);
+  print("TOKEN LENGTH:");
+  print(authEntity.token.length);
+  print("=================================");
 
-        notifyListeners();
-        return true;
-      },
+  print("LOGGED IN EMAIL: ${authEntity.email}");
+  print("LOGGED IN ROLE: ${authEntity.role}");
+
+  await tokenService.saveToken(authEntity.token);
+
+  _role = authEntity.role;
+  _userId = authEntity.id;   // 🔥 ADD THIS
+
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString("user_name", authEntity.fullName);
+  await prefs.setString("user_email", authEntity.email);
+
+  notifyListeners();
+  return true;
+},
     );
   }
 
@@ -154,9 +171,17 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   // ================= LOGOUT =================
-  Future<void> logout(BuildContext context) async {
-    await tokenService.removeToken();
-    _role = null;
-    notifyListeners();
-  }
+ Future<void> logout(BuildContext context) async {
+  final prefs = await SharedPreferences.getInstance();
+
+  await tokenService.removeToken();
+  await prefs.remove("user_name");
+  await prefs.remove("user_email");
+  await prefs.setBool("isLoggedIn", false);
+
+  Hive.box("authBox").clear();
+
+  _role = null;
+  notifyListeners();
+}
 }

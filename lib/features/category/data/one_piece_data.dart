@@ -12,6 +12,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant floral one-piece crafted with soft fabric for a graceful everyday look.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -23,6 +24,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Flowy summer maxi dress designed for comfort and breezy movement.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -34,6 +36,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfortable long dress with relaxed fit and soft texture for daily styling.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -45,6 +48,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Sophisticated evening dress perfect for special occasions and celebrations.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -56,6 +60,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish red evening dress with elegant tailoring and premium finish.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -67,6 +72,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Graceful evening wear featuring a flattering silhouette and smooth fabric.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -78,6 +84,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Chic pink evening dress crafted for a refined and feminine look.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -89,6 +96,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant green one-piece designed to bring sophistication to your wardrobe.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -100,6 +108,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Classic black evening dress offering timeless elegance and charm.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -111,6 +120,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Vibrant orange dress designed to make a bold and stylish statement.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -122,6 +132,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Premium black evening wear crafted with attention to detail and comfort.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -133,6 +144,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Graceful red evening dress ideal for formal gatherings and parties.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -144,6 +156,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Beautiful green dress blending elegance with modern tailoring.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -155,6 +168,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stunning red evening outfit designed for a confident and bold appearance.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -166,6 +180,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant white dress offering a fresh and sophisticated vibe.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -177,6 +192,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Modern black one-piece designed for comfort and stylish evening wear.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -188,6 +204,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft white evening dress crafted for effortless elegance.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -199,6 +216,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish pink one-piece with graceful flow and comfortable fit.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -210,6 +228,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Chic white dress perfect for formal dinners and special events.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -221,6 +240,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant blue evening wear designed for a refined and classy look.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -232,6 +252,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright orange dress adding vibrance and elegance to your wardrobe.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -243,6 +264,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Premium green dress designed for comfort and graceful styling.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -254,6 +276,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Sophisticated green one-piece perfect for elegant evening outings.",
+      category: "onepiece",
       isNew: true,
     ),
     ProductModel(
@@ -265,6 +288,7 @@ class OnePieceData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish blue dress combining modern design with timeless elegance.",
+      category: "onepiece",
       isNew: true,
     ),
   ];

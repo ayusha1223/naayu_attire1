@@ -12,6 +12,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stunning evening party dress designed to make you stand out at every celebration.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -23,6 +24,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant cocktail gown crafted with premium fabric for a glamorous night look.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -34,6 +36,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Sparkling glitter top perfect for parties, adding shine and confidence to your style.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -45,6 +48,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bold sequin dress designed to shimmer beautifully under party lights.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -56,6 +60,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant red sequin dress offering a perfect blend of glamour and comfort.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -67,6 +72,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Graceful white party dress crafted with shimmering sequin detailing.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -78,6 +84,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright yellow sequin dress designed to radiate energy and elegance.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -89,6 +96,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish yellow evening dress with a glamorous shine and flattering fit.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -100,6 +108,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Luxury gold sequin dress perfect for weddings and grand celebrations.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -110,6 +119,7 @@ class PartyData {
       color: "blue",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "party",
       description: "Elegant blue party dress featuring detailed sequin work and premium fabric.",
       isNew: true,
     ),
@@ -121,6 +131,7 @@ class PartyData {
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "party",
       description: "Chic green sequin dress designed for bold and confident party looks.",
       isNew: true,
     ),
@@ -132,6 +143,7 @@ class PartyData {
       color: "white",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "party",
       description: "Sophisticated white evening dress perfect for classy gatherings.",
       isNew: true,
     ),
@@ -144,6 +156,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Modern green sequin dress offering elegance with a glamorous twist.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -154,6 +167,7 @@ class PartyData {
       color: "red",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "party",
       description: "Statement red party dress designed to turn heads instantly.",
       isNew: true,
     ),
@@ -166,6 +180,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Glamorous red sequin dress crafted for festive and special occasions.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -177,6 +192,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Golden party dress with sparkling finish for luxurious styling.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -187,6 +203,7 @@ class PartyData {
       color: "green",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "party",
       description: "Elegant green evening dress designed for refined party looks.",
       isNew: true,
     ),
@@ -199,6 +216,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish blue sequin dress with eye-catching shimmer and smooth fit.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -209,6 +227,7 @@ class PartyData {
       color: "brown",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "party",
       description: "Unique brown party dress blending elegance with modern fashion.",
       isNew: true,
     ),
@@ -221,6 +240,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Chic brown evening wear crafted for stylish and comfortable parties.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -232,6 +252,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Classic black sequin dress offering timeless party glamour.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -243,6 +264,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Modern green sequin outfit perfect for festive celebrations.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -254,6 +276,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant white party dress designed for sophisticated evenings.",
+      category: "party",
       isNew: true,
     ),
     ProductModel(
@@ -265,6 +288,7 @@ class PartyData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright yellow sequin dress crafted to shine beautifully at any event.",
+      category: "party",
       isNew: true,
     ),
   ];

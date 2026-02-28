@@ -12,6 +12,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant floral co-ord set designed for comfort and modern styling. Perfect for brunch and casual outings.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -23,6 +24,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Lightweight summer co-ord crafted with breathable fabric to keep you cool and stylish all day.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -34,6 +36,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfortable printed lounge set with relaxed fit and soft texture for everyday elegance.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -45,6 +48,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Minimal and classy co-ord set that blends traditional charm with modern fashion.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -56,6 +60,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish black co-ord set with refined stitching and premium finishing.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -67,6 +72,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Trendy green co-ord set featuring soft fabric and comfortable straight fit.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -78,6 +84,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Modern co-ord set designed with vibrant prints and breathable material.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -89,6 +96,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft white lounge set perfect for relaxed evenings and casual styling.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -100,6 +108,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright yellow co-ord set adding freshness and energy to your wardrobe.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -111,6 +120,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfortable blue co-ord with smooth finish and elegant detailing.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -122,6 +132,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bold red co-ord set crafted for confident and stylish looks.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -132,6 +143,7 @@ class CoordData {
       color: "brown",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "coord",
       description: "Earthy brown co-ord set designed for comfortable everyday wear.",
       isNew: true,
     ),
@@ -144,6 +156,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Chic green co-ord with contemporary prints and relaxed fit.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -155,6 +168,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant white co-ord perfect for both casual and semi-formal occasions.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -166,6 +180,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Minimalist co-ord set with smooth texture and graceful appeal.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -177,6 +192,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Classic co-ord set designed for effortless everyday elegance.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -188,6 +204,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stylish matching set crafted with breathable and soft fabric.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -199,6 +216,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfort-driven co-ord set perfect for relaxed summer styling.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -210,6 +228,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant co-ord set with modern tailoring and stylish finish.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -221,6 +240,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Trendy green matching set offering comfort and sophistication.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -232,6 +252,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Soft and stylish co-ord designed for effortless chic looks.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -243,6 +264,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Warm-toned co-ord set combining comfort with elegant styling.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -254,6 +276,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Beautiful blue co-ord set featuring smooth fabric and modern prints.",
+      category: "coord",
       isNew: true,
     ),
     ProductModel(
@@ -265,6 +288,7 @@ class CoordData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bright orange co-ord set that adds vibrance and elegance to your look.",
+      category: "coord",
       isNew: true,
     ),
   ];

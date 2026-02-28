@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../data/casual_data.dart';
+import '../../data/product_repository.dart';
 import '../../domain/models/product_model.dart';
 import '../widgets/product_grid.dart';
 
@@ -11,39 +12,59 @@ class CasualScreen extends StatefulWidget {
 }
 
 class _CasualScreenState extends State<CasualScreen> {
-  late List<ProductModel> products;
-  String selectedColor = "all";
+
+  late Future<List<ProductModel>> productsFuture;
+
+  List<ProductModel> originalProducts = [];
+  List<ProductModel> products = [];
 
   @override
   void initState() {
     super.initState();
-    products = List.from(CasualData.products);
+    productsFuture = loadProducts();
   }
 
-  // 🔥 SORT LOW TO HIGH
+  Future<List<ProductModel>> loadProducts() async {
+
+    List<ProductModel> hardcoded =
+        List.from(CasualData.products);
+
+    List<ProductModel> backend = [];
+
+    try {
+      backend = await ProductRepository.getProducts("casual");
+    } catch (e) {
+      print("Backend error: $e");
+    }
+
+    final merged = [...hardcoded, ...backend];
+
+    originalProducts = merged;
+    products = List.from(merged);
+
+    return merged;
+  }
+
   void sortLowToHigh() {
     setState(() {
       products.sort((a, b) => a.price.compareTo(b.price));
     });
   }
 
-  // 🔥 SORT HIGH TO LOW
   void sortHighToLow() {
     setState(() {
       products.sort((a, b) => b.price.compareTo(a.price));
     });
   }
 
-  // 🔥 FILTER BY COLOR
   void filterByColor(String color) {
     setState(() {
-      selectedColor = color;
-
       if (color == "all") {
-        products = List.from(CasualData.products);
+        products = List.from(originalProducts);
       } else {
-        products = CasualData.products
-            .where((product) => product.color == color)
+        products = originalProducts
+            .where((product) =>
+                product.color.toLowerCase() == color.toLowerCase())
             .toList();
       }
     });
@@ -51,120 +72,90 @@ class _CasualScreenState extends State<CasualScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return FutureBuilder<List<ProductModel>>(
+      future: productsFuture,
+      builder: (context, snapshot) {
 
-        // 🔥 SORT + FILTER BAR
-        Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
-            children: [
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-              // 🔽 SORT BUTTON
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  if (value == "low") {
-                    sortLowToHigh();
-                  } else {
-                    sortHighToLow();
-                  }
-                },
-                itemBuilder: (context) => const [
-                  PopupMenuItem(
-                    value: "low",
-                    child: Text("Price: Low to High"),
-                  ),
-                  PopupMenuItem(
-                    value: "high",
-                    child: Text("Price: High to Low"),
-                  ),
-                ],
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(20),
-                    border: Border.all(
-                        color: Colors.grey.shade300),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.sort, size: 18),
-                      SizedBox(width: 6),
-                      Text("Sort"),
+        if (snapshot.hasError) {
+          return const Center(child: Text("Error loading products"));
+        }
+
+        return Column(
+          children: [
+
+            /// SORT + FILTER
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  PopupMenuButton<String>(
+                    child: _filterButton("Sort", Icons.sort),
+                    onSelected: (value) {
+                      if (value == "low") {
+                        sortLowToHigh();
+                      } else {
+                        sortHighToLow();
+                      }
+                    },
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(
+                        value: "low",
+                        child: Text("Price: Low to High"),
+                      ),
+                      PopupMenuItem(
+                        value: "high",
+                        child: Text("Price: High to Low"),
+                      ),
                     ],
                   ),
-                ),
-              ),
 
-              // 🎨 COLOR FILTER
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  filterByColor(value);
-                },
-                itemBuilder: (context) => const [
-                  PopupMenuItem(
-                      value: "all",
-                      child: Text("All")),
-                  PopupMenuItem(
-                      value: "white",
-                      child: Text("White")),
-                  PopupMenuItem(
-                      value: "blue",
-                      child: Text("Blue")),
-                  PopupMenuItem(
-                      value: "pink",
-                      child: Text("Pink")),
-                  PopupMenuItem(
-                      value: "yellow",
-                      child: Text("Yellow")),
-                  PopupMenuItem(
-                      value: "orange",
-                      child: Text("Orange")),
-                  PopupMenuItem(
-                      value: "brown",
-                      child: Text("Brown")),
-                  PopupMenuItem(
-                      value: "green",
-                      child: Text("Green")),
-                  PopupMenuItem(
-                      value: "red",
-                      child: Text("Red")),
-                ],
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(20),
-                    border: Border.all(
-                        color: Colors.grey.shade300),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.color_lens_outlined,
-                          size: 18),
-                      SizedBox(width: 6),
-                      Text("Color"),
+                  PopupMenuButton<String>(
+                    child: _filterButton("Color", Icons.palette_outlined),
+                    onSelected: (value) {
+                      filterByColor(value);
+                    },
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(value: "all", child: Text("All")),
+                      PopupMenuItem(value: "red", child: Text("Red")),
+                      PopupMenuItem(value: "blue", child: Text("Blue")),
+                      PopupMenuItem(value: "green", child: Text("Green")),
+                      PopupMenuItem(value: "black", child: Text("Black")),
+                      PopupMenuItem(value: "white", child: Text("White")),
                     ],
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
 
-        // 🔥 PRODUCT GRID
-        Expanded(
-          child: ProductGrid(
-            products: products,
-          ),
-        ),
-      ],
+            Expanded(
+              child: ProductGrid(products: products),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _filterButton(String text, IconData icon) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 18),
+          const SizedBox(width: 6),
+          Text(text),
+        ],
+      ),
     );
   }
 }

@@ -7,23 +7,31 @@ import 'package:naayu_attire1/core/providers/shop_provider.dart';
 
 class ProductGrid extends StatelessWidget {
   final List<ProductModel> products;
+  final bool scrollable;
 
-  const ProductGrid({super.key, required this.products});
+  const ProductGrid({
+    super.key,
+    required this.products,
+    this.scrollable = true,
+  });
 
 @override
 Widget build(BuildContext context) {
   return Consumer<ShopProvider>(
     builder: (context, shop, _) {
       return GridView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: products.length,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 14,
-          mainAxisSpacing: 14,
-          childAspectRatio: 0.55,
-        ),
+  shrinkWrap: !scrollable,
+  physics: scrollable
+      ? const AlwaysScrollableScrollPhysics()
+      : const NeverScrollableScrollPhysics(),
+  padding: const EdgeInsets.all(16),
+  itemCount: products.length,
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 14,
+    mainAxisSpacing: 14,
+    childAspectRatio: 0.55,
+  ),
         itemBuilder: (context, index) {
           final product = products[index];
 
@@ -55,39 +63,46 @@ Widget build(BuildContext context) {
                 children: [
 
                   // 🔥 IMAGE + FAVORITE
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.all(12),
-                          child: Image.asset(
-                            product.image,
-                            fit: BoxFit.contain,
-                            width: double.infinity,
-                          ),
-                        ),
+                 Expanded(
+  child: Stack(
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(12),
+        child: product.image.startsWith("http")
+            ? Image.network(
+                product.image,
+                fit: BoxFit.contain,
+                width: double.infinity,
+                errorBuilder:
+                    (context, error, stackTrace) =>
+                        const Icon(Icons.broken_image),
+              )
+            : Image.asset(
+                product.image,
+                fit: BoxFit.contain,
+                width: double.infinity,
+              ),
+      ),
 
-                        Positioned(
-  top: 12,
-  right: 12,
-  child: InkWell(
-    onTap: () {
-      shop.toggleFavorite(product);
-    },
-    child: Icon(
-      shop.isFavorite(product)
-          ? Icons.favorite
-          : Icons.favorite_border,
-      color: Colors.red,
-      size: 22,
-    ),
+      Positioned(
+        top: 12,
+        right: 12,
+        child: InkWell(
+          onTap: () {
+            shop.toggleFavorite(product);
+          },
+          child: Icon(
+            shop.isFavorite(product)
+                ? Icons.favorite
+                : Icons.favorite_border,
+            color: Colors.red,
+            size: 22,
+          ),
+        ),
+      ),
+    ],
   ),
 ),
-
-                      ],
-                    ),
-                  ),
 
                   const SizedBox(height: 6),
 

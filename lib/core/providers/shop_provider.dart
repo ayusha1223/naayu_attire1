@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/core/api/api_client.dart';
+import 'package:naayu_attire1/core/services/storage/token_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive/hive.dart';
 import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
@@ -10,8 +12,14 @@ import 'package:naayu_attire1/features/category/data/one_piece_data.dart';
 import 'package:naayu_attire1/features/category/data/party_data.dart';
 import 'package:naayu_attire1/features/category/data/wedding_data.dart';
 import 'package:naayu_attire1/features/category/data/winter_data.dart';
+import 'package:dio/dio.dart';
+import 'package:naayu_attire1/features/notification/domain/models/app_notification.dart';
 
 class ShopProvider extends ChangeNotifier {
+  final TokenService tokenService;
+  final ApiClient apiClient;
+
+  ShopProvider(this.tokenService, this.apiClient);
   // ================= ALL PRODUCTS =================
 
   late final List<ProductModel> _allProducts = [
@@ -38,6 +46,7 @@ class ShopProvider extends ChangeNotifier {
     Hive.box("authBox").put("currentUser", userId);
 
     await loadData();
+    await fetchNotifications(); 
   }
 
 Future<void> initializeUser() async {
@@ -49,7 +58,10 @@ Future<void> initializeUser() async {
 
   if (savedUser != null) {
     _userId = savedUser;
+
     await loadData();
+    await fetchNotifications();   
+
     notifyListeners();
   }
 }
@@ -166,20 +178,19 @@ Future<void> initializeUser() async {
     notifyListeners();
   }
 
-  // ================= NOTIFICATIONS =================
 
-  int _notificationCount = 0;
-  int get notificationCount => _notificationCount;
+ // ================= REAL NOTIFICATIONS =================
 
-  void addNotification() {
-    _notificationCount++;
-    notifyListeners();
-  }
+final List<AppNotification> _notifications = [];
+List<AppNotification> get notifications => _notifications;
 
-  void clearNotifications() {
-    _notificationCount = 0;
-    notifyListeners();
-  }
+// 🔥 ADD THIS
+bool _isLoadingNotifications = false;
+bool get isLoadingNotifications => _isLoadingNotifications;
+
+int get notificationCount =>
+    _notifications.where((n) => !n.isRead).length;
+
 
   // ================= ADDRESS =================
 
@@ -276,4 +287,60 @@ final hiveFav =
 
     notifyListeners();
   }
+    // ================= FETCH NOTIFICATIONS =================
+
+Future<void> fetchNotifications() async {
+  try {
+    _isLoadingNotifications = true;
+    notifyListeners();
+
+    final response = await apiClient.dio.get(
+      "/api/notifications/my",
+    );
+
+    _notifications.clear();
+
+    _notifications.addAll(
+      (response.data as List)
+          .map((e) => AppNotification.fromJson(e))
+          .toList(),
+    );
+
+  } catch (e) {
+    print("Fetch notification error: $e");
+  } finally {
+    _isLoadingNotifications = false;
+    notifyListeners();
+  }
+}
+Future<void> markAsRead(String id) async {
+  try {
+    final token = tokenService.getToken();
+
+    await apiClient.dio.put(
+      "/api/notifications/read/$id",
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      ),
+    );
+
+    final index =
+        _notifications.indexWhere((n) => n.id == id);
+
+    if (index != -1) {
+      _notifications[index] = AppNotification(
+        id: _notifications[index].id,
+        message: _notifications[index].message,
+        isRead: true,
+        createdAt: _notifications[index].createdAt,
+      );
+    }
+
+    notifyListeners();
+  } catch (e) {
+    print("Mark read error: $e");
+  }
+}
 }

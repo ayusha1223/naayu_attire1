@@ -531,26 +531,30 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 ),
               ),
               onPressed: () {
-                final shop = context.read<ShopProvider>();
+  final shop = context.read<ShopProvider>();
 
-                if (shop.address == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Please add delivery address first"),
-                    ),
-                  );
-                  return;
-                }
+  if (shop.address == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Please add delivery address first"),
+      ),
+    );
+    return;
+  }
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentMethodScreen(
-                      totalAmount: totalPayment,
-                    ),
-                  ),
-                );
-              },
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => PaymentMethodScreen(
+        totalAmount: totalPayment,
+        customerName: shop.address!.name,
+        email: shop.address!.email,
+        phone: shop.address!.phone,
+        address: shop.address!.fullAddress,
+      ),
+    ),
+  );
+},
               child: const Text(
                 "Proceed",
                 style: TextStyle(color: Colors.white),

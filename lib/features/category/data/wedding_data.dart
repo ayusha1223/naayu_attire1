@@ -12,6 +12,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Exquisite bridal lehenga adorned with intricate detailing for a majestic wedding look.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -23,6 +24,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Graceful wedding gown crafted with premium fabric for timeless elegance.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -34,6 +36,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Luxurious royal saree designed with rich textures and traditional charm.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -45,6 +48,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant gold saree offering regal vibes for wedding celebrations.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -55,6 +59,7 @@ class WeddingData {
       color: "gold",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
+      category: "wedding",
       description: "Traditional saree crafted with fine embroidery and royal detailing.",
       isNew: true,
     ),
@@ -67,6 +72,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Emerald green saree designed to reflect sophistication and grace.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -78,6 +84,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Beautifully woven saree combining modern elegance with tradition.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -89,6 +96,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Royal blue saree featuring rich fabric and stunning craftsmanship.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -100,6 +108,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Premium gold saree designed for grand wedding ceremonies.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -111,6 +120,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Rich brown saree offering a luxurious and elegant appearance.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -122,6 +132,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant blue wedding saree perfect for festive celebrations.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -133,6 +144,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Classic white saree designed for graceful wedding styling.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -144,6 +156,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Traditional red saree symbolizing elegance and bridal beauty.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -155,6 +168,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Vibrant orange saree crafted for lively wedding celebrations.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -166,6 +180,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Stunning red saree designed with rich texture and refined finish.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -177,6 +192,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Bridal-inspired saree perfect for grand wedding occasions.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -188,6 +204,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Royal blue saree designed for a majestic and elegant appearance.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -199,6 +216,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Delicate pink saree offering charm and graceful beauty.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -210,6 +228,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant red saree crafted to enhance bridal elegance.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -221,6 +240,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Grand orange saree reflecting richness and festive spirit.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -232,6 +252,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Elegant black saree designed for sophisticated wedding styling.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -243,6 +264,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Premium green saree blending tradition with luxury fashion.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -254,6 +276,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Traditional bridal saree designed for timeless wedding beauty.",
+      category: "wedding",
       isNew: true,
     ),
     ProductModel(
@@ -265,6 +288,7 @@ class WeddingData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Festive orange saree offering elegance and grandeur.",
+      category: "wedding",
       isNew: true,
     ),
   ];

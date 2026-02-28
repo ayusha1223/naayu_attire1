@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/widgets/notification_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -153,143 +154,149 @@ class _LocationHeaderState extends State<LocationHeader> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final shop =
-        context.watch<ShopProvider>();
+ @override
+Widget build(BuildContext context) {
+  final shop = context.watch<ShopProvider>();
 
-    return Padding(
-      padding:
-          const EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment:
-            MainAxisAlignment
-                .spaceBetween,
-        children: [
+  return Padding(
+    padding: const EdgeInsets.all(16),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
 
-          GestureDetector(
-            onTap:
-                _openLocationOptions,
-            child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment
-                      .start,
-              children: [
-
-                const Text(
-                  "Location",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color:
-                        Colors.grey,
-                  ),
+        // LEFT SIDE (Location)
+        GestureDetector(
+          onTap: _openLocationOptions,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Location",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
                 ),
-
-                const SizedBox(
-                    height: 4),
-
-                Row(
-                  children: [
-
-                    const Icon(
-                      Icons
-                          .location_on,
-                      size: 16,
-                      color:
-                          Colors.brown,
-                    ),
-
-                    const SizedBox(
-                        width: 4),
-
-                    _isLoading
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child:
-                                CircularProgressIndicator(
-                              strokeWidth:
-                                  2,
-                            ),
-                          )
-                        : Text(
-                            shop
-                                .selectedLocation,
-                            style:
-                                const TextStyle(
-                              fontWeight:
-                                  FontWeight
-                                      .bold,
-                            ),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_on,
+                    size: 16,
+                    color: Colors.brown,
+                  ),
+                  const SizedBox(width: 4),
+                  _isLoading
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text(
+                          shop.selectedLocation,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
-                  ],
-                ),
-              ],
-            ),
+                        ),
+                ],
+              ),
+            ],
           ),
+        ),
 
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                      const FavoritesScreen(),
-                ),
-              );
-            },
-            child: Stack(
-              children: [
+        // RIGHT SIDE (Favorites + Notifications)
+        Row(
+          children: [
 
-                const CircleAvatar(
-                  backgroundColor:
-                      Colors.white,
-                  child: Icon(
-                    Icons
-                        .favorite_border,
-                    color:
-                        Colors.red,
+            // ❤️ FAVORITES
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const FavoritesScreen(),
                   ),
-                ),
-
-                if (shop.favorites
-                    .isNotEmpty)
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child:
-                        Container(
-                      padding:
-                          const EdgeInsets
-                              .all(4),
-                      decoration:
-                          const BoxDecoration(
-                        color:
-                            Colors.red,
-                        shape:
-                            BoxShape
-                                .circle,
-                      ),
-                      child: Text(
-                        shop
-                            .favorites
-                            .length
-                            .toString(),
-                        style:
-                            const TextStyle(
-                          color:
-                              Colors.white,
-                          fontSize:
-                              10,
+                );
+              },
+              child: Stack(
+                children: [
+                  const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.favorite_border,
+                      color: Colors.red,
+                    ),
+                  ),
+                  if (shop.favorites.isNotEmpty)
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          shop.favorites.length.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+
+            const SizedBox(width: 12),
+
+            // 🔔 NOTIFICATIONS
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const NotificationScreen(),
+                  ),
+                );
+              },
+              child: Stack(
+                children: [
+                  const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.notifications_none,
+                      color: Colors.brown,
+                    ),
+                  ),
+                  if (shop.notificationCount > 0)
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          shop.notificationCount.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 }

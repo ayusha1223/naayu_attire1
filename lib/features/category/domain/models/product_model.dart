@@ -10,6 +10,7 @@ class ProductModel {
   final String color;
   final bool isNew;
   final double? oldPrice;
+  final String category; // 🔥 ADD THIS
   int quantity;
 
   ProductModel({
@@ -24,10 +25,10 @@ class ProductModel {
     required this.color,
     required this.isNew,
     this.oldPrice,
-    this.quantity = 1, 
+    required this.category, // 🔥 ADD THIS
+    this.quantity = 1,
   });
 
-  // 🔥 equality for cart
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -38,10 +39,9 @@ class ProductModel {
   @override
   int get hashCode => id.hashCode;
 
-  // ✅ Convert to JSON
+  // ✅ Convert to JSON (for POST request)
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'image': image,
       'name': name,
       'price': price,
@@ -51,26 +51,27 @@ class ProductModel {
       'color': color,
       'isNew': isNew,
       'oldPrice': oldPrice,
-      'quantity': quantity,
+      'category': category, // 🔥 IMPORTANT
     };
   }
 
-  // ✅ Convert from JSON
+  // ✅ Convert from JSON (for GET request)
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'],
+      id: json['_id'], // 🔥 MongoDB uses _id
       image: json['image'],
       name: json['name'],
       price: (json['price'] as num).toDouble(),
       description: json['description'],
       rating: (json['rating'] as num).toDouble(),
-      sizes: List<String>.from(json['sizes']),
+      sizes: List<String>.from(json['sizes'] ?? []),
       color: json['color'],
       isNew: json['isNew'],
       oldPrice: json['oldPrice'] != null
           ? (json['oldPrice'] as num).toDouble()
           : null,
-      quantity: json['quantity'] ?? 1, 
+      category: json['category'], // 🔥 IMPORTANT
+      quantity: 1,
     );
   }
 

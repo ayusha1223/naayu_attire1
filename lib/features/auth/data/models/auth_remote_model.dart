@@ -16,17 +16,15 @@ class AuthRemoteModel {
   });
 
   // ================= FROM JSON (Login Response) =================
-  factory AuthRemoteModel.fromJson(Map<String, dynamic> json) {
-    final data = json['data'] ?? json;
-
-    return AuthRemoteModel(
-      id: data['_id'] ?? '',
-      name: data['name'] ?? '',
-      email: data['email'] ?? '',
-      token: data['token'] ?? '',
-      role: data['role'] ?? 'user',   // 🔥 IMPORTANT
-    );
-  }
+ factory AuthRemoteModel.fromJson(Map<String, dynamic> json) {
+  return AuthRemoteModel(
+    id: json['id'] ?? '',
+    name: json['name'] ?? '',
+    email: json['email'] ?? '',
+    token: json['token'] ?? '',
+    role: json['role'] ?? 'user',
+  );
+}
 
   // ================= TO ENTITY =================
   AuthEntity toEntity() {

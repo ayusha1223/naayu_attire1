@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class DressModel {
   final String image;
   final double widthFactor;
@@ -16,6 +15,7 @@ class DressModel {
     required this.offsetY,
   });
 }
+
 class TryOnScreen extends StatefulWidget {
   const TryOnScreen({super.key});
 
@@ -24,72 +24,59 @@ class TryOnScreen extends StatefulWidget {
 }
 
 class _TryOnScreenState extends State<TryOnScreen> {
-  int currentDressIndex = 0;
-  final PageController _pageController = PageController();
+  int? selectedDressIndex; // ✅ null = naked avatar
 
   final List<DressModel> dresses = [
-  DressModel(
-    image: "assets/images/tryon/view1.png",
-    widthFactor: 0.92,
-    heightFactor: 0.62,
-    offsetX:-2,
-    offsetY: 85,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view2.png",
-    widthFactor: 0.80,
-    heightFactor: 0.70,
-    offsetX: -5,
-    offsetY: 43,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view3.png",
-    widthFactor: 0.78,
-    heightFactor: 0.60,
-    offsetX: -2,
-    offsetY: 45,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view4.png",
-    widthFactor: 0.65,
-    heightFactor: 0.75,
-    offsetX: -5,
-    offsetY: 25,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view5.png",
-    widthFactor: 0.75,
-    heightFactor: 0.65,
-    offsetX: 5,
-    offsetY: 45,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view6.png",
-    widthFactor: 0.77,
-    heightFactor: 0.67,
-    offsetX: -8,
-    offsetY: 50,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view7.png",
-    widthFactor: 0.92,
-    heightFactor: 0.80,
-    offsetX: -8,
-    offsetY: 18,
-  ),
-  DressModel(
-    image: "assets/images/tryon/view8.png",
-    widthFactor: 0.79,
-    heightFactor: 0.69,
-    offsetX: -4,
-    offsetY: 55,
-  ),
-];
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+    DressModel(
+      image: "assets/images/tryon/view1.png",
+      widthFactor: 0.90,
+      heightFactor: 0.62,
+      offsetX: -2,
+      offsetY: 86,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view2.png",
+      widthFactor: 0.80,
+      heightFactor: 0.70,
+      offsetX: -5,
+      offsetY: 43,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view3.png",
+      widthFactor: 0.78,
+      heightFactor: 0.60,
+      offsetX: -2,
+      offsetY: 45,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view4.png",
+      widthFactor: 0.65,
+      heightFactor: 0.75,
+      offsetX: -5,
+      offsetY: 25,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view5.png",
+      widthFactor: 0.75,
+      heightFactor: 0.65,
+      offsetX: 5,
+      offsetY: 45,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view6.png",
+      widthFactor: 0.77,
+      heightFactor: 0.67,
+      offsetX: -8,
+      offsetY: 50,
+    ),
+    DressModel(
+      image: "assets/images/tryon/view7.png",
+      widthFactor: 0.92,
+      heightFactor: 0.80,
+      offsetX: -8,
+      offsetY: 6,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -109,116 +96,77 @@ class _TryOnScreenState extends State<TryOnScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: Stack(
+      body: Column(
         children: [
 
-          /// ===== AVATAR =====
-          Center(
-            child: Image.asset(
-              'assets/images/tryon/avatar.png',   // ✅ corrected path
-              width: screenWidth * 0.95,
-              height: screenHeight * 0.85,
-              fit: BoxFit.contain,
-            ),
-          ),
-
-          /// ===== DRESS VIEW =====
-          Center(
-            child: PageView.builder(
-              controller: _pageController,
+          /// ===== TOP HORIZONTAL DRESS LIST =====
+          SizedBox(
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
               itemCount: dresses.length,
-              onPageChanged: (index) {
-                setState(() {
-                  currentDressIndex = index;
-                });
-              },
-          itemBuilder: (context, index) {
-  final dress = dresses[index];
-
-  return Center(
-    child: Transform.translate(
-      offset: Offset(dress.offsetX, dress.offsetY),
-      child: Image.asset(
-        dress.image,
-        width: screenWidth * dress.widthFactor,
-        height: screenHeight * dress.heightFactor,
-        fit: BoxFit.contain,
-      ),
-    ),
-  );
-},
-
-            ),
-          ),
-
-          /// ===== DRESS COUNTER =====
-          Positioned(
-            bottom: 40,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "Dress ${currentDressIndex + 1} / ${dresses.length}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedDressIndex = index;
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: selectedDressIndex == index
+                            ? Colors.pink
+                            : Colors.grey.shade300,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Image.asset(
+                      dresses[index].image,
+                      width: 70,
+                      fit: BoxFit.contain,
+                    ),
                   ),
+                );
+              },
+            ),
+          ),
+
+          /// ===== AVATAR AREA =====
+          Expanded(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+
+                /// Avatar (Always Visible)
+                Image.asset(
+                  'assets/images/tryon/avatar.png',
+                  width: screenWidth * 0.95,
+                  height: screenHeight * 0.85,
+                  fit: BoxFit.contain,
                 ),
-              ),
-            ),
-          ),
 
-          /// ===== LEFT ARROW =====
-          Positioned(
-            left: 20,
-            top: 0,
-            bottom: 0,
-            child: Center(
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 30),
-                onPressed: currentDressIndex > 0
-                    ? () {
-                        _pageController.previousPage(
-                          duration:
-                              const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    : null,
-                color: Colors.black54,
-              ),
-            ),
-          ),
-
-          /// ===== RIGHT ARROW =====
-          Positioned(
-            right: 20,
-            top: 0,
-            bottom: 0,
-            child: Center(
-              child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 30),
-                onPressed: currentDressIndex <
-                        dresses.length - 1
-                    ? () {
-                        _pageController.nextPage(
-                          duration:
-                              const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    : null,
-                color: Colors.black54,
-              ),
+                /// Dress (Only if selected)
+                if (selectedDressIndex != null)
+                  Transform.translate(
+                    offset: Offset(
+                      dresses[selectedDressIndex!].offsetX,
+                      dresses[selectedDressIndex!].offsetY,
+                    ),
+                    child: Image.asset(
+                      dresses[selectedDressIndex!].image,
+                      width: screenWidth *
+                          dresses[selectedDressIndex!].widthFactor,
+                      height: screenHeight *
+                          dresses[selectedDressIndex!].heightFactor,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+              ],
             ),
           ),
         ],

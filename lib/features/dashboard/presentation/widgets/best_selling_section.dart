@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/dashboard/data/flash_products_data.dart';
-import 'package:naayu_attire1/features/dashboard/presentation/widgets/premium_product_card.dart';
+import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+import 'package:naayu_attire1/features/dashboard/presentation/widgets/product_card.dart';
 
 class BestSellingSection extends StatelessWidget {
   const BestSellingSection({super.key});
@@ -8,36 +8,32 @@ class BestSellingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final List<FlashProduct> bestSellingProducts = [
-      FlashProduct(
-        imagePath: "assets/images/banners/lehengacholi.png",
-        title: "Chaubandi",
+    final List<ProductModel> bestSellingProducts = [
+      ProductModel(
+        id: "1",
+        image: "assets/images/banners/lehengacholi.png",
+        name: "Chaubandi",
         price: 1200,
         oldPrice: 1999,
+        description: "Beautiful traditional outfit",
+        rating: 4.5,
+        sizes: ["S", "M", "L"],
+        color: "Blue",
+        isNew: false,
+        category: "casual",
       ),
-      FlashProduct(
-        imagePath: "assets/images/banners/wedding.png",
-        title: "Cotton",
+      ProductModel(
+        id: "2",
+        image: "assets/images/banners/wedding.png",
+        name: "Cotton",
         price: 999,
         oldPrice: 1299,
-      ),
-      FlashProduct(
-        imagePath: "assets/images/wedding/wedding2.png",
-        title: "Royal Bridal",
-        price: 1799,
-        oldPrice: 2399,
-      ),
-      FlashProduct(
-        imagePath: "assets/images/wedding/wedding1.png",
-        title: "Cotton",
-        price: 999,
-        oldPrice: 1299,
-      ),
-      FlashProduct(
-        imagePath: "assets/images/wedding/wedding12.png",
-        title: "Royal Bridal",
-        price: 1799,
-        oldPrice: 2399,
+        description: "Comfortable daily wear",
+        rating: 4.3,
+        sizes: ["S", "M", "L"],
+        color: "Red",
+        isNew: false,
+        category: "casual",
       ),
     ];
 
@@ -64,17 +60,12 @@ class BestSellingSection extends StatelessWidget {
               itemCount: bestSellingProducts.length,
               itemBuilder: (context, index) {
 
-                final product = bestSellingProducts[index];
-
                 return Padding(
                   padding: const EdgeInsets.only(right: 12),
                   child: SizedBox(
                     width: 170,
-                    child: PremiumProductCard(
-                      image: product.imagePath,
-                      title: product.title,
-                      price: product.price,
-                      oldPrice: product.oldPrice,
+                    child: ProductCard(
+                      product: bestSellingProducts[index],
                     ),
                   ),
                 );

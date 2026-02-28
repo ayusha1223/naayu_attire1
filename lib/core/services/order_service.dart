@@ -27,29 +27,37 @@ class OrderService {
   /// ==============================
   /// 🛒 CREATE ORDER
   /// ==============================
-  Future<Map<String, dynamic>> createOrder({
-    required List items,
-    required double totalAmount,
-    required String paymentMethod,
-    required String token,
-  }) async {
+Future<Map<String, dynamic>> createOrder({
+  required List<Map<String, dynamic>> items,
+  required double totalAmount,
+  required String paymentMethod,
+  required String customerName,
+  required String email,
+  required String phone,
+  required String address,
+  required String token,
+}) async {
 
-    final response = await _dio.post(
-      "/orders",
-      data: {
-        "items": items,
-        "totalAmount": totalAmount,
-        "paymentMethod": paymentMethod,
+  final response = await _dio.post(
+    "/orders",
+    data: {
+      "items": items,
+      "totalAmount": totalAmount,
+      "paymentMethod": paymentMethod,
+      "customerName": customerName,
+      "email": email,
+      "phone": phone,
+      "address": address,
+    },
+    options: Options(
+      headers: {
+        "Authorization": "Bearer $token",
       },
-      options: Options(
-        headers: {
-          "Authorization": "Bearer $token",
-        },
-      ),
-    );
+    ),
+  );
 
-    return response.data;
-  }
+  return response.data;
+}
 
   /// ==============================
   /// 📦 GET ALL ORDERS (FOR LOGGED USER)

@@ -249,29 +249,34 @@ Future<void> _signInWithGoogle() async {
 
                           if (!mounted) return;
 
-                          if (success) {
-                            context.read<ShopProvider>().setUser(emailController.text.trim());
-                             final prefs = await SharedPreferences.getInstance();
+                         if (success) {
+  final shopProvider = context.read<ShopProvider>();
+
+  // 🔥 PASS REAL USER ID
+  await shopProvider.setUser(authVM.userId!);
+
+  // 🔥 FETCH NOTIFICATIONS AFTER LOGIN
+  await shopProvider.fetchNotifications();
+
+  final prefs = await SharedPreferences.getInstance();
   await prefs.setBool("isLoggedIn", true);
 
-                            if (authVM.role == "admin") {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      const AdminMainNavigation(),
-                                ),
-                              );
-                            } else {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      const MainNavigation(),
-                                ),
-                              );
-                            }
-                          }
+  if (authVM.role == "admin") {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const AdminMainNavigation(),
+      ),
+    );
+  } else {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const MainNavigation(),
+      ),
+    );
+  }
+}
                         },
                   child: authVM.isLoading
                       ? const CircularProgressIndicator(color: Colors.white)

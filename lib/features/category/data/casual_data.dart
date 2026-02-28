@@ -13,6 +13,7 @@ class CasualData {
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
       description: "Soft cotton blend fabric with elegant floral patterns. Designed for everyday comfort and effortless style.",
+      category: "casual",
       isNew: true, 
       
     ),
@@ -27,6 +28,7 @@ class CasualData {
   sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.0,
   description: "Lightweight breathable material perfect for summer days. A graceful silhouette with a modern touch.",
+  category: "casual",
   isNew: true, 
 ),
 
@@ -41,6 +43,7 @@ ProductModel(
   sizes: ["XS", "S", "M", "L", "XL"],
   rating: 4.5,
   description: "Crafted with premium fabric for all-day comfort. Ideal for office wear and casual outings.",
+  category: "casual",
   isNew: true, 
 ),
    
@@ -55,6 +58,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
       description: "Elegant straight-cut design with subtle detailing. Perfect combination of simplicity and charm.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -67,6 +71,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
       description: "Trendy printed kurti featuring vibrant colors. Keeps you comfortable while looking stylish.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -79,6 +84,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
       description: "Relaxed fit design made for daily wear. Soft texture and smooth finish for maximum comfort.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -91,6 +97,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.6,
       description: "Contemporary style with minimal patterns. Perfect for brunch, shopping, or casual gatherings.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -103,6 +110,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.0,
       description: "Breathable fabric that feels light on the skin. A timeless piece for effortless elegance.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -115,6 +123,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
       description: "Stylish ethnic look with modern tailoring. Designed to enhance both comfort and confidence.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -127,6 +136,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
       description: "Beautiful color tones with refined stitching. A perfect addition to your casual wardrobe.",
+      category: "casual",
       isNew: true, 
 
     ),
@@ -140,6 +150,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Premium quality cotton fabric with neat finishing. Comfortable and versatile for any occasion.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -151,6 +162,7 @@ ProductModel(
       color: "pink",
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
+      category: "casual",
       description: "Simple yet classy kurti for everyday fashion. Easy to pair with leggings or palazzos..",
       isNew: true, 
 
@@ -165,6 +177,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
       description: "Comfortable fit with breathable fabric. Keeps you cool and stylish throughout the day.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -177,6 +190,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
       description: "Eye-catching design with subtle prints. Ideal for college wear and daily office outfits.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -189,6 +203,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
       description: "Elegant kurti crafted for relaxed comfort. Lightweight material perfect for warm weather.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -201,6 +216,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
       description: "Soft fabric with detailed neckline design. A stylish piece for casual and semi-formal wear.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -213,6 +229,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.2,
       description: "Chic everyday kurti with modern prints. Designed for effortless elegance.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -225,6 +242,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfortable straight-fit kurti with vibrant patterns. Suitable for daily styling.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -237,6 +255,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
       description: "Stylish and breathable kurti made for active days. Perfect for a simple yet graceful look.",
+      category: "casual",
       isNew: true, 
 
     ),
@@ -250,6 +269,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.1,
       description: "Soft-touch fabric with trendy ethnic design. A must-have for your summer collection.",
+      category: "casual",
       isNew: true, 
     
     ),
@@ -263,6 +283,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.4,
       description: "Elegant printed kurti that blends tradition and modern fashion beautifully",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -275,6 +296,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Comfortable casual wear with smooth finishing and durable stitching.",
+      category: "casual",
       isNew: true, 
     ),
      ProductModel(
@@ -287,6 +309,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.3,
       description: "Minimalistic design with vibrant colors. Perfect for both indoor and outdoor wear.",
+      category: "casual",
       isNew: true, 
 
     ),
@@ -300,6 +323,7 @@ ProductModel(
       sizes: ["XS", "S", "M", "L", "XL"],
       rating: 4.5,
       description: "Designed for comfort with lightweight breathable fabric and elegant detailing.",
+      category: "casual",
       isNew: true, 
     ),
   ];
