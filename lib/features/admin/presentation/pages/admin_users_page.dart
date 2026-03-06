@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/admin/data/services/admin_service.dart';
+import 'package:naayu_attire1/features/admin/data/datasources/admin_remote_datasource.dart';
 
 
 class AdminUsersPage extends StatefulWidget {
@@ -10,7 +10,7 @@ class AdminUsersPage extends StatefulWidget {
 }
 
 class _AdminUsersPageState extends State<AdminUsersPage> {
-  final AdminService _adminService = AdminService();
+  final AdminRemoteDatasource _adminService = AdminRemoteDatasource();
 
   List users = [];
   bool isLoading = true;
@@ -128,8 +128,41 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
                                   IconButton(
                                     icon: const Icon(Icons.delete,
                                         color: Colors.red),
-                                    onPressed: () =>
-                                        deleteUser(user["_id"]),
+                                   onPressed: () async {
+  final confirm = await showDialog<bool>(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: const Text("Delete User"),
+      content: const Text(
+          "Are you sure you want to delete this user?"),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text("Cancel"),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text(
+            "Delete",
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  if (confirm == true) {
+    await deleteUser(user["_id"]);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("🗑 User Deleted Successfully"),
+        behavior: SnackBarBehavior.floating,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+},
                                   ),
                                 ],
                               ),
@@ -183,8 +216,16 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
                 emailController.text,
                 passwordController.text,
               );
-              Navigator.pop(context);
-              loadUsers();
+             Navigator.pop(context);
+loadUsers();
+
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    content: Text("✅ User Created Successfully"),
+    behavior: SnackBarBehavior.floating,
+    duration: Duration(seconds: 2),
+  ),
+);
             },
             child: const Text("Create"),
           ),
@@ -229,7 +270,15 @@ class _AdminUsersPageState extends State<AdminUsersPage> {
                 emailController.text,
               );
               Navigator.pop(context);
-              loadUsers();
+loadUsers();
+
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    content: Text("✏️ User Updated Successfully"),
+    behavior: SnackBarBehavior.floating,
+    duration: Duration(seconds: 2),
+  ),
+);
             },
             child: const Text("Update"),
           ),

@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // LOGO (UPDATED)
+            
             Container(
               height: 120,
               width: 120,

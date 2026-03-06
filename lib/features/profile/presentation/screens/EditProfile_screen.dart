@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
 
-import 'package:naayu_attire1/features/auth/presentation/pages/login_page.dart';
 import 'package:naayu_attire1/core/services/storage/image_service.dart';
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
+import 'package:naayu_attire1/features/profile/data/services/profile_service.dart';
 
 class EditprofileScreen extends StatefulWidget {
   const EditprofileScreen({super.key});
@@ -17,6 +17,7 @@ class EditprofileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditprofileScreen> {
+
   final ImagePicker _picker = ImagePicker();
 
   String? profileImageUrl;
@@ -36,23 +37,23 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
   }
 
   Future<void> loadProfileData() async {
+
     final prefs = await SharedPreferences.getInstance();
+
     savedEmail = prefs.getString('user_email');
 
     if (savedEmail == null) return;
 
     setState(() {
-      profileImageUrl =
-          prefs.getString('profile_image_$savedEmail');
-      nameController.text =
-          prefs.getString('user_name') ?? '';
+      profileImageUrl = prefs.getString('profile_image_$savedEmail');
+      nameController.text = prefs.getString('user_name') ?? '';
       emailController.text = savedEmail!;
-      phoneController.text =
-          prefs.getString('user_phone_$savedEmail') ?? '';
+      phoneController.text = prefs.getString('user_phone_$savedEmail') ?? '';
     });
   }
 
   Future<void> saveProfileData() async {
+
     FocusScope.of(context).unfocus();
 
     if (savedEmail == null) return;
@@ -60,25 +61,17 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
     setState(() => isSaving = true);
 
     try {
-      final tokenService =
-          Provider.of<TokenService>(context, listen: false);
 
-      final token = await tokenService.getToken();
+      final tokenService = context.read<TokenService>();
 
-      final dio = Dio();
+      final service = ProfileService(
+        Dio(),
+        tokenService,
+      );
 
-      await dio.put(
-        "http://192.168.1.74:3000/api/v1/students/update-profile",
-        data: {
-          "name": nameController.text,
-          if (passwordController.text.isNotEmpty)
-            "password": passwordController.text,
-        },
-        options: Options(
-          headers: {
-            "Authorization": "Bearer $token",
-          },
-        ),
+      await service.updateProfile(
+        name: nameController.text,
+        password: passwordController.text,
       );
 
       final prefs = await SharedPreferences.getInstance();
@@ -95,9 +88,11 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
       passwordController.clear();
 
     } catch (e) {
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Update Failed")),
       );
+
     }
 
     if (mounted) {
@@ -106,24 +101,32 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
   }
 
   Future<void> pickAndUploadProfileImage() async {
-    final pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery);
+
+    final pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
     if (pickedFile == null) return;
 
     setState(() => isUploading = true);
 
     final imageFile = File(pickedFile.path);
+
     final imageService = ImageService(Dio());
 
     try {
+
       final imageUrl = await imageService.uploadImage(
         context: context,
         imageFile: imageFile,
       );
 
       final prefs = await SharedPreferences.getInstance();
+
       await prefs.setString(
-          'profile_image_$savedEmail', imageUrl);
+        'profile_image_$savedEmail',
+        imageUrl,
+      );
 
       setState(() {
         profileImageUrl = imageUrl;
@@ -138,23 +141,28 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
+
       appBar: AppBar(
         title: const Text("Edit Profile"),
         centerTitle: true,
       ),
+
       body: SafeArea(
         child: SingleChildScrollView(
+
           padding: const EdgeInsets.all(20),
+
           child: Column(
             children: [
 
               const SizedBox(height: 20),
 
-              /// PROFILE IMAGE SECTION
               Container(
                 padding: const EdgeInsets.all(20),
+
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -166,27 +174,29 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
                     )
                   ],
                 ),
+
                 child: Column(
                   children: [
+
                     CircleAvatar(
                       radius: 60,
-                      backgroundImage:
-                          profileImageUrl != null
-                              ? NetworkImage(profileImageUrl!)
-                              : null,
+                      backgroundImage: profileImageUrl != null
+                          ? NetworkImage(profileImageUrl!)
+                          : null,
                       child: profileImageUrl == null
                           ? const Icon(Icons.person, size: 60)
                           : null,
                     ),
+
                     const SizedBox(height: 12),
+
                     TextButton(
-                      onPressed:
-                          isUploading ? null : pickAndUploadProfileImage,
+                      onPressed: isUploading
+                          ? null
+                          : pickAndUploadProfileImage,
                       child: const Text(
                         "Change Picture",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -195,7 +205,6 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
 
               const SizedBox(height: 30),
 
-              /// NAME
               TextField(
                 controller: nameController,
                 decoration: const InputDecoration(
@@ -206,7 +215,6 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
 
               const SizedBox(height: 16),
 
-              /// EMAIL
               TextField(
                 controller: emailController,
                 readOnly: true,
@@ -218,7 +226,6 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
 
               const SizedBox(height: 16),
 
-              /// PHONE
               TextField(
                 controller: phoneController,
                 decoration: const InputDecoration(
@@ -229,31 +236,34 @@ class _EditProfileScreenState extends State<EditprofileScreen> {
 
               const SizedBox(height: 16),
 
-              /// PASSWORD
               TextField(
                 controller: passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
-                  labelText: "Change Password ",
+                  labelText: "Change Password",
                   border: OutlineInputBorder(),
                 ),
               ),
 
               const SizedBox(height: 30),
 
-              /// UPDATE BUTTON
               SizedBox(
                 width: double.infinity,
                 height: 55,
+
                 child: ElevatedButton(
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff7c5cff),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
                   ),
-                  onPressed:
-                      isSaving ? null : saveProfileData,
+
+                  onPressed: isSaving
+                      ? null
+                      : saveProfileData,
+
                   child: isSaving
                       ? const CircularProgressIndicator(
                           color: Colors.white,

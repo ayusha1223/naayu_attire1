@@ -1,71 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mocktail/mocktail.dart';
 
 import 'package:naayu_attire1/features/auth/presentation/pages/signup_page.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
+import 'package:naayu_attire1/features/auth/domain/repositories/auth_repository.dart';
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
-import 'package:naayu_attire1/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:naayu_attire1/features/auth/data/datasources/remote/auth_datasource.dart';
-import 'package:naayu_attire1/features/auth/data/models/auth_remote_model.dart';
 
-/// ================= TEST-ONLY DATASOURCE =================
-/// No API calls
-class TestAuthDatasource implements IAuthDatasource {
-  @override
-  Future<bool> register(String name, String email, String password) async {
-    return true;
-  }
-
-  @override
-  Future<AuthRemoteModel> login(String email, String password) async {
-    return AuthRemoteModel(
-      id: '1',
-      name: 'Test User',
-      email: email,
-      token: 'test-token', role: '',
-    );
-  }
-}
-
-/// ================= TEST-ONLY SHARED PREFERENCES =================
-class FakeSharedPreferences implements SharedPreferences {
-  @override
-  dynamic noSuchMethod(Invocation invocation) => null;
-}
-
-/// ================= TEST-ONLY TOKEN SERVICE =================
-class TestTokenService extends TokenService {
-  TestTokenService() : super(FakeSharedPreferences());
-}
+class MockAuthRepository extends Mock implements IAuthRepository {}
+class MockTokenService extends Mock implements TokenService {}
 
 void main() {
-  Widget createWidgetUnderTest() {
-    return ChangeNotifierProvider(
-      create: (_) => AuthViewModel(
-        AuthRepositoryImpl(TestAuthDatasource()),
-        TestTokenService(), // ✅ VALID
-      ),
+
+  late MockAuthRepository repository;
+  late MockTokenService tokenService;
+  late AuthViewModel viewModel;
+
+  setUp(() {
+    repository = MockAuthRepository();
+    tokenService = MockTokenService();
+    viewModel = AuthViewModel(repository, tokenService);
+  });
+
+  Widget createWidget() {
+    return ChangeNotifierProvider<AuthViewModel>.value(
+      value: viewModel,
       child: const MaterialApp(
         home: RegisterScreen(),
       ),
     );
   }
 
-  testWidgets('Signup page renders correctly', (tester) async {
-    await tester.pumpWidget(createWidgetUnderTest());
+  testWidgets("Name field exists", (tester) async {
+    await tester.pumpWidget(createWidget());
 
-    expect(find.textContaining('Create'), findsOneWidget);
-    expect(find.text('SIGN UP'), findsOneWidget);
+    expect(find.text("Enter your name"), findsOneWidget);
   });
 
-  testWidgets(
-    'Signup page has name, email, password and confirm password fields',
-    (tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+  testWidgets("Email field exists", (tester) async {
+    await tester.pumpWidget(createWidget());
 
-      expect(find.byType(TextField), findsNWidgets(4));
-    },
-  );
+    expect(find.text("Email address"), findsOneWidget);
+  });
+
+  testWidgets("Password field exists", (tester) async {
+    await tester.pumpWidget(createWidget());
+
+    expect(find.text("Password"), findsOneWidget);
+  });
+
+  testWidgets("Confirm password field exists", (tester) async {
+    await tester.pumpWidget(createWidget());
+
+    expect(find.text("Confirm password"), findsOneWidget);
+  });
+
+  testWidgets("Signup button exists", (tester) async {
+    await tester.pumpWidget(createWidget());
+
+    expect(find.text("SIGN UP"), findsOneWidget);
+  });
+
 }

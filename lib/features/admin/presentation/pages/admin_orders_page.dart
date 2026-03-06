@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/admin/data/services/admin_service.dart';
+import 'package:naayu_attire1/features/admin/data/datasources/admin_remote_datasource.dart';
 
 class AdminOrdersPage extends StatefulWidget {
   const AdminOrdersPage({super.key});
@@ -9,7 +9,7 @@ class AdminOrdersPage extends StatefulWidget {
 }
 
 class _AdminOrdersPageState extends State<AdminOrdersPage> {
-  final AdminService _adminService = AdminService();
+  final AdminRemoteDatasource _adminService = AdminRemoteDatasource();
 
   List orders = [];
   bool isLoading = true;

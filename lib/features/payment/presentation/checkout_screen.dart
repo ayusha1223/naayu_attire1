@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/cart/presentation/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/core/providers/shop_provider.dart';
 
@@ -8,7 +9,7 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final shop = context.watch<ShopProvider>();
+    final shop = context.watch<CartProvider>();
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,

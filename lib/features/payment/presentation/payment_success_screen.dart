@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/payment/data/datasource/payment_remote_datasource.dart';
+import 'package:naayu_attire1/features/payment/domain/entities/payment_entity.dart';
 import 'package:provider/provider.dart';
-import 'package:naayu_attire1/core/providers/shop_provider.dart';
+import 'package:naayu_attire1/features/cart/presentation/provider/cart_provider.dart';
 import 'package:naayu_attire1/core/services/order_service.dart';
-import 'package:naayu_attire1/core/services/payment_service.dart';
+
 import 'package:naayu_attire1/core/services/storage/token_service.dart';
 import 'order_tracking_screen.dart';
 import 'receipt_screen.dart';
@@ -14,16 +17,18 @@ class PaymentSuccessScreen extends StatefulWidget {
   final String email;
   final String phone;
   final String address;
+  final bool testMode;
 
   const PaymentSuccessScreen({
-    super.key,
-    required this.amount,
-    required this.paymentMethod,
-    required this.customerName,
-    required this.email,
-    required this.phone,
-    required this.address,
-  });
+  super.key,
+  required this.amount,
+  required this.paymentMethod,
+  required this.customerName,
+  required this.email,
+  required this.phone,
+  required this.address,
+  this.testMode = false,
+});
 
   @override
   State<PaymentSuccessScreen> createState() =>
@@ -49,7 +54,7 @@ class _PaymentSuccessScreenState
 
   Future<void> _completeOrder() async {
     try {
-      final shop = context.read<ShopProvider>();
+      final shop = context.read<CartProvider>();
       final tokenService =
           Provider.of<TokenService>(context, listen: false);
 
@@ -67,7 +72,6 @@ class _PaymentSuccessScreenState
           }).toList();
 
       final orderService = OrderService();
-      final paymentService = PaymentService();
 
      final order = await orderService.createOrder(
   items: shop.cart.map((item) => {
@@ -88,13 +92,23 @@ class _PaymentSuccessScreenState
 
       orderId = order["_id"];
 
-      if (widget.paymentMethod != "cod") {
-        await paymentService.processPayment(
-          orderId: orderId!,
-          paymentMethod: widget.paymentMethod,
-          token: token,
-        );
-      }
+    final dio = Dio(
+  BaseOptions(
+    baseUrl: "http://192.168.1.74:3000/api/v1",
+  ),
+);
+
+final datasource = PaymentRemoteDatasource(dio);
+
+if (widget.paymentMethod != "cod") {
+  final payment = PaymentEntity(
+    orderId: orderId!,
+    paymentMethod: widget.paymentMethod,
+    transactionId: "TXN${DateTime.now().millisecondsSinceEpoch}",
+  );
+
+  await datasource.processPayment(payment, token);
+}
 
       shop.clearCart();
 

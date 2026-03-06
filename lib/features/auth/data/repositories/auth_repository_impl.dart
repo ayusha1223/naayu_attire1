@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:naayu_attire1/core/error/cache_failure.dart';
 import 'package:naayu_attire1/core/error/server_failure.dart';
 import 'package:naayu_attire1/features/auth/data/datasources/remote/auth_datasource.dart';
 import '../../../../core/error/failure.dart';
@@ -78,6 +79,23 @@ class AuthRepositoryImpl implements IAuthRepository {
       return const Left(ServerFailure('OTP verification failed'));
     }
   }
+  // ================= LOGOUT =================
+@override
+Future<Either<Failure, bool>> logout() async {
+  try {
+
+    // clear token or session
+    // example:
+    // await tokenService.clearToken();
+
+    return const Right(true);
+
+  } catch (e) {
+
+    return Left(CacheFailure("Logout failed"));
+
+  }
+}
 
   // ================= RESET PASSWORD =================
   @override

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
-import '../../data/flash_products_data.dart';
+import 'package:naayu_attire1/features/category/domain/entities/product.dart';
 import 'product_card.dart';
 
 class ProductGrid extends StatelessWidget {
-  final List<ProductModel> products;
+  final List<Product> products;
 
   const ProductGrid({
     super.key,
@@ -24,8 +23,10 @@ class ProductGrid extends StatelessWidget {
         childAspectRatio: 0.60,
       ),
       itemBuilder: (context, index) {
+        final product = products[index];
+
         return ProductCard(
-          product: products[index],
+          product: product,
         );
       },
     );

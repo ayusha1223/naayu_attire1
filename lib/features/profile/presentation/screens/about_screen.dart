@@ -90,7 +90,7 @@ class AboutScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
 
-          // IMAGE LEFT
+          // IMAGE 
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: Image.asset(
@@ -103,7 +103,7 @@ class AboutScreen extends StatelessWidget {
 
           const SizedBox(width: 16),
 
-          // TEXT RIGHT
+          // TEXT
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

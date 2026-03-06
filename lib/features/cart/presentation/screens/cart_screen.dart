@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/core/providers/shop_provider.dart';
+import 'package:naayu_attire1/features/cart/presentation/provider/cart_provider.dart';
 import 'package:naayu_attire1/features/payment/presentation/delivery_details_screen.dart';
 import 'package:naayu_attire1/features/payment/presentation/payment_method_screen.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class CartScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Consumer<ShopProvider>(
+      body: Consumer<CartProvider>(
         builder: (context, shop, _) {
           if (shop.cart.isEmpty) {
             return const Center(
@@ -39,11 +40,19 @@ class CartScreen extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 6),
                       child: ListTile(
-                        leading: Image.asset(
-                          product.image,
-                          width: 60,
-                          fit: BoxFit.contain,
-                        ),
+                        leading: product.image.startsWith("http")
+    ? Image.network(
+        product.image,
+        width: 60,
+        fit: BoxFit.contain,
+        errorBuilder: (_, __, ___) =>
+            const Icon(Icons.image_not_supported),
+      )
+    : Image.asset(
+        product.image,
+        width: 60,
+        fit: BoxFit.contain,
+      ),
                         title: Text(product.name),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

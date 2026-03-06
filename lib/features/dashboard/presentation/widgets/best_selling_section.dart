@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+import 'package:naayu_attire1/features/category/data/models/product_model.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/widgets/product_card.dart';
 
 class BestSellingSection extends StatelessWidget {
@@ -9,6 +9,7 @@ class BestSellingSection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final List<ProductModel> bestSellingProducts = [
+
       ProductModel(
         id: "1",
         image: "assets/images/banners/lehengacholi.png",
@@ -22,6 +23,7 @@ class BestSellingSection extends StatelessWidget {
         isNew: false,
         category: "casual",
       ),
+
       ProductModel(
         id: "2",
         image: "assets/images/banners/wedding.png",
@@ -37,10 +39,19 @@ class BestSellingSection extends StatelessWidget {
       ),
     ];
 
+    /// If no products exist
+    if (bestSellingProducts.isEmpty) {
+      return const Center(
+        child: Text("No products available"),
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
 
           const Text(
@@ -55,17 +66,23 @@ class BestSellingSection extends StatelessWidget {
 
           SizedBox(
             height: 260,
+
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: bestSellingProducts.length,
+
               itemBuilder: (context, index) {
+
+              final product = bestSellingProducts[index].toEntity();
 
                 return Padding(
                   padding: const EdgeInsets.only(right: 12),
+
                   child: SizedBox(
                     width: 170,
+
                     child: ProductCard(
-                      product: bestSellingProducts[index],
+                      product: product,
                     ),
                   ),
                 );

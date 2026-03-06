@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/cart/presentation/screens/cart_screen.dart';
 import 'package:naayu_attire1/features/category/presentation/screens/category_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/widgets/category_tabs_screen.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/screens/home_screen.dart';
 import 'package:naayu_attire1/features/profile/presentation/screens/EditProfile_screen.dart';
 import 'package:naayu_attire1/features/profile/presentation/screens/Profile_screen.dart';
@@ -19,7 +20,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    CategoryScreen(),
+    CategoryTabsScreen(),
     CartScreen(),
     TryOnScreen(),
     ProfileScreen(),
@@ -35,7 +36,7 @@ class _MainNavigationState extends State<MainNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      // Keeps all screens alive
+     
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
@@ -78,7 +79,7 @@ class _MainNavigationState extends State<MainNavigation> {
                       shape: BoxShape.circle,
                     ),
                     child: const Text(
-                      "2", // Replace with dynamic cart count later
+                      "2", 
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 8,

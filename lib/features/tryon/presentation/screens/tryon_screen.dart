@@ -24,7 +24,7 @@ class TryOnScreen extends StatefulWidget {
 }
 
 class _TryOnScreenState extends State<TryOnScreen> {
-  int? selectedDressIndex; // ✅ null = naked avatar
+  int? selectedDressIndex; 
 
   final List<DressModel> dresses = [
     DressModel(
@@ -78,99 +78,102 @@ class _TryOnScreenState extends State<TryOnScreen> {
     ),
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+@override
+Widget build(BuildContext context) {
+  final theme = Theme.of(context);
+  final screenHeight = MediaQuery.of(context).size.height;
+  final screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          "Virtual Try On",
-          style: TextStyle(
-            color: Color(0xFFE91E63),
-            fontWeight: FontWeight.bold,
-          ),
+  return Scaffold(
+    backgroundColor: theme.scaffoldBackgroundColor,
+
+    appBar: AppBar(
+      elevation: 0,
+      centerTitle: true,
+      title: Text(
+        "Virtual Try On",
+        style: TextStyle(
+          color: theme.colorScheme.primary,
+          fontWeight: FontWeight.bold,
         ),
       ),
-      body: Column(
-        children: [
+    ),
 
-          /// ===== TOP HORIZONTAL DRESS LIST =====
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: dresses.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedDressIndex = index;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: selectedDressIndex == index
-                            ? Colors.pink
-                            : Colors.grey.shade300,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
+    body: Column(
+      children: [
+
+        /// ===== TOP DRESS LIST =====
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: dresses.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedDressIndex = index;
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 10, vertical: 10),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: selectedDressIndex == index
+                          ? theme.colorScheme.primary
+                          : theme.dividerColor,
+                      width: 2,
                     ),
-                    child: Image.asset(
-                      dresses[index].image,
-                      width: 70,
-                      fit: BoxFit.contain,
-                    ),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                );
-              },
-            ),
-          ),
-
-          /// ===== AVATAR AREA =====
-          Expanded(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-
-                /// Avatar (Always Visible)
-                Image.asset(
-                  'assets/images/tryon/avatar.png',
-                  width: screenWidth * 0.95,
-                  height: screenHeight * 0.85,
-                  fit: BoxFit.contain,
+                  child: Image.asset(
+                    dresses[index].image,
+                    width: 70,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-
-                /// Dress (Only if selected)
-                if (selectedDressIndex != null)
-                  Transform.translate(
-                    offset: Offset(
-                      dresses[selectedDressIndex!].offsetX,
-                      dresses[selectedDressIndex!].offsetY,
-                    ),
-                    child: Image.asset(
-                      dresses[selectedDressIndex!].image,
-                      width: screenWidth *
-                          dresses[selectedDressIndex!].widthFactor,
-                      height: screenHeight *
-                          dresses[selectedDressIndex!].heightFactor,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-              ],
-            ),
+              );
+            },
           ),
-        ],
-      ),
-    );
-  }
+        ),
+
+        /// ===== AVATAR AREA =====
+        Expanded(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+
+              /// Avatar
+              Image.asset(
+                'assets/images/tryon/avatar.png',
+                width: screenWidth * 0.95,
+                height: screenHeight * 0.85,
+                fit: BoxFit.contain,
+              ),
+
+              /// Dress overlay
+              if (selectedDressIndex != null)
+                Transform.translate(
+                  offset: Offset(
+                    dresses[selectedDressIndex!].offsetX,
+                    dresses[selectedDressIndex!].offsetY,
+                  ),
+                  child: Image.asset(
+                    dresses[selectedDressIndex!].image,
+                    width: screenWidth *
+                        dresses[selectedDressIndex!].widthFactor,
+                    height: screenHeight *
+                        dresses[selectedDressIndex!].heightFactor,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }

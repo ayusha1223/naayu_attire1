@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naayu_attire1/features/cart/presentation/provider/cart_provider.dart';
 import 'package:naayu_attire1/features/payment/presentation/payment_method_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/core/providers/shop_provider.dart';
@@ -318,10 +319,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   // ================= UI =================
   @override
   Widget build(BuildContext context) {
-    final shop = context.watch<ShopProvider>();
+     final cart = context.watch<CartProvider>();
+  final shop = context.watch<ShopProvider>();
 
-    double shipping = shop.shippingCharge;
-    double totalPayment = shop.finalTotal;
+    double shipping = cart.shippingCharge;
+    double totalPayment = cart.finalTotal;
 
     return Scaffold(
       backgroundColor: kBg,
@@ -471,7 +473,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               ),
               child: Column(
                 children: [
-                  rowItem("Total Amount", shop.totalPrice),
+                  rowItem("Total Amount", cart.totalPrice),
                   rowItem("Shipping", shipping),
                   const Divider(),
                   rowItem("Total Payment", totalPayment, isBold: true),
@@ -494,7 +496,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               const Color(0xFFEFFAF3),
               Icons.local_offer,
               const Color(0xFF2E7D32),
-              "You are saving Rs.${(shop.totalPrice * 0.05).toInt()} on this purchase",
+              "You are saving Rs.${(cart.totalPrice * 0.05).toInt()} on this purchase",
             ),
 
             const SizedBox(height: 120),

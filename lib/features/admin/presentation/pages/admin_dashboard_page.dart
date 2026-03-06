@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:naayu_attire1/features/admin/data/services/admin_service.dart';
+import 'package:naayu_attire1/features/admin/data/datasources/admin_remote_datasource.dart';
 
 class AdminDashboardPage extends StatefulWidget {
   const AdminDashboardPage({super.key});
@@ -13,7 +13,7 @@ class AdminDashboardPage extends StatefulWidget {
 class _AdminDashboardPageState
     extends State<AdminDashboardPage> {
 
-  final AdminService _adminService = AdminService();
+  final AdminRemoteDatasource _adminService = AdminRemoteDatasource();
 
   bool isLoading = true;
 

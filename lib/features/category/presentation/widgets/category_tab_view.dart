@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/category/presentation/screens/onepiece_screen.dart';
-import 'package:naayu_attire1/features/category/presentation/screens/winter_screen.dart';
-import '../screens/casual_screen.dart';
-import '../screens/coord_screen.dart';
-import '../screens/wedding_screen.dart';
-import '../screens/party_screen.dart';
+import 'package:naayu_attire1/features/category/presentation/screens/category_screen.dart';
 
 class CategoryTabView extends StatelessWidget {
   const CategoryTabView({super.key});
@@ -13,12 +8,36 @@ class CategoryTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const TabBarView(
       children: [
-        CasualScreen(),
-        CoordScreen(),
-        WeddingScreen(),
-        PartyScreen(),
-        OnePieceScreen(),
-        WinterScreen(),
+
+        CategoryScreen(
+          category: "casual",
+          title: "Casual",
+        ),
+
+        CategoryScreen(
+          category: "coord",
+          title: "Coord Sets",
+        ),
+
+        CategoryScreen(
+          category: "wedding",
+          title: "Wedding",
+        ),
+
+        CategoryScreen(
+          category: "party",
+          title: "Party",
+        ),
+
+        CategoryScreen(
+          category: "onepiece",
+          title: "One Piece",
+        ),
+
+        CategoryScreen(
+          category: "winter",
+          title: "Winter",
+        ),
       ],
     );
   }

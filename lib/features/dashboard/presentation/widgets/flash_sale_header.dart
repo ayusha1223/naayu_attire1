@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+import 'package:provider/provider.dart';
+
+import 'package:naayu_attire1/features/category/domain/entities/product.dart';
+import 'package:naayu_attire1/features/category/presentation/provider/product_provider.dart';
+
 import 'product_card.dart';
 
 class FlashSaleHeader extends StatefulWidget {
@@ -17,35 +21,6 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
   final DateTime _endDate =
       DateTime.now().add(const Duration(days: 25));
 
-  final List<ProductModel> flashProducts = [
-    ProductModel(
-      id: "1",
-      image: "assets/images/splash/onepiece2.png",
-      name: "Chaubandi",
-      price: 1200,
-      oldPrice: 1999,
-      description: "Flash sale outfit",
-      rating: 4.5,
-      sizes: ["S", "M", "L"],
-      color: "Blue",
-      isNew: false,
-      category: "casual",
-    ),
-    ProductModel(
-      id: "2",
-      image: "assets/images/onepiece/onepiece3.png",
-      name: "Cotton",
-      price: 999,
-      oldPrice: 1299,
-      description: "Comfort daily wear",
-      rating: 4.2,
-      sizes: ["S", "M", "L"],
-      color: "Red",
-      isNew: false,
-      category: "casual",
-    ),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -54,9 +29,10 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
 
   void _startTimer() {
     _updateTime();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      _updateTime();
-    });
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (_) => _updateTime(),
+    );
   }
 
   void _updateTime() {
@@ -82,6 +58,19 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
 
   @override
   Widget build(BuildContext context) {
+
+    final productProvider = context.watch<ProductProvider>();
+
+    final List<Product> flashProducts =
+        productProvider.products
+            .where((p) => p.isNew == true)
+            .take(5)
+            .toList();
+
+    if (flashProducts.isEmpty) {
+      return const SizedBox();
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -96,10 +85,8 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
               const Text(
                 "Flash Sale",
                 style: TextStyle(
-                  fontFamily: "Times New Roman",
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
-                  letterSpacing: 1.2,
                 ),
               ),
 
@@ -112,8 +99,11 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.access_time,
-                        color: Colors.white, size: 16),
+                    const Icon(
+                      Icons.access_time,
+                      color: Colors.white,
+                      size: 16,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       "${_timeLeft.inDays}d "
@@ -135,7 +125,7 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
 
         const SizedBox(height: 15),
 
-        /// PRODUCT LIST
+        /// FLASH PRODUCTS
         SizedBox(
           height: 270,
           child: ListView.builder(
@@ -143,12 +133,15 @@ class _FlashSaleHeaderState extends State<FlashSaleHeader> {
             padding: const EdgeInsets.only(left: 16),
             itemCount: flashProducts.length,
             itemBuilder: (context, index) {
+
+              final product = flashProducts[index];
+
               return Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: SizedBox(
                   width: 170,
                   child: ProductCard(
-                    product: flashProducts[index],
+                    product: product,
                   ),
                 ),
               );

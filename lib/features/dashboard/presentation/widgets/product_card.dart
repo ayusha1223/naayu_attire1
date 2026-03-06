@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:naayu_attire1/core/providers/shop_provider.dart';
-import 'package:naayu_attire1/features/category/domain/models/product_model.dart';
+
+import 'package:naayu_attire1/features/cart/domain/entities/cart_item.dart';
+import 'package:naayu_attire1/features/cart/presentation/provider/cart_provider.dart';
+
+import 'package:naayu_attire1/features/category/domain/entities/product.dart';
 import 'package:naayu_attire1/features/category/presentation/screens/product_detail_screen.dart';
 
+import 'package:naayu_attire1/features/favorites/presentation/provider/favorites_provider.dart';
+
 class ProductCard extends StatelessWidget {
-  final ProductModel product;
+
+  final Product product;
 
   const ProductCard({
     super.key,
@@ -14,16 +20,20 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shop = context.read<ShopProvider>();
+
+    final favoritesProvider = context.watch<FavoritesProvider>();
 
     double discount = 0;
+
     if (product.oldPrice != null && product.oldPrice! > 0) {
       discount =
           ((product.oldPrice! - product.price) / product.oldPrice!) * 100;
     }
 
     return Container(
+
       padding: const EdgeInsets.all(12),
+
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -35,6 +45,7 @@ class ProductCard extends StatelessWidget {
           ),
         ],
       ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -45,7 +56,9 @@ class ProductCard extends StatelessWidget {
               children: [
 
                 GestureDetector(
+
                   onTap: () {
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -53,44 +66,84 @@ class ProductCard extends StatelessWidget {
                             ProductDetailScreen(product: product),
                       ),
                     );
+
                   },
-                  child: Center(
-                    child: product.image.startsWith("http")
-                        ? Image.network(
-                            product.image,
-                            fit: BoxFit.contain,
-                          )
-                        : Image.asset(
-                            product.image,
-                            fit: BoxFit.contain,
-                          ),
+
+                  child: ClipRRect(
+
+                    borderRadius: BorderRadius.circular(12),
+
+                    child: Center(
+
+                      child: product.image.startsWith("http")
+
+                          ? Image.network(
+                              product.image,
+                              fit: BoxFit.contain,
+                              width: double.infinity,
+
+                              loadingBuilder:
+                                  (context, child, progress) {
+
+                                if (progress == null) return child;
+
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                );
+                              },
+
+                              errorBuilder:
+                                  (context, error, stackTrace) {
+
+                                return const Icon(
+                                  Icons.image_not_supported,
+                                  size: 40,
+                                  color: Colors.grey,
+                                );
+                              },
+                            )
+
+                          : Image.asset(
+                              product.image,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ),
+                    ),
                   ),
                 ),
 
-               Positioned(
-  top: 0,
-  right: 0,
-  child: Consumer<ShopProvider>(
-    builder: (context, shop, _) {
-      return GestureDetector(
-        onTap: () {
-          shop.toggleFavorite(product);
-        },
-        child: CircleAvatar(
-          radius: 16,
-          backgroundColor: Colors.white,
-          child: Icon(
-            shop.isFavorite(product)
-                ? Icons.favorite
-                : Icons.favorite_border,
-            size: 18,
-            color: Colors.red,
-          ),
-        ),
-      );
-    },
-  ),
-),
+                /// FAVORITE BUTTON
+                Positioned(
+
+                  top: 0,
+                  right: 0,
+
+                  child: GestureDetector(
+
+                    onTap: () {
+                      favoritesProvider.toggleFavorite(product);
+                    },
+
+                    child: CircleAvatar(
+
+                      radius: 16,
+                      backgroundColor: Colors.white,
+
+                      child: Icon(
+
+                        favoritesProvider.isFavorite(product)
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+
+                        size: 18,
+                        color: Colors.red,
+
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -123,8 +176,10 @@ class ProductCard extends StatelessWidget {
 
           /// OLD PRICE + DISCOUNT
           if (product.oldPrice != null && product.oldPrice! > 0)
+
             Row(
               children: [
+
                 Text(
                   "Rs.${product.oldPrice!.toInt()}",
                   style: const TextStyle(
@@ -133,7 +188,9 @@ class ProductCard extends StatelessWidget {
                     fontSize: 12,
                   ),
                 ),
+
                 const SizedBox(width: 6),
+
                 Text(
                   "${discount.toStringAsFixed(0)}% off",
                   style: const TextStyle(
@@ -141,6 +198,7 @@ class ProductCard extends StatelessWidget {
                     fontSize: 12,
                   ),
                 ),
+
               ],
             ),
 
@@ -148,9 +206,12 @@ class ProductCard extends StatelessWidget {
 
           /// ADD TO CART
           SizedBox(
+
             width: double.infinity,
             height: 40,
+
             child: ElevatedButton(
+
               style: ElevatedButton.styleFrom(
                 backgroundColor:
                     const Color.fromARGB(255, 199, 157, 211),
@@ -158,17 +219,34 @@ class ProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-            onPressed: () {
-  shop.addToCart(product);
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text("${product.name} added to cart"),
-      duration: const Duration(seconds: 1),
-      backgroundColor: const Color.fromARGB(255, 47, 46, 47),
-    ),
-  );
-},
+              onPressed: () {
+
+                final cart = context.read<CartProvider>();
+
+                cart.addToCart(
+                  CartItem(
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1,
+                  ),
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(
+
+                  SnackBar(
+                    content:
+                        Text("${product.name} added to cart"),
+                    duration: const Duration(seconds: 1),
+                    backgroundColor:
+                        const Color.fromARGB(255, 47, 46, 47),
+                  ),
+
+                );
+              },
+
               child: const Text(
                 "Add to cart",
                 style: TextStyle(

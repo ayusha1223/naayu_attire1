@@ -55,10 +55,14 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      /// START SCREEN LOGIC
-      home: isLoggedIn
-          ? const MainNavigation()
-          : const OnboardingMain(),
+      /// START SCREEN 
+      /// START SCREEN 
+// home: const MainNavigation(),
+home: const OnboardingMain(),
+
+// home: isLoggedIn
+//     ? const MainNavigation()
+//     : const OnboardingMain(),
     );
   }
 }

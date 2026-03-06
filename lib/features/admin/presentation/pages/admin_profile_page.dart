@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../data/services/admin_profile_service.dart';
+import '../../data/datasources/admin_profile_remote_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/services/storage/token_service.dart';
 import '../../../auth/presentation/pages/login_page.dart';
@@ -14,7 +14,7 @@ class AdminProfilePage extends StatefulWidget {
 }
 
 class _AdminProfilePageState extends State<AdminProfilePage> {
-  final AdminProfileService _service = AdminProfileService();
+ final AdminProfileRemoteDatasource _service = AdminProfileRemoteDatasource();
 
   bool isLoading = true;
   bool notificationsEnabled = true;

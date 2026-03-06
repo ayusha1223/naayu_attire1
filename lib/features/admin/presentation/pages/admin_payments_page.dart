@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/features/admin/data/services/admin_service.dart';
+import 'package:naayu_attire1/features/admin/data/datasources/admin_remote_datasource.dart';
 
 
 class AdminPaymentsPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class AdminPaymentsPage extends StatefulWidget {
 
 class _AdminPaymentsPageState
     extends State<AdminPaymentsPage> {
-  final AdminService _adminService = AdminService();
+  final AdminRemoteDatasource _adminService = AdminRemoteDatasource();
 
   List payments = [];
   bool isLoading = true;

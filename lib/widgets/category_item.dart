@@ -15,8 +15,8 @@ class CategoryItem extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 100, // ⬅ bigger height
-          width: 100,  // ⬅ bigger width
+          height: 100, 
+          width: 100, 
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(

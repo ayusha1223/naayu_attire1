@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:naayu_attire1/core/providers/shop_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'package:naayu_attire1/features/cart/domain/entities/cart_item.dart';
+import 'package:naayu_attire1/features/cart/presentation/provider/cart_provider.dart';
+
+import 'package:naayu_attire1/features/favorites/presentation/provider/favorites_provider.dart';
+
 import 'package:naayu_attire1/features/category/presentation/screens/product_detail_screen.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -15,10 +20,14 @@ class FavoritesScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Consumer<ShopProvider>(
-        builder: (context, shop, _) {
 
-          if (shop.favorites.isEmpty) {
+      body: Consumer<FavoritesProvider>(
+        builder: (context, favoritesProvider, _) {
+
+          final favorites = favoritesProvider.favorites;
+
+          /// EMPTY FAVORITES
+          if (favorites.isEmpty) {
             return const Center(
               child: Text(
                 "No Favorites Yet ❤️",
@@ -27,36 +36,50 @@ class FavoritesScreen extends StatelessWidget {
             );
           }
 
+          /// FAVORITES LIST
           return ListView.builder(
-            itemCount: shop.favorites.length,
+            itemCount: favorites.length,
             itemBuilder: (context, index) {
 
-              final product = shop.favorites[index];
+              final product = favorites[index];
 
               return Card(
                 margin: const EdgeInsets.symmetric(
                     horizontal: 12, vertical: 6),
                 elevation: 2,
+
                 child: ListTile(
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12, vertical: 8),
 
-                  leading: Image.asset(
-                    product.image,
-                    width: 60,
-                    fit: BoxFit.contain,
-                  ),
+                  /// IMAGE
+                  leading: product.image.startsWith("http")
+                      ? Image.network(
+                          product.image,
+                          width: 60,
+                          fit: BoxFit.contain,
+                          errorBuilder: (_, __, ___) =>
+                              const Icon(Icons.image_not_supported),
+                        )
+                      : Image.asset(
+                          product.image,
+                          width: 60,
+                          fit: BoxFit.contain,
+                        ),
 
+                  /// NAME
                   title: Text(
                     product.name,
                     style: const TextStyle(
                         fontWeight: FontWeight.w600),
                   ),
 
+                  /// PRICE
                   subtitle: Text(
                     "Rs. ${product.price.toStringAsFixed(0)}",
                   ),
 
+                  /// OPEN PRODUCT
                   onTap: () {
                     Navigator.push(
                       context,
@@ -67,19 +90,30 @@ class FavoritesScreen extends StatelessWidget {
                     );
                   },
 
-                  /// 🔥 TRAILING WITH TWO BUTTONS
+                  /// ACTION BUTTONS
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
 
-                      /// 🛒 ADD TO CART
+                      /// ADD TO CART
                       IconButton(
                         icon: const Icon(
                           Icons.shopping_cart_outlined,
                           color: Colors.black87,
                         ),
                         onPressed: () {
-                          shop.addToCart(product);
+
+                          final cart = context.read<CartProvider>();
+
+                          cart.addToCart(
+                            CartItem(
+                              id: product.id,
+                              name: product.name,
+                              price: product.price,
+                              image: product.image,
+                              quantity: 1,
+                            ),
+                          );
 
                           ScaffoldMessenger.of(context)
                               .showSnackBar(
@@ -91,14 +125,14 @@ class FavoritesScreen extends StatelessWidget {
                         },
                       ),
 
-                      /// ❤️ REMOVE FAVORITE
+                      /// REMOVE FAVORITE
                       IconButton(
                         icon: const Icon(
                           Icons.favorite,
                           color: Colors.red,
                         ),
                         onPressed: () {
-                          shop.toggleFavorite(product);
+                          favoritesProvider.toggleFavorite(product);
                         },
                       ),
                     ],

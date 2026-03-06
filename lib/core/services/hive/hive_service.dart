@@ -18,6 +18,10 @@ class HiveService {
 
     // Open auth box
     await Hive.openBox<AuthHiveModel>(HiveTableConstant.authTable);
+    await Hive.openBox("productsBox");
+await Hive.openBox("notificationBox");
+await Hive.openBox("cartBox");
+await Hive.openBox("wishlistBox");
   }
 
   // Save user (Signup)

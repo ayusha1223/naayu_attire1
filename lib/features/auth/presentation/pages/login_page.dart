@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/core/providers/shop_provider.dart';
 import 'package:naayu_attire1/features/auth/presentation/pages/forgot_password_screen.dart';
+import 'package:naayu_attire1/features/notification/presentation/view_model/notification_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:naayu_attire1/navigation/main_navigation.dart';
 import 'package:naayu_attire1/features/auth/presentation/view_model/auth_view_model.dart';
@@ -255,8 +256,7 @@ Future<void> _signInWithGoogle() async {
   // 🔥 PASS REAL USER ID
   await shopProvider.setUser(authVM.userId!);
 
-  // 🔥 FETCH NOTIFICATIONS AFTER LOGIN
-  await shopProvider.fetchNotifications();
+await context.read<NotificationViewModel>().fetchNotifications();
 
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool("isLoggedIn", true);

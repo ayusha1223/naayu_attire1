@@ -67,256 +67,228 @@ Future<void> loadProfile() async {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          "My Profile",
-          style: TextStyle(color: Colors.black),
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+@override
+Widget build(BuildContext context) {
+  final theme = Theme.of(context);
 
-            const SizedBox(height: 20),
+  return Scaffold(
+    backgroundColor: theme.scaffoldBackgroundColor,
 
-            /// ===============================
-            /// MAIN CARD
-            /// ===============================
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(vertical: 25),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
-                  )
-                ],
-              ),
-              child: Column(
-                children: [
+    appBar: AppBar(
+      elevation: 0,
+      centerTitle: true,
+      title: const Text("My Profile"),
+    ),
 
-                  /// ===============================
-                  /// PROFILE HEADER (NEW UI)
-                  /// ===============================
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.center,
-                      children: [
+    body: SingleChildScrollView(
+      child: Column(
+        children: [
 
-                        /// PROFILE IMAGE
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage: profileImage != null
-                              ? NetworkImage(profileImage!)
-                              : const AssetImage(
-                                      "assets/images/profile.png")
-                                  as ImageProvider,
-                        ),
+          const SizedBox(height: 20),
 
-                        const SizedBox(width: 20),
-
-                        /// NAME + EDIT
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                            children: [
-
-                              Text(
-                                name,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight:
-                                      FontWeight.bold,
-                                ),
-                              ),
-
-                              const SizedBox(height: 6),
-
-                              GestureDetector(
-                                onTap: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          const EditprofileScreen(),
-                                    ),
-                                  );
-                                  loadProfile();
-                                },
-                                child: const Text(
-                                  "Edit Profile",
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.red,
-                                    fontWeight:
-                                        FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 25),
-                  const Divider(),
-
-                  /// ===============================
-                  /// MENU ITEMS
-                  /// ===============================
-                 buildMenuItem(
-  icon: Icons.favorite_border,
-  title: "Favorites",
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => const FavoritesScreen(),
-      ),
-    );
-  },
-),
-
-                  buildMenuItem(
-                    icon: Icons.shopping_bag_outlined,
-                    title: "My Orders",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              const MyOrdersScreen(),
-                        ),
-                      );
-                    },
-                  ),
-
-                  buildMenuItem(
-                    icon: Icons.support_agent_outlined,
-                    title: "Contact Us",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              const ContactScreen(),
-                        ),
-                      );
-                    },
-                  ),
-
-                  buildMenuItem(
-                    icon: Icons.info_outline,
-                    title: "About Us",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              const AboutScreen(),
-                        ),
-                      );
-                    },
-                  ),
-
-                  buildMenuItem(
-                    icon: Icons.description_outlined,
-                    title: "Terms & Conditions",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              const TermsScreen(),
-                        ),
-                      );
-                    },
-                  ),
-
-                  /// ===============================
-                  /// DARK MODE
-                  /// ===============================
-                  Consumer<ThemeProvider>(
-                    builder: (context, themeProvider, _) {
-                      return SwitchListTile(
-                        secondary:
-                            const Icon(Icons.dark_mode),
-                        title:
-                            const Text("Dark Mode"),
-                        value: themeProvider.isDark,
-                        onChanged: (value) {
-                          themeProvider
-                              .toggleTheme(value);
-                        },
-                      );
-                    },
-                  ),
-
-                  /// ===============================
-                  /// LOGOUT
-                  /// ===============================
-                  buildMenuItem(
-                    icon: Icons.logout,
-                    title: "Logout",
-                    isLogout: true,
-                    onTap: logout,
-                  ),
-                ],
-              ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 25),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surface,
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                )
+              ],
             ),
+            child: Column(
+              children: [
 
-            const SizedBox(height: 30),
-          ],
-        ),
-      ),
-    );
-  }
+                /// PROFILE HEADER
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
 
-  Widget buildMenuItem({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-    bool isLogout = false,
-  }) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color:
-            isLogout ? Colors.red : Colors.black87,
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: profileImage != null
+                            ? NetworkImage(profileImage!)
+                            : const AssetImage(
+                                "assets/images/profile.png")
+                                as ImageProvider,
+                      ),
+
+                      const SizedBox(width: 20),
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Text(
+                              name,
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            const SizedBox(height: 6),
+
+                            GestureDetector(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const EditprofileScreen(),
+                                  ),
+                                );
+                                loadProfile();
+                              },
+                              child: Text(
+                                "Edit Profile",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+                const Divider(),
+
+                buildMenuItem(
+                  icon: Icons.favorite_border,
+                  title: "Favorites",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const FavoritesScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                buildMenuItem(
+                  icon: Icons.shopping_bag_outlined,
+                  title: "My Orders",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const MyOrdersScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                buildMenuItem(
+                  icon: Icons.support_agent_outlined,
+                  title: "Contact Us",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ContactScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                buildMenuItem(
+                  icon: Icons.info_outline,
+                  title: "About Us",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AboutScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                buildMenuItem(
+                  icon: Icons.description_outlined,
+                  title: "Terms & Conditions",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const TermsScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, _) {
+                    return SwitchListTile(
+                      secondary: const Icon(Icons.dark_mode),
+                      title: const Text("Dark Mode"),
+                      value: themeProvider.isDark,
+                      onChanged: (value) {
+                        themeProvider.toggleTheme(value);
+                      },
+                    );
+                  },
+                ),
+
+                buildMenuItem(
+                  icon: Icons.logout,
+                  title: "Logout",
+                  isLogout: true,
+                  onTap: logout,
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 30),
+        ],
       ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 14,
-          color: isLogout
-              ? Colors.red
-              : Colors.black87,
-        ),
+    ),
+  );
+}
+
+Widget buildMenuItem({
+  required IconData icon,
+  required String title,
+  required VoidCallback onTap,
+  bool isLogout = false,
+}) {
+  final theme = Theme.of(context);
+
+  return ListTile(
+    leading: Icon(
+      icon,
+      color: isLogout
+          ? Colors.red
+          : theme.iconTheme.color,
+    ),
+    title: Text(
+      title,
+      style: TextStyle(
+        fontSize: 14,
+        color: isLogout
+            ? Colors.red
+            : theme.textTheme.bodyMedium?.color,
       ),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        size: 14,
-        color: Colors.grey,
-      ),
-      onTap: onTap,
-    );
-  }
+    ),
+    trailing: Icon(
+      Icons.arrow_forward_ios,
+      size: 14,
+      color: theme.iconTheme.color,
+    ),
+    onTap: onTap,
+  );
+}
 }

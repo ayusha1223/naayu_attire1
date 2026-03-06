@@ -1,30 +1,42 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import '../domain/models/product_model.dart';
+import 'models/product_model.dart';
 
 class ProductRepository {
   static const String baseUrl =
       "http://192.168.1.74:3000/api/v1/products";
 
   // ================= GET PRODUCTS =================
-  static Future<List<ProductModel>> getProducts(
-      String category) async {
-    final response = await http.get(
-      Uri.parse("$baseUrl?category=$category"),
-    );
+  // ================= GET PRODUCTS (FILTER + SEARCH) =================
+static Future<List<ProductModel>> getProducts(
+  String? category, {
+  String? search,
+}) async {
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      List productsJson = data["data"];
+  String url = baseUrl + "?";
 
-      return productsJson
-          .map((e) => ProductModel.fromJson(e))
-          .toList();
-    } else {
-      throw Exception("Failed to load products");
-    }
+  if (category != null && category.isNotEmpty) {
+    url += "category=$category&";
   }
+
+  if (search != null && search.isNotEmpty) {
+    url += "search=$search&";
+  }
+
+  final response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    List productsJson = data["data"];
+
+    return productsJson
+        .map((e) => ProductModel.fromJson(e))
+        .toList();
+  } else {
+    throw Exception("Failed to load products");
+  }
+}
 
   // ================= CREATE PRODUCT =================
   static Future<void> createProduct(
@@ -105,6 +117,7 @@ static Future<List<ProductModel>> searchProducts(
     throw Exception("Failed to search products");
   }
 }
+
   // 🔥 GET ALL PRODUCTS (no category)
 static Future<List<ProductModel>> getAllProducts() async {
   final response = await http.get(
@@ -120,6 +133,40 @@ static Future<List<ProductModel>> getAllProducts() async {
         .toList();
   } else {
     throw Exception("Failed to load products");
+  }
+}
+// 🔥 GET LIMITED PRODUCTS (for HomeScreen)
+static Future<List<ProductModel>> getLimitedProducts(int limit) async {
+  final response = await http.get(
+    Uri.parse("$baseUrl?limit=$limit"),
+  );
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    List productsJson = data["data"];
+
+    return productsJson
+        .map((e) => ProductModel.fromJson(e))
+        .toList();
+  } else {
+    throw Exception("Failed to load limited products");
+  }
+}
+// 🔥 GET FLASH PRODUCTS
+static Future<List<ProductModel>> getFlashProducts() async {
+  final response = await http.get(
+    Uri.parse("$baseUrl?isFlash=true"),
+  );
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    List productsJson = data["data"];
+
+    return productsJson
+        .map((e) => ProductModel.fromJson(e))
+        .toList();
+  } else {
+    throw Exception("Failed to load flash products");
   }
 }
 }

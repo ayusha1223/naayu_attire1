@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:naayu_attire1/features/dashboard/presentation/widgets/notification_screen.dart';
+import 'package:naayu_attire1/features/favorites/presentation/provider/favorites_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:naayu_attire1/core/providers/shop_provider.dart';
 import 'package:naayu_attire1/features/favorites/presentation/screens/favorites_screen.dart';
+import 'package:naayu_attire1/features/notification/presentation/view_model/notification_view_model.dart';
 import '../screens/map_screen.dart';
 
 class LocationHeader extends StatefulWidget {
@@ -25,42 +27,37 @@ class _LocationHeaderState extends State<LocationHeader> {
     setState(() => _isLoading = true);
 
     try {
-      // Check if location service is enabled
       bool serviceEnabled =
           await Geolocator.isLocationServiceEnabled();
+
       if (!serviceEnabled) {
         setState(() => _isLoading = false);
         return;
       }
 
-      // Request permission
       LocationPermission permission =
           await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-        permission =
-            await Geolocator.requestPermission();
+        permission = await Geolocator.requestPermission();
       }
 
-      if (permission ==
-              LocationPermission.denied ||
-          permission ==
-              LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
         setState(() => _isLoading = false);
         return;
       }
 
-      // Get position
       Position position =
           await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
 
-      // Convert to readable address
       List<Placemark> placemarks =
           await placemarkFromCoordinates(
-              position.latitude,
-              position.longitude);
+        position.latitude,
+        position.longitude,
+      );
 
       Placemark place = placemarks.first;
 
@@ -74,6 +71,7 @@ class _LocationHeaderState extends State<LocationHeader> {
     }
 
     if (!mounted) return;
+
     setState(() => _isLoading = false);
   }
 
@@ -82,24 +80,20 @@ class _LocationHeaderState extends State<LocationHeader> {
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius:
-            BorderRadius.vertical(
-                top: Radius.circular(20)),
+            BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) {
         return Padding(
-          padding:
-              const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisSize:
-                MainAxisSize.min,
+            mainAxisSize: MainAxisSize.min,
             children: [
 
               const Text(
                 "Choose Location",
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight:
-                      FontWeight.bold,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
 
@@ -110,8 +104,7 @@ class _LocationHeaderState extends State<LocationHeader> {
                   Icons.my_location,
                   color: Colors.brown,
                 ),
-                title: const Text(
-                    "Use Current Location"),
+                title: const Text("Use Current Location"),
                 onTap: () {
                   Navigator.pop(context);
                   _useCurrentLocation();
@@ -123,27 +116,21 @@ class _LocationHeaderState extends State<LocationHeader> {
                   Icons.map,
                   color: Colors.brown,
                 ),
-                title: const Text(
-                    "Add Location on Map"),
+                title: const Text("Add Location on Map"),
                 onTap: () async {
                   Navigator.pop(context);
 
-                  final result =
-                      await Navigator.push(
+                  final result = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) =>
-                          const MapScreen(),
+                      builder: (_) => const MapScreen(),
                     ),
                   );
 
-                  if (result != null &&
-                      mounted) {
+                  if (result != null && mounted) {
                     context
-                        .read<
-                            ShopProvider>()
-                        .setLocation(
-                            result);
+                        .read<ShopProvider>()
+                        .setLocation(result);
                   }
                 },
               ),
@@ -154,149 +141,132 @@ class _LocationHeaderState extends State<LocationHeader> {
     );
   }
 
- @override
-Widget build(BuildContext context) {
-  final shop = context.watch<ShopProvider>();
+  @override
+  Widget build(BuildContext context) {
 
-  return Padding(
-    padding: const EdgeInsets.all(16),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+    final shop = context.watch<ShopProvider>();
+    final favoritesProvider = context.watch<FavoritesProvider>();
+    final notificationVM = context.watch<NotificationViewModel>();
 
-        // LEFT SIDE (Location)
-        GestureDetector(
-          onTap: _openLocationOptions,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Location",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+        children: [
+
+          /// LEFT SIDE (LOCATION)
+          GestureDetector(
+            onTap: _openLocationOptions,
+            child: Column(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
+              children: [
+
+                const Text(
+                  "Location",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.location_on,
-                    size: 16,
-                    color: Colors.brown,
-                  ),
-                  const SizedBox(width: 4),
-                  _isLoading
-                      ? const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : Text(
-                          shop.selectedLocation,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                ],
-              ),
-            ],
-          ),
-        ),
 
-        // RIGHT SIDE (Favorites + Notifications)
-        Row(
-          children: [
+                const SizedBox(height: 4),
 
-            // ❤️ FAVORITES
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const FavoritesScreen(),
-                  ),
-                );
-              },
-              child: Stack(
-                children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.favorite_border,
-                      color: Colors.red,
-                    ),
-                  ),
-                  if (shop.favorites.isNotEmpty)
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          shop.favorites.length.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
+                Row(
+                  children: [
 
-            const SizedBox(width: 12),
-
-            // 🔔 NOTIFICATIONS
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const NotificationScreen(),
-                  ),
-                );
-              },
-              child: Stack(
-                children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.notifications_none,
+                    const Icon(
+                      Icons.location_on,
+                      size: 16,
                       color: Colors.brown,
                     ),
-                  ),
-                  if (shop.notificationCount > 0)
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          shop.notificationCount.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
+
+                    const SizedBox(width: 4),
+
+                    _isLoading
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child:
+                                CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : Text(
+                            shop.selectedLocation,
+                            style: const TextStyle(
+                              fontWeight:
+                                  FontWeight.bold,
+                            ),
+                          ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          /// RIGHT SIDE (FAVORITES + NOTIFICATIONS)
+          Row(
+            children: [
+
+              /// FAVORITES
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          const FavoritesScreen(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+
+                    const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.favorite_border,
+                        color: Colors.red,
+                      ),
+                    ),
+
+                    if (favoritesProvider
+                        .favorites.isNotEmpty)
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          padding:
+                              const EdgeInsets.all(4),
+                          decoration:
+                              const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            favoritesProvider
+                                .favorites.length
+                                .toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
+
+              const SizedBox(width: 12),
+
+
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-/// Abstract contract
+
 abstract class INetworkInfo {
   Future<bool> get isConnected;
 }
 
-/// Implementation
+
 class NetworkInfo implements INetworkInfo {
   final Connectivity connectivity;
 
