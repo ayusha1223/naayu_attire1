@@ -7,7 +7,7 @@ class ProductRepository {
   static const String baseUrl =
       "http://192.168.1.74:3000/api/v1/products";
 
-  // ================= GET PRODUCTS =================
+  
   // ================= GET PRODUCTS (FILTER + SEARCH) =================
 static Future<List<ProductModel>> getProducts(
   String? category, {
@@ -118,7 +118,7 @@ static Future<List<ProductModel>> searchProducts(
   }
 }
 
-  // 🔥 GET ALL PRODUCTS (no category)
+  // GET ALL PRODUCTS (no category)
 static Future<List<ProductModel>> getAllProducts() async {
   final response = await http.get(
     Uri.parse(baseUrl),
@@ -135,7 +135,7 @@ static Future<List<ProductModel>> getAllProducts() async {
     throw Exception("Failed to load products");
   }
 }
-// 🔥 GET LIMITED PRODUCTS (for HomeScreen)
+//GET LIMITED PRODUCTS (for HomeScreen)
 static Future<List<ProductModel>> getLimitedProducts(int limit) async {
   final response = await http.get(
     Uri.parse("$baseUrl?limit=$limit"),
@@ -152,7 +152,7 @@ static Future<List<ProductModel>> getLimitedProducts(int limit) async {
     throw Exception("Failed to load limited products");
   }
 }
-// 🔥 GET FLASH PRODUCTS
+//  GET FLASH PRODUCTS
 static Future<List<ProductModel>> getFlashProducts() async {
   final response = await http.get(
     Uri.parse("$baseUrl?isFlash=true"),

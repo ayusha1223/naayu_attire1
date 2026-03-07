@@ -5,7 +5,7 @@ class AuthRemoteModel {
   final String name;
   final String email;
   final String token;
-  final String role;   // 🔥 ADD
+  final String role;   
 
   AuthRemoteModel({
     required this.id,

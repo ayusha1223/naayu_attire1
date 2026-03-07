@@ -25,7 +25,7 @@ class OrderService {
 }
 
   /// ==============================
-  /// 🛒 CREATE ORDER
+  ///  CREATE ORDER
   /// ==============================
 Future<Map<String, dynamic>> createOrder({
   required List<Map<String, dynamic>> items,
@@ -60,7 +60,7 @@ Future<Map<String, dynamic>> createOrder({
 }
 
   /// ==============================
-  /// 📦 GET ALL ORDERS (FOR LOGGED USER)
+  ///  GET ALL ORDERS (FOR LOGGED USER)
   /// ==============================
   Future<List<dynamic>> getOrders(String token) async {
 
@@ -73,13 +73,11 @@ Future<Map<String, dynamic>> createOrder({
       ),
     );
 
-    /// If backend returns:
-    /// { orders: [...] }
+    
     if (response.data["orders"] != null) {
       return response.data["orders"];
     }
 
-    /// If backend directly returns array
     if (response.data is List) {
       return response.data;
     }

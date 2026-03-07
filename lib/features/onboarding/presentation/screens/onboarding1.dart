@@ -11,7 +11,7 @@ class Onboarding1 extends StatelessWidget {
       body: Stack(
         children: [
 
-          /// 🔹 TOP GREY SECTION
+          ///  TOP GREY SECTION
           Container(
             height: screenHeight * 0.65,
             width: double.infinity,
@@ -38,7 +38,7 @@ class Onboarding1 extends StatelessWidget {
             ),
           ),
 
-          /// 🔹 BOTTOM MAUVE SECTION
+          ///  BOTTOM MAUVE SECTION
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -48,7 +48,7 @@ class Onboarding1 extends StatelessWidget {
             ),
           ),
 
-          /// 🔥 FLOATING IMAGE (OVERLAPPING)
+          ///  FLOATING IMAGE (OVERLAPPING)
           Positioned(
             top: screenHeight * 0.30,
             left: 40,

@@ -5,7 +5,7 @@ class ApiEndpoints {
   // Android Emulator
   // static const String baseUrl = 'http://10.0.2.2:3000/api/v1';
 
-  // Physical Device (example)
+  // Physical Device 
    static const String baseUrl = 'http://192.168.1.74:3000/api/v1';
 
   // ================= Auth Endpoints =================
@@ -15,6 +15,6 @@ class ApiEndpoints {
   static const String resetPassword = "/students/reset-password";
   static const String verifyOtp = "/students/verify-otp";
 
-  // ================= Other Endpoints (future) =================
+  // ================= Other Endpoints  =================
   static const String students = '/students';
 }

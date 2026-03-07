@@ -41,14 +41,14 @@ await Hive.openBox("wishlistBox");
     return null;
   }
 
-  // Get current user (simple version)
+  // Get current user 
   AuthHiveModel? getUser(String email) {
     final box = Hive.box<AuthHiveModel>(HiveTableConstant.authTable);
     return box.get(email);
   }
 
-  // Logout (local app → nothing to clear yet)
+  // Logout 
   Future<void> logout() async {
-    // Later you can clear session data here
+    
   }
 }

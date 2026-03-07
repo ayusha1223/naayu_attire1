@@ -19,7 +19,7 @@ class ApiClient {
       ),
     );
 
-    /// 🔥 AUTH INTERCEPTOR
+    ///AUTH INTERCEPTOR
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
@@ -36,7 +36,7 @@ class ApiClient {
       ),
     );
 
-    /// 🔹 Logging interceptor (keep this for viva)
+    ///Logging interceptor 
     dio.interceptors.add(
       LogInterceptor(
         request: true,

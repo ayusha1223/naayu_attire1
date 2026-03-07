@@ -33,7 +33,7 @@ class AuthHiveModel extends HiveObject {
     this.role,
   });
 
-  // 🔁 Hive → Entity
+  //  Hive → Entity
   AuthEntity toEntity() {
     return AuthEntity(
       id: id ?? '',
@@ -45,7 +45,7 @@ class AuthHiveModel extends HiveObject {
     );
   }
 
-  // 🔁 Entity → Hive
+  //  Entity → Hive
   factory AuthHiveModel.fromEntity(AuthEntity entity) {
     return AuthHiveModel(
       id: entity.id.isEmpty ? null : entity.id,

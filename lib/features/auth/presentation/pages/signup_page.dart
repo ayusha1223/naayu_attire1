@@ -315,7 +315,7 @@ Row(
   }
 }
 
-/// 🔥 NEW SOCIAL BUTTON WIDGET
+/// NEW SOCIAL BUTTON WIDGET
 class SocialButton extends StatelessWidget {
   final String imagePath;
 

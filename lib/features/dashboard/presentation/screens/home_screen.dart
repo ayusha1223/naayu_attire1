@@ -126,8 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             final homeProducts = productProvider.products;
 
-            /// 🔴 NO INTERNET + NO CACHE
-/// 🔴 NO INTERNET + NO CACHE
+       
 if (shop.isOffline && homeProducts.isEmpty){
 
               return Center(
@@ -179,7 +178,7 @@ if (shop.isOffline && homeProducts.isEmpty){
                   ),
                 ),
 
-                /// 🟡 OFFLINE BANNER
+                ///  OFFLINE BANNER
                 if (shop.isOffline)
                   SliverToBoxAdapter(
                     child: Container(
@@ -199,7 +198,7 @@ if (shop.isOffline && homeProducts.isEmpty){
                     ),
                   ),
 
-                /// 🔍 SEARCH RESULTS
+                ///  SEARCH RESULTS
                 if (flashProvider.isSearching)
 
                   SliverPadding(

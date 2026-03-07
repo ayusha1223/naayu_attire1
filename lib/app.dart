@@ -55,9 +55,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      /// START SCREEN 
-      /// START SCREEN 
-// home: const MainNavigation(),
+
 home: const OnboardingMain(),
 
 // home: isLoggedIn

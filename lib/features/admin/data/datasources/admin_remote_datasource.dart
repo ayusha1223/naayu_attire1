@@ -10,7 +10,7 @@ class AdminRemoteDatasource {
     final prefs = await SharedPreferences.getInstance();
     final tokenService = TokenService(prefs);
 
-    final token = await tokenService.getToken(); // ✅ use await (safe)
+    final token = await tokenService.getToken();
 
     if (token == null || token.isEmpty) {
       throw Exception("No token found. Please login again.");
@@ -31,7 +31,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 📊 Dashboard
+  ///  Dashboard
   /// =============================
   Future<Map<String, dynamic>> getDashboardStats() async {
     final token = await _getToken();
@@ -49,7 +49,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 📈 Monthly Revenue
+  ///  Monthly Revenue
   /// =============================
   Future<List<dynamic>> getMonthlyRevenue() async {
     final token = await _getToken();
@@ -67,7 +67,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 💳 GET ALL PAYMENTS
+  ///  GET ALL PAYMENTS
   /// =============================
   Future<List<dynamic>> getPayments() async {
     final token = await _getToken();
@@ -85,7 +85,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 📦 GET ALL ORDERS
+  /// GET ALL ORDERS
   /// =============================
   Future<List<dynamic>> getOrders() async {
     final token = await _getToken();
@@ -103,7 +103,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 🔄 UPDATE ORDER STATUS
+  ///  UPDATE ORDER STATUS
   /// =============================
   Future<void> updateOrderStatus(String orderId, String status) async {
     final token = await _getToken();
@@ -120,7 +120,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 💸 REFUND ORDER
+  ///  REFUND ORDER
   /// =============================
   Future<void> refundOrder(String orderId) async {
     final token = await _getToken();
@@ -136,7 +136,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// 👥 Get Users
+  /// Get Users
   /// =============================
   Future<List<dynamic>> getUsers() async {
     final token = await _getToken();
@@ -154,7 +154,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// ❌ Delete User
+  ///  Delete User
   /// =============================
   Future<void> deleteUser(String userId) async {
     final token = await _getToken();
@@ -170,7 +170,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// ➕ Create User
+  ///  Create User
   /// =============================
   Future<void> createUser(String name, String email, String password) async {
     final token = await _getToken();
@@ -191,7 +191,7 @@ class AdminRemoteDatasource {
   }
 
   /// =============================
-  /// ✏ Update User
+  ///  Update User
   /// =============================
   Future<void> updateUser(String userId, String name, String email) async {
     final token = await _getToken();

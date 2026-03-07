@@ -30,7 +30,7 @@ class _EsewaWebviewScreenState extends State<EsewaWebviewScreen> {
   bool _isLoading = true;
   bool _hasError = false;
 
-  // 🔴 IMPORTANT: Change if your IP changes
+
   final String backendUrl =
       "http://192.168.1.74:3000/api/esewa/create-esewa-payment";
 
@@ -47,7 +47,7 @@ class _EsewaWebviewScreenState extends State<EsewaWebviewScreen> {
         _hasError = false;
       });
 
-      // 1️⃣ Call backend to get signed data
+      // 1️ Call backend to get signed data
       final response = await http.post(
         Uri.parse(backendUrl),
         headers: {"Content-Type": "application/json"},
@@ -67,13 +67,13 @@ class _EsewaWebviewScreenState extends State<EsewaWebviewScreen> {
       final Map<String, dynamic> paymentData =
           Map<String, dynamic>.from(decoded["payment"]);
 
-      // 2️⃣ Convert map to form body
+      // 2️ Convert map to form body
       final String postBody = paymentData.entries
           .map((e) =>
               "${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}")
           .join("&");
 
-      // 3️⃣ Setup WebView safely
+      // 3️Setup WebView safely
       final controller = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..setNavigationDelegate(

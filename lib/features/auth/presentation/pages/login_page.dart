@@ -253,7 +253,6 @@ Future<void> _signInWithGoogle() async {
                          if (success) {
   final shopProvider = context.read<ShopProvider>();
 
-  // 🔥 PASS REAL USER ID
   await shopProvider.setUser(authVM.userId!);
 
 await context.read<NotificationViewModel>().fetchNotifications();
@@ -304,7 +303,7 @@ await context.read<NotificationViewModel>().fetchNotifications();
         child: InkWell(
           customBorder: const CircleBorder(),
           onTap: () {
-            print("Fingerprint tapped"); // debug
+            print("Fingerprint tapped"); 
             _authenticateWithFingerprint();
           },
           child: Container(
@@ -333,7 +332,7 @@ await context.read<NotificationViewModel>().fetchNotifications();
 
               const SizedBox(height: 30),
 
-              /// OR DIVIDER
+          
               Row(
                 children: [
                   Expanded(child: Divider(color: Colors.grey.shade400)),
@@ -352,8 +351,7 @@ await context.read<NotificationViewModel>().fetchNotifications();
               const SizedBox(height: 25),
               
 
-              /// SOCIAL BUTTONS
-             /// SOCIAL BUTTONS (Google Only)
+             
 Row(
   mainAxisAlignment: MainAxisAlignment.center,
   children: [

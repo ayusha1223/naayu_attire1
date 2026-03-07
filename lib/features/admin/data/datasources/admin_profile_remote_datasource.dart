@@ -6,7 +6,7 @@ import '../../../../core/services/storage/token_service.dart';
 class AdminProfileRemoteDatasource {
   final String baseUrl = "http://192.168.1.74:3000/api/admin";
 
-  /// 🔐 Get token safely
+  /// Get token safely
   Future<String> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
     final tokenService = TokenService(prefs);
@@ -21,7 +21,7 @@ class AdminProfileRemoteDatasource {
     return token;
   }
 
-  /// 👤 GET PROFILE
+  /// GET PROFILE
   Future<Map<String, dynamic>> getProfile() async {
     final token = await _getToken();
 
@@ -46,7 +46,7 @@ class AdminProfileRemoteDatasource {
     }
   }
 
-  /// 📊 GET DASHBOARD STATS
+  ///  GET DASHBOARD STATS
   Future<Map<String, dynamic>> getDashboardStats() async {
     final token = await _getToken();
 
@@ -71,7 +71,7 @@ class AdminProfileRemoteDatasource {
     }
   }
 
-  /// ✏️ UPDATE PROFILE
+  /// UPDATE PROFILE
   Future<void> updateProfile(String name, String email) async {
     final token = await _getToken();
 
@@ -95,7 +95,7 @@ class AdminProfileRemoteDatasource {
     }
   }
 
-  /// 🔑 CHANGE PASSWORD
+  ///  CHANGE PASSWORD
   Future<void> changePassword(
       String currentPassword, String newPassword) async {
     final token = await _getToken();

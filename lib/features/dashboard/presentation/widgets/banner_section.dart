@@ -54,7 +54,7 @@ class _BannerSectionState extends State<BannerSection> {
         child: Stack(
           children: [
 
-            /// 🔥 SHARP PAGEVIEW
+            ///  SHARP PAGEVIEW
             PageView.builder(
               controller: _controller,
               itemCount: _images.length,
@@ -69,13 +69,13 @@ class _BannerSectionState extends State<BannerSection> {
                   child: Image.asset(
                     _images[index],
                     fit: BoxFit.cover,
-                    filterQuality: FilterQuality.high, // 🔥 sharper
+                    filterQuality: FilterQuality.high, 
                   ),
                 );
               },
             ),
 
-            /// 🔥 PREMIUM GRADIENT OVERLAY (Subtle)
+         
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
@@ -92,7 +92,7 @@ class _BannerSectionState extends State<BannerSection> {
               ),
             ),
 
-            /// 🔥 DOTS
+          
             Positioned(
               bottom: 12,
               left: 0,

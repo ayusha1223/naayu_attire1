@@ -6,7 +6,7 @@ class WishlistService {
   void addToWishlist(Map<String, dynamic> product) {
     List wishlistItems = wishlistBox.get("items", defaultValue: []);
 
-    // Prevent duplicates
+   
     bool alreadyExists = wishlistItems.any(
       (item) => item["title"] == product["title"],
     );

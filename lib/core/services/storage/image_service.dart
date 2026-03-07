@@ -38,7 +38,7 @@ class ImageService {
       ),
     );
 
-    print("🔥 UPLOAD RESPONSE: ${response.data}");
+    print(" UPLOAD RESPONSE: ${response.data}");
 
     return response.data["imageUrl"];
   }

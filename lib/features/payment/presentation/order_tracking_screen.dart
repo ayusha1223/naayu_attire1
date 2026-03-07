@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OrderTrackingScreen extends StatelessWidget {
-  final int currentStage; // 0 = Processing, 1 = Shipped, 2 = Delivered
+  final int currentStage; 
   final String orderId;
   final String estimatedDelivery;
 

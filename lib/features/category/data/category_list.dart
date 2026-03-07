@@ -1,7 +1,7 @@
 class CategoryModel {
   final String title;
   final String image;
-  final String value;   // 🔥 ADD THIS
+  final String value;   
 
   CategoryModel({
     required this.title,
